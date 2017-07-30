@@ -11,5 +11,4 @@
 Project for the subject Web Services, which consists of designing and developing a website on which articles can be published
 
 
-## Delivers
-> ### Deliver 1: [Use cases and class diagram](https://github.com/PUJWebServices1730/PeerCheck/tree/master/Diagrams)
+## [Delivers](https://github.com/PUJWebServices1730/PeerCheck/wiki/Delivers)
