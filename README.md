@@ -7,8 +7,5 @@
 
 > More information about team members on the [Wiki](https://github.com/PUJWebServices1730/PeerCheck/wiki)
 
-## About PeerCheck
-Project for the subject Web Services, which consists of designing and developing a website on which articles can be published
-
-
-## [Delivers](https://github.com/PUJWebServices1730/PeerCheck/wiki/Delivers)
+### [About PeerCheck](https://github.com/PUJWebServices1730/PeerCheck/wiki/PeerCheck-Team)
+### [Delivers](https://github.com/PUJWebServices1730/PeerCheck/wiki/Delivers)
