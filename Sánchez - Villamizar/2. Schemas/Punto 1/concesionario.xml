@@ -1,0 +1,26 @@
+
+<concesionario>
+	<carro>
+		<marca tipo="nacional">renault</marca>
+		<motor tipo="gasolina" unidad="cc"></motor>
+		<placa>ABC123</placa>
+		<linea>Hola</linea>
+		<modelo>1980</modelo>
+		<precio>Muy caro</precio>
+	</carro>
+	<carro>
+		<marca tipo="nacional">nissan</marca>
+		<motor tipo="gasolina" unidad="cc"></motor>
+		<placa>ABC123</placa>
+		<linea>Hola</linea>
+		<modelo>1980</modelo>
+		<precio>Muy caro</precio>
+	</carro>
+	<carro>
+		<marca tipo="importado">bmw</marca>
+		<motor tipo="diesel"></motor>
+		<placa>ABC123</placa>
+		<linea>Hola</linea>
+		<modelo>1980</modelo>
+	</carro>
+</concesionario>

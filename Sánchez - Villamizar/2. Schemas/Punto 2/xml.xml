@@ -1,0 +1,22 @@
+<punto2>
+	<hora>08:00:00</hora>
+	<numero>100.5</numero>
+	<cadena>abcd</cadena>
+	<extension>jpg</extension>
+	<isbn>125489635214</isbn>
+	
+	<cmp1 attr="1">hola</cmp1>
+	<cmp2>
+		<elem1>Hola</elem1>
+		<elem2>Hola</elem2>
+		<elem2>Hola</elem2>
+		<elem3>Hola</elem3>
+		<elem4>Hola</elem4>
+	</cmp2>
+	<cmp3>
+		<elem1>Hola</elem1>
+		<elem2>Hola</elem2>
+		<elem2>Hola</elem2>
+		<elem4>Hola</elem4>
+	</cmp3>
+</punto2>
