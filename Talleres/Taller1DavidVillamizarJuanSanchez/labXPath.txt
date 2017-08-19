@@ -1,0 +1,32 @@
+1.
+	1. Se encontraron 2 elementos titulo.
+	2. Se encontró el libro que tiene título igual a Beginning XML.
+	3. Se encontró el primer libro de la libreria.
+	4. Se encontró el segundo libro de la libreria.
+	5. Se encontró el tercer autor del segundo libro.
+	6. Se econtró el atributo moneda del elemento precio del primer libro.
+	7. Se encontraron 2 libros.
+	8. Se encontraron todos los libros.
+2.
+	1. //director[@apellido="Stone"]/@nombre
+	2. //pelicula[@duracion<120]/titulo
+	3. //categoria[@nombre="Comedia"]/pelicula/titulo
+	4. //actor[@apellido="Tautou" or @apellido="Reeves"]/..
+	5. //categoria[ pelicula[ director[@apellido="Spielberg"] ] ]
+	6. //pelicula[count(actor)>2]
+	7. //categoria[count(pelicula)=0]
+	8. //pelicula[ @anyo=2004 and actor[@nombre="Angelina" and @apellido="Jolie"] ]
+3. 
+	1. //personaje[@nombre="Luis IX"]/../..
+	2. //personaje[@nombre="Luis IX"]/../../../..
+	3. //personaje[@nombre="Luis IX"]/descendencia/personaje/descendencia/personaje[1]
+	4. //personaje[ reinado[@inicio<=1300 and @fin>=1300] ]
+	5. //personaje[@nombre="Luis X el obstinado"]/../personaje[@nombre!="Luis X el obstinado"]
+	6. //personaje[ fechas[(@nacimiento>=1300 and @nacimiento<1400) or (@deceso>=1300 and @deceso<1400) or (@nacimiento<1300 and @deceso>=1400)] ]
+	7. //personaje[ fechas[(@deceso>1250 and @deceso<1350)] ]
+	8. count(//personaje[reinado])
+	9. count(//personaje[@nombre="Felipe IV el hermoso"]/descendencia/personaje)
+	10. //personaje[(reinado/@fin) = (fechas/@deceso)]
+	11. //personaje[(reinado/@inicio) < (fechas/@nacimiento )+ 20]
+	12. //personaje[count(reinado) = 0]
+	13. //personaje[ ../..[count(reinado) = 0] and reinado]

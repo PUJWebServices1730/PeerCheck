@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalogo>
+<articulo nombre="jabon">
+<precio moneda="peso">4000</precio>
+</articulo>
+<articulo nombre="cepillo">
+<precio moneda="dollar">5</precio>
+</articulo>
+<articulo nombre="Shampoo">
+<precio>8000</precio>
+</articulo>
+<articulo nombre="crema humectante">
+<precio moneda="euro">20</precio>
+</articulo>
+</catalogo>
