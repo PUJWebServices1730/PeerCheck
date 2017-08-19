@@ -1,0 +1,74 @@
+Laboratorio 1 XPath - Ejercicio 3 - Reyes
+1. //personaje[@nombre="Luis IX"]/../../@nombre
+[Attribute: name nombre value "Luis VIII el león"]
+
+2. //personaje[@nombre="Luis IX"]/../../../../@nombre
+[Attribute: name nombre value "Felipe II Augusto"]
+
+3. //personaje[@nombre="Luis IX"]/descendencia/personaje/descendencia/personaje/@nombre
+[Attribute: name nombre value "Felipe IV el hermoso"]
+[Attribute: name nombre value "Carlos"]
+
+4. //personaje/reinado[@inicio <= 1300 and @fin >= 1300]/../@nombre
+[Attribute: name nombre value "Felipe IV el hermoso"]
+
+5. //personaje[@nombre="Luis X el obstinado"]/following-sibling::personaje/@nombre
+[Attribute: name nombre value "Felipe V el largo"]
+[Attribute: name nombre value "Carlos IV el hermoso"]
+
+6. //personaje/reinado[@inicio > 1300]/../@nombre
+[Attribute: name nombre value "Luis X el obstinado"]
+[Attribute: name nombre value "Felipe V el largo"]
+[Attribute: name nombre value "Carlos IV el hermoso"]
+[Attribute: name nombre value "Felipe VI de Valois"]
+[Attribute: name nombre value "Juan II el bueno"]
+[Attribute: name nombre value "Carlos V el sabio"]
+[Attribute: name nombre value "Carlos VI el loco"]
+[Attribute: name nombre value "Luis XII"]
+
+7. //personaje/fechas[@deceso >= 1250 and @deceso <= 1350]/../@nombre
+[Attribute: name nombre value "Luis IX"]
+[Attribute: name nombre value "Felipe III"]
+[Attribute: name nombre value "Felipe IV el hermoso"]
+[Attribute: name nombre value "Luis X el obstinado"]
+[Attribute: name nombre value "Felipe V el largo"]
+[Attribute: name nombre value "Carlos IV el hermoso"]
+[Attribute: name nombre value "Carlos"]
+[Attribute: name nombre value "Felipe VI de Valois"]
+
+8. count(//personaje[reinado])
+13.0
+
+9. count(//personaje[@nombre="Felipe IV el hermoso"]/descendencia/personaje)
+3.0
+
+10. //personaje[fechas[@deceso]=reinado[@fin]]/@nombre
+[Attribute: name nombre value "Felipe II Augusto"]
+[Attribute: name nombre value "Luis VIII el león"]
+[Attribute: name nombre value "Luis IX"]
+[Attribute: name nombre value "Felipe III"]
+[Attribute: name nombre value "Felipe IV el hermoso"]
+[Attribute: name nombre value "Luis X el obstinado"]
+[Attribute: name nombre value "Felipe V el largo"]
+[Attribute: name nombre value "Carlos IV el hermoso"]
+[Attribute: name nombre value "Felipe VI de Valois"]
+[Attribute: name nombre value "Juan II el bueno"]
+[Attribute: name nombre value "Carlos V el sabio"]
+[Attribute: name nombre value "Carlos VI el loco"]
+[Attribute: name nombre value "Luis XII"]
+
+11. //personaje[(reinado/@inicio - fechas/@nacimiento) < 20]/@nombre
+[Attribute: name nombre value "Felipe II Augusto"]
+[Attribute: name nombre value "Luis IX"]
+[Attribute: name nombre value "Felipe IV el hermoso"]
+[Attribute: name nombre value "Carlos VI el loco"]
+
+12. //personaje[count(reinado)=0]/@nombre
+[Attribute: name nombre value "Carlos"]
+[Attribute: name nombre value "Luis de Francia"]
+[Attribute: name nombre value "Carlos de Orleans"]
+
+13. //personaje[count(reinado)=0]/descendencia/personaje/@nombre
+[Attribute: name nombre value "Felipe VI de Valois"]
+[Attribute: name nombre value "Carlos de Orleans"]
+[Attribute: name nombre value "Luis XII"]
