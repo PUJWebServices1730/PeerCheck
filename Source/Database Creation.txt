@@ -1,0 +1,90 @@
+Nombre: peerCheckDB
+
+Usuatio: root
+Contraseña: pass
+
+--------------------------------------------------------
+
+create table "ROOT".USERS
+(
+	ID INTEGER not null primary key,
+	BIRTHDATE DATE not null,
+	EMAIL VARCHAR(80) not null,
+	NAME VARCHAR(50) not null,
+	PASSWORD VARCHAR(80) not null,
+	ROLE VARCHAR(15) not null
+);
+
+create table "ROOT".EVENTS
+(
+	ID INTEGER not null primary key,
+	DATE DATE not null,
+	DEADLINE DATE not null,
+	DESCRIPTION VARCHAR(200) not null,
+	LOCATION VARCHAR(80) not null,
+	NAME VARCHAR(80) not null,
+	SUBMISSIONSTART DATE not null,
+	WEBSITE VARCHAR(80) not null,
+	EDITOR_ID INTEGER references USERS(ID)
+);
+
+create table "ROOT".TOPICS
+(
+	ID INTEGER not null primary key,
+	NAME VARCHAR(100) not null
+);
+
+create table "ROOT".EVENTS_TOPICS
+(
+	EVENT_ID INTEGER references EVENTS(ID),
+	TOPIC_ID INTEGER references TOPICS(ID),
+	primary key (EVENT_ID, TOPIC_ID)
+);
+
+create table "ROOT".FILES
+(
+	ID INTEGER not null primary key,
+	PATH VARCHAR(200) not null
+);
+
+create table "ROOT".ARTICLES
+(
+	ID INTEGER not null primary key,
+	ABSTRACT VARCHAR(200) not null,
+	CATEGORY VARCHAR(80) not null,
+	KEYWORDS VARCHAR(100) not null,
+	MAIN_AUTHOR_ID INTEGER references USERS(ID),
+	FILE_ID INTEGER references FILES(ID)
+);
+
+create table "ROOT".USERS_ARTICLES
+(
+	USER_ID INTEGER references USERS(ID),
+	ARTICLE_ID INTEGER references ARTICLES(ID),
+	primary key (USER_ID, ARTICLE_ID)
+);
+
+create table "ROOT".ARTICLES_FILES
+(
+	FILE_ID INTEGER references FILES(ID),
+	ARTICLE_ID INTEGER references ARTICLES(ID),
+	primary key (FILE_ID, ARTICLE_ID)
+);
+
+create table "ROOT".EVENTS_ARTICLES
+(
+	EVENT_ID INTEGER references EVENTS(ID),
+	ARTICLE_ID INTEGER references ARTICLES(ID),
+	primary key (EVENT_ID, ARTICLE_ID)
+);
+
+create table "ROOT".REVIEWS
+(
+	ID INTEGER not null primary key,
+	DATE DATE not null,
+	GRADE NUMERIC(5) not null,
+	MESSAGE VARCHAR(200) not null,
+	STATUS VARCHAR(20) not null,
+	REVIEWER_ID INTEGER references USERS(ID),
+	ARTICLE_ID INTEGER references ARTICLES(ID)
+);
