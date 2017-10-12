@@ -12,7 +12,8 @@ create table "ROOT".USERS
 	EMAIL VARCHAR(80) not null,
 	NAME VARCHAR(50) not null,
 	PASSWORD VARCHAR(80) not null,
-	ROLE VARCHAR(15) not null
+	ROLE VARCHAR(15) not null,
+	USERNAME VARCHAR(20) not null
 );
 
 create table "ROOT".EVENTS
