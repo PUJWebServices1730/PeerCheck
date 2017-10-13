@@ -17,35 +17,69 @@ import javax.jws.WebParam;
 
 /**
  *
- * @author sebas
+ * @author davlad
  */
 @WebService(serviceName = "UsersService")
 @Stateless()
 public class UsersService {
 
-    @EJB
-    private UsersFacade ejbRef;// Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Web Service Operation")
+	@EJB
+	private UsersFacade ejbRef;// Add business logic below. (Right-click in editor and choose
+	// "Insert Code > Add Web Service Operation")
 
-    @WebMethod(operationName = "create")
+	@WebMethod(operationName = "create")
     @Oneway
-    public void create(@WebParam(name = "entity") Users entity) {
-        ejbRef.create(entity);
-    }
+	public void create(@WebParam(name = "entity") Users entity) {
+		ejbRef.create(entity);
+	}
 
-    @WebMethod(operationName = "find")
-    public Users find(@WebParam(name = "id") Object id) {
-        return ejbRef.find(id);
-    }
-    
-    @WebMethod(operationName = "findByUsername")
-    public Users findByUsername(@WebParam(name = "username") Object username) {
-        return ejbRef.findByUsername(username);
-    }
+	@WebMethod(operationName = "edit")
+    @Oneway
+	public void edit(@WebParam(name = "entity") Users entity) {
+		ejbRef.edit(entity);
+	}
 
-    @WebMethod(operationName = "findAll")
-    public List<Users> findAll() {
-        return ejbRef.findAll();
-    }
-    
+	@WebMethod(operationName = "remove")
+    @Oneway
+	public void remove(@WebParam(name = "entity") Users entity) {
+		ejbRef.remove(entity);
+	}
+
+	@WebMethod(operationName = "find")
+	public Users find(@WebParam(name = "id") Object id) {
+		return ejbRef.find(id);
+	}
+
+	@WebMethod(operationName = "findAll")
+	public List<Users> findAll() {
+		return ejbRef.findAll();
+	}
+
+	@WebMethod(operationName = "findRange")
+	public List<Users> findRange(@WebParam(name = "range") int[] range) {
+		return ejbRef.findRange(range);
+	}
+
+	@WebMethod(operationName = "count")
+	public int count() {
+		return ejbRef.count();
+	}
+
+	/**
+	 * Web service operation
+	 */
+	@WebMethod(operationName = "editAuthorRole")
+	public Users editAuthorRole(@WebParam(name = "id") Object id) {
+		return ejbRef.editAuthorRole(id);
+	}
+	
+	/**
+	 * Web service operation
+	 */
+	@WebMethod(operationName = "findUsersByEmails")
+	public List<Users> findUsersByEmails(@WebParam(name = "emails") List<String> emails) {
+		return ejbRef.findByEmail(emails);
+	}
+	
+	
 }

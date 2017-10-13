@@ -6,6 +6,7 @@
 package testclient;
 
 import integration.users.Users;
+import java.util.Date;
 
 /**
  *
@@ -17,12 +18,25 @@ public class TestClient {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(authenticate("test", "pass"));
+		/**
+		 * Crear un usuario.
+		 */
+		create(ClassAdapter.initUser(new Date(), "email@mail.com", "Carlos", "pass"));
+		/**
+		 * Volver reviewer a un usuario.
+		 */
+		editAuthorRole(1);
     }
 
-    private static integration.authentication.Users authenticate(java.lang.Object username, java.lang.Object password) {
-        integration.authentication.AuthenticationService_Service service = new integration.authentication.AuthenticationService_Service();
-        integration.authentication.AuthenticationService port = service.getAuthenticationServicePort();
-        return port.authenticate(username, password);
-    }
+	private static void create(integration.users.Users entity) {
+		integration.users.UsersService_Service service = new integration.users.UsersService_Service();
+		integration.users.UsersService port = service.getUsersServicePort();
+		port.create(entity);
+	}
+
+	private static Users editAuthorRole(java.lang.Object id) {
+		integration.users.UsersService_Service service = new integration.users.UsersService_Service();
+		integration.users.UsersService port = service.getUsersServicePort();
+		return port.editAuthorRole(id);
+	}
 }

@@ -28,6 +28,30 @@ public interface UsersService {
 
     /**
      * 
+     * @param entity
+     */
+    @WebMethod
+    @Oneway
+    @RequestWrapper(localName = "remove", targetNamespace = "http://services/", className = "integration.users.Remove")
+    @Action(input = "http://services/UsersService/remove")
+    public void remove(
+        @WebParam(name = "entity", targetNamespace = "")
+        Users entity);
+
+    /**
+     * 
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "count", targetNamespace = "http://services/", className = "integration.users.Count")
+    @ResponseWrapper(localName = "countResponse", targetNamespace = "http://services/", className = "integration.users.CountResponse")
+    @Action(input = "http://services/UsersService/countRequest", output = "http://services/UsersService/countResponse")
+    public int count();
+
+    /**
+     * 
      * @param id
      * @return
      *     returns integration.users.Users
@@ -55,21 +79,6 @@ public interface UsersService {
 
     /**
      * 
-     * @param username
-     * @return
-     *     returns integration.users.Users
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findByUsername", targetNamespace = "http://services/", className = "integration.users.FindByUsername")
-    @ResponseWrapper(localName = "findByUsernameResponse", targetNamespace = "http://services/", className = "integration.users.FindByUsernameResponse")
-    @Action(input = "http://services/UsersService/findByUsernameRequest", output = "http://services/UsersService/findByUsernameResponse")
-    public Users findByUsername(
-        @WebParam(name = "username", targetNamespace = "")
-        Object username);
-
-    /**
-     * 
      * @return
      *     returns java.util.List<integration.users.Users>
      */
@@ -79,5 +88,47 @@ public interface UsersService {
     @ResponseWrapper(localName = "findAllResponse", targetNamespace = "http://services/", className = "integration.users.FindAllResponse")
     @Action(input = "http://services/UsersService/findAllRequest", output = "http://services/UsersService/findAllResponse")
     public List<Users> findAll();
+
+    /**
+     * 
+     * @param range
+     * @return
+     *     returns java.util.List<integration.users.Users>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findRange", targetNamespace = "http://services/", className = "integration.users.FindRange")
+    @ResponseWrapper(localName = "findRangeResponse", targetNamespace = "http://services/", className = "integration.users.FindRangeResponse")
+    @Action(input = "http://services/UsersService/findRangeRequest", output = "http://services/UsersService/findRangeResponse")
+    public List<Users> findRange(
+        @WebParam(name = "range", targetNamespace = "")
+        List<Integer> range);
+
+    /**
+     * 
+     * @param entity
+     */
+    @WebMethod
+    @Oneway
+    @RequestWrapper(localName = "edit", targetNamespace = "http://services/", className = "integration.users.Edit")
+    @Action(input = "http://services/UsersService/edit")
+    public void edit(
+        @WebParam(name = "entity", targetNamespace = "")
+        Users entity);
+
+    /**
+     * 
+     * @param id
+     * @return
+     *     returns integration.users.Users
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "editAuthorRole", targetNamespace = "http://services/", className = "integration.users.EditAuthorRole")
+    @ResponseWrapper(localName = "editAuthorRoleResponse", targetNamespace = "http://services/", className = "integration.users.EditAuthorRoleResponse")
+    @Action(input = "http://services/UsersService/editAuthorRoleRequest", output = "http://services/UsersService/editAuthorRoleResponse")
+    public Users editAuthorRole(
+        @WebParam(name = "id", targetNamespace = "")
+        Object id);
 
 }

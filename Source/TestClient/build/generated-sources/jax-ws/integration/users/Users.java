@@ -24,7 +24,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="role" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,8 +39,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "id",
     "name",
     "password",
-    "role",
-    "username"
+    "role"
 })
 public class Users {
 
@@ -52,7 +50,6 @@ public class Users {
     protected String name;
     protected String password;
     protected String role;
-    protected String username;
 
     /**
      * Gets the value of the birthdate property.
@@ -196,30 +193,6 @@ public class Users {
      */
     public void setRole(String value) {
         this.role = value;
-    }
-
-    /**
-     * Gets the value of the username property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Sets the value of the username property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUsername(String value) {
-        this.username = value;
     }
 
 }

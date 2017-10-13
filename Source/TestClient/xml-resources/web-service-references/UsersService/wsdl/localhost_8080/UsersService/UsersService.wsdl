@@ -4,6 +4,15 @@
 <xsd:import namespace="http://services/" schemaLocation="http://localhost:8080/UsersService/UsersService?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="remove">
+<part name="parameters" element="tns:remove"/>
+</message>
+<message name="count">
+<part name="parameters" element="tns:count"/>
+</message>
+<message name="countResponse">
+<part name="parameters" element="tns:countResponse"/>
+</message>
 <message name="find">
 <part name="parameters" element="tns:find"/>
 </message>
@@ -13,19 +22,35 @@
 <message name="create">
 <part name="parameters" element="tns:create"/>
 </message>
-<message name="findByUsername">
-<part name="parameters" element="tns:findByUsername"/>
-</message>
-<message name="findByUsernameResponse">
-<part name="parameters" element="tns:findByUsernameResponse"/>
-</message>
 <message name="findAll">
 <part name="parameters" element="tns:findAll"/>
 </message>
 <message name="findAllResponse">
 <part name="parameters" element="tns:findAllResponse"/>
 </message>
+<message name="findRange">
+<part name="parameters" element="tns:findRange"/>
+</message>
+<message name="findRangeResponse">
+<part name="parameters" element="tns:findRangeResponse"/>
+</message>
+<message name="edit">
+<part name="parameters" element="tns:edit"/>
+</message>
+<message name="editAuthorRole">
+<part name="parameters" element="tns:editAuthorRole"/>
+</message>
+<message name="editAuthorRoleResponse">
+<part name="parameters" element="tns:editAuthorRoleResponse"/>
+</message>
 <portType name="UsersService">
+<operation name="remove">
+<input wsam:Action="http://services/UsersService/remove" message="tns:remove"/>
+</operation>
+<operation name="count">
+<input wsam:Action="http://services/UsersService/countRequest" message="tns:count"/>
+<output wsam:Action="http://services/UsersService/countResponse" message="tns:countResponse"/>
+</operation>
 <operation name="find">
 <input wsam:Action="http://services/UsersService/findRequest" message="tns:find"/>
 <output wsam:Action="http://services/UsersService/findResponse" message="tns:findResponse"/>
@@ -33,17 +58,39 @@
 <operation name="create">
 <input wsam:Action="http://services/UsersService/create" message="tns:create"/>
 </operation>
-<operation name="findByUsername">
-<input wsam:Action="http://services/UsersService/findByUsernameRequest" message="tns:findByUsername"/>
-<output wsam:Action="http://services/UsersService/findByUsernameResponse" message="tns:findByUsernameResponse"/>
-</operation>
 <operation name="findAll">
 <input wsam:Action="http://services/UsersService/findAllRequest" message="tns:findAll"/>
 <output wsam:Action="http://services/UsersService/findAllResponse" message="tns:findAllResponse"/>
 </operation>
+<operation name="findRange">
+<input wsam:Action="http://services/UsersService/findRangeRequest" message="tns:findRange"/>
+<output wsam:Action="http://services/UsersService/findRangeResponse" message="tns:findRangeResponse"/>
+</operation>
+<operation name="edit">
+<input wsam:Action="http://services/UsersService/edit" message="tns:edit"/>
+</operation>
+<operation name="editAuthorRole">
+<input wsam:Action="http://services/UsersService/editAuthorRoleRequest" message="tns:editAuthorRole"/>
+<output wsam:Action="http://services/UsersService/editAuthorRoleResponse" message="tns:editAuthorRoleResponse"/>
+</operation>
 </portType>
 <binding name="UsersServicePortBinding" type="tns:UsersService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="remove">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="count">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="find">
 <soap:operation soapAction=""/>
 <input>
@@ -59,7 +106,7 @@
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="findByUsername">
+<operation name="findAll">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -68,7 +115,22 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findAll">
+<operation name="findRange">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="edit">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="editAuthorRole">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

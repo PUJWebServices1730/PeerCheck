@@ -33,22 +33,5 @@
         <delete dir="${build.generated.dir}/jax-wsCache/UsersService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/integration/users"/>
     </target>
-    <target name="wsimport-client-AuthenticationService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/AuthenticationService"/>
-        <property name="wsdl-AuthenticationService" location="xml-resources/web-service-references/AuthenticationService/wsdl/localhost_8080/AuthenticationService/AuthenticationService.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AuthenticationService" destdir="${build.generated.dir}/jax-wsCache/AuthenticationService" wsdl="${wsdl-AuthenticationService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/AuthenticationService/AuthenticationService?wsdl" xnocompile="true" xendorsed="true" package="integration.authentication">
-            <depends file="${wsdl-AuthenticationService}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/AuthenticationService"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/AuthenticationService">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-AuthenticationService" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/AuthenticationService"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/integration/authentication"/>
-    </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-UsersService, wsimport-client-AuthenticationService"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-UsersService"/>
 </project>

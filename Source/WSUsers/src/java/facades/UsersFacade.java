@@ -6,27 +6,59 @@
 package facades;
 
 import entities.Users;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
- * @author sebas
+ * @author davlad
  */
 @Stateless
 public class UsersFacade extends AbstractFacade<Users> {
 
-    @PersistenceContext(unitName = "WSUsersPU")
-    private EntityManager em;
+	@PersistenceContext(unitName = "WSUsersPU")
+	private EntityManager em;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
-    public UsersFacade() {
-        super(Users.class);
-    }
-    
+	public UsersFacade() {
+		super(Users.class);
+	}
+	
+	public Users editAuthorRole(Object id) {
+		Users user = super.find(id);
+		user.setRole("Reviewer");
+		super.edit(user);
+		return user;
+	}
+	
+	public Users findByEmail(String email) {
+		Query q = em.createNamedQuery("Users.findByEmail", Users.class);
+		try {
+			return (Users) q.setParameter("email", email).getSingleResult();
+		} catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public List<Users> findByEmail(List<String> emails) {
+		List<Users> users = new ArrayList<>(emails.size());
+		for (int i = 0; i < emails.size(); i++) {
+			String email = emails.get(i);
+			Query q = em.createNamedQuery("Users.findByEmail", Users.class);
+			try {
+				users.set(i, (Users) q.setParameter("email", email).getSingleResult());
+			} catch(Exception e) {
+				users.set(i, null);
+			}
+		}
+		return users;
+	}
 }
