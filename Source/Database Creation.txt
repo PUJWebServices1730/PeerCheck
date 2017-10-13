@@ -7,18 +7,17 @@ Contraseña: pass
 
 create table "ROOT".USERS
 (
-	ID INTEGER not null primary key,
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
 	BIRTHDATE DATE not null,
-	EMAIL VARCHAR(80) not null,
+	EMAIL VARCHAR(80) not null unique,
 	NAME VARCHAR(50) not null,
 	PASSWORD VARCHAR(80) not null,
-	ROLE VARCHAR(15) not null,
-	USERNAME VARCHAR(20) not null
+	ROLE VARCHAR(15) not null default 'Author'
 );
 
 create table "ROOT".EVENTS
 (
-	ID INTEGER not null primary key,
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
 	DATE DATE not null,
 	DEADLINE DATE not null,
 	DESCRIPTION VARCHAR(200) not null,
@@ -29,33 +28,23 @@ create table "ROOT".EVENTS
 	EDITOR_ID INTEGER references USERS(ID)
 );
 
-create table "ROOT".TOPICS
+create table "ROOT".ARTICLES
 (
-	ID INTEGER not null primary key,
-	NAME VARCHAR(100) not null
-);
-
-create table "ROOT".EVENTS_TOPICS
-(
-	EVENT_ID INTEGER references EVENTS(ID),
-	TOPIC_ID INTEGER references TOPICS(ID),
-	primary key (EVENT_ID, TOPIC_ID)
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	ABSTRACT VARCHAR(200) not null,
+	CATEGORY VARCHAR(80) not null,
+	KEYWORDS VARCHAR(100) not null,
+	TITLE VARCHAR(100) not null,
+	MAIN_AUTHOR_ID INTEGER references USERS(ID)
 );
 
 create table "ROOT".FILES
 (
-	ID INTEGER not null primary key,
-	PATH VARCHAR(200) not null
-);
-
-create table "ROOT".ARTICLES
-(
-	ID INTEGER not null primary key,
-	ABSTRACT VARCHAR(200) not null,
-	CATEGORY VARCHAR(80) not null,
-	KEYWORDS VARCHAR(100) not null,
-	MAIN_AUTHOR_ID INTEGER references USERS(ID),
-	FILE_ID INTEGER references FILES(ID)
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	DESCRIPTION VARCHAR(200) not null,
+	TITLE VARCHAR(100) not null,
+	URL VARCHAR(200) not null,
+	ARTICLE_ID INTEGER references ARTICLES(ID)
 );
 
 create table "ROOT".USERS_ARTICLES
@@ -63,13 +52,6 @@ create table "ROOT".USERS_ARTICLES
 	USER_ID INTEGER references USERS(ID),
 	ARTICLE_ID INTEGER references ARTICLES(ID),
 	primary key (USER_ID, ARTICLE_ID)
-);
-
-create table "ROOT".ARTICLES_FILES
-(
-	FILE_ID INTEGER references FILES(ID),
-	ARTICLE_ID INTEGER references ARTICLES(ID),
-	primary key (FILE_ID, ARTICLE_ID)
 );
 
 create table "ROOT".EVENTS_ARTICLES
@@ -81,7 +63,7 @@ create table "ROOT".EVENTS_ARTICLES
 
 create table "ROOT".REVIEWS
 (
-	ID INTEGER not null primary key,
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
 	DATE DATE not null,
 	GRADE NUMERIC(5) not null,
 	MESSAGE VARCHAR(200) not null,
@@ -89,3 +71,13 @@ create table "ROOT".REVIEWS
 	REVIEWER_ID INTEGER references USERS(ID),
 	ARTICLE_ID INTEGER references ARTICLES(ID)
 );
+
+--------------
+
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES (CURRENT_DATE, 'editor@mail.com', 'Editor', 'editor', 'Editor');
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES (CURRENT_DATE, 'autor1@mail.com', 'Autor', 'autor', 'Author');
+INSERT INTO ROOT.EVENTS ("DATE", DEADLINE, DESCRIPTION, LOCATION, "NAME", SUBMISSIONSTART, WEBSITE, EDITOR_ID) 
+	VALUES (CURRENT_DATE, '2017-12-12', 'Mi primer evento', 'Bogota', 'Evento 1', CURRENT_DATE, 'evento.com', 2);
+

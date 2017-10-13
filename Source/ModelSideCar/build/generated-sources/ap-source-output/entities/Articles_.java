@@ -9,7 +9,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-12T00:27:36")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-10-12T19:40:13")
 @StaticMetamodel(Articles.class)
 public class Articles_ { 
 
@@ -20,8 +20,8 @@ public class Articles_ {
     public static volatile SingularAttribute<Articles, Integer> id;
     public static volatile SingularAttribute<Articles, String> abstract1;
     public static volatile SingularAttribute<Articles, String> category;
+    public static volatile SingularAttribute<Articles, String> title;
     public static volatile CollectionAttribute<Articles, Users> usersCollection;
     public static volatile CollectionAttribute<Articles, Reviews> reviewsCollection;
-    public static volatile SingularAttribute<Articles, Files> fileId;
 
 }

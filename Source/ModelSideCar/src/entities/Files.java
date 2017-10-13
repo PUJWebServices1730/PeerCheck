@@ -6,119 +6,130 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sebas
+ * @author davlad
  */
 @Entity
 @Table(name = "FILES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Files.findAll", query = "SELECT f FROM Files f")
-    , @NamedQuery(name = "Files.findById", query = "SELECT f FROM Files f WHERE f.id = :id")
-    , @NamedQuery(name = "Files.findByPath", query = "SELECT f FROM Files f WHERE f.path = :path")})
+	@NamedQuery(name = "Files.findAll", query = "SELECT f FROM Files f")
+	, @NamedQuery(name = "Files.findById", query = "SELECT f FROM Files f WHERE f.id = :id")
+	, @NamedQuery(name = "Files.findByDescription", query = "SELECT f FROM Files f WHERE f.description = :description")
+	, @NamedQuery(name = "Files.findByTitle", query = "SELECT f FROM Files f WHERE f.title = :title")
+	, @NamedQuery(name = "Files.findByUrl", query = "SELECT f FROM Files f WHERE f.url = :url")})
 public class Files implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
+	private static final long serialVersionUID = 1L;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
-    private Integer id;
-    @Basic(optional = false)
-    @Column(name = "PATH")
-    private String path;
-    @JoinTable(name = "ARTICLES_FILES", joinColumns = {
-        @JoinColumn(name = "FILE_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private Collection<Articles> articlesCollection;
-    @OneToMany(mappedBy = "fileId")
-    private Collection<Articles> articlesCollection1;
+	private Integer id;
+	@Basic(optional = false)
+    @Column(name = "DESCRIPTION")
+	private String description;
+	@Basic(optional = false)
+    @Column(name = "TITLE")
+	private String title;
+	@Basic(optional = false)
+    @Column(name = "URL")
+	private String url;
+	@JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")
+    @ManyToOne
+	private Articles articleId;
 
-    public Files() {
-    }
+	public Files() {
+	}
 
-    public Files(Integer id) {
-        this.id = id;
-    }
+	public Files(Integer id) {
+		this.id = id;
+	}
 
-    public Files(Integer id, String path) {
-        this.id = id;
-        this.path = path;
-    }
+	public Files(Integer id, String description, String title, String url) {
+		this.id = id;
+		this.description = description;
+		this.title = title;
+		this.url = url;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getPath() {
-        return path;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setPath(String path) {
-        this.path = path;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    @XmlTransient
-    public Collection<Articles> getArticlesCollection() {
-        return articlesCollection;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setArticlesCollection(Collection<Articles> articlesCollection) {
-        this.articlesCollection = articlesCollection;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    @XmlTransient
-    public Collection<Articles> getArticlesCollection1() {
-        return articlesCollection1;
-    }
+	public String getUrl() {
+		return url;
+	}
 
-    public void setArticlesCollection1(Collection<Articles> articlesCollection1) {
-        this.articlesCollection1 = articlesCollection1;
-    }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public Articles getArticleId() {
+		return articleId;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Files)) {
-            return false;
-        }
-        Files other = (Files) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	public void setArticleId(Articles articleId) {
+		this.articleId = articleId;
+	}
 
-    @Override
-    public String toString() {
-        return "entities.Files[ id=" + id + " ]";
-    }
-    
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Files)) {
+			return false;
+		}
+		Files other = (Files) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "entities.Files[ id=" + id + " ]";
+	}
+	
 }
