@@ -6,14 +6,22 @@
 package facades;
 
 import entities.Articles;
-import entities.Files;
+import entities.Events;
+import entities.Users;
 import integration.users.UsersService_Service;
-import java.util.Collection;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.xml.ws.WebServiceRef;
+import javax.xml.namespace.QName;
+import javax.xml.transform.Source;
+import javax.xml.ws.Dispatch;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.ws.Service;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import mappers.UsersMapper;
 
 /**
  *
@@ -36,11 +44,58 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 	public ArticlesFacade() {
 		super(Articles.class);
 	}
-
-	public void create(Articles article, List<String> emails) {
-		article.setUsersCollection((Collection) findUsersByEmails(emails));
-		//article.setFilesCollection1(new Collection<Files>());
+	
+	/**
+	 * Crea una nuevo artículo en la base de datos con los autores con los correos dados, y los eventos con los ids dados.
+	 * @param article
+	 * @param mainAuthorEmail
+	 * @param authorsEmails
+	 * @param eventsIds
+	 * @return una lista con los correos que no se encontraron, o null si el mainAuthor o alguno de los eventsIds no se encontró.
+	 */
+	public List<String> create(Articles article, String mainAuthorEmail, List<String> authorsEmails, List<Integer> eventsIds) {
+		// Obtener usuarios a partir de los emails
+		List<integration.users.Users> usersDtos = findUsersByEmails(authorsEmails);
+		List<Users> users = new ArrayList<>(usersDtos.size());
+		integration.users.Users userDto = findUserByEmail(mainAuthorEmail);
+		
+		// Obtener eventos a partir de los ids
+		// TODO conexión con eventos findEventsBy
+		List<Events> events = new ArrayList<>();
+		
+		// Convertir DTOs a JPA Entities
+		Users user = UsersMapper.INSTANCE.usersDtoToUsers(userDto);
+		for (int i = 0; i < usersDtos.size(); i++) {
+			integration.users.Users uDto = usersDtos.get(i);
+			users.set(i, UsersMapper.INSTANCE.usersDtoToUsers(uDto));
+		}
+		
+		// Obtener emails que no se encontraron
+		List<String> missing = new ArrayList<>();
+		for (int i = users.size() - 1; i >= 0; --i) {
+			if (users.get(i) == null) {
+				missing.add(authorsEmails.get(i));
+				users.remove(i);
+			}
+		}
+		
+		// Agregar artículo a la base de datos
 		em.persist(article);
+		
+		// Agregar evento al artículo
+		article.getEventsList().addAll(events);
+		
+		// Agregar autores al artículo
+		article.setMainAuthorId(user);
+		article.setUsersList(users);
+		
+		// Agregar el artículo a sus autores
+		user.getArticlesList1().add(article);
+		for (Users u : users) {
+			u.getArticlesList().add(article);
+		}
+		
+		return missing;
 	}
 
 	private java.util.List<integration.users.Users> findUsersByEmails(java.util.List<java.lang.String> emails) {
@@ -49,5 +104,13 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 		integration.users.UsersService port = service.getUsersServicePort();
 		return port.findUsersByEmails(emails);
 	}
+
+	private integration.users.Users findUserByEmail(java.lang.String email) {
+		// Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+		// If the calling of port operations may lead to race condition some synchronization is required.
+		integration.users.UsersService port = service.getUsersServicePort();
+		return port.findUserByEmail(email);
+	}
+	
 	
 }

@@ -33,5 +33,4 @@ public class ClassAdapter {
 		user.setRole("Author");
 		return user;
 	}
-	
 }

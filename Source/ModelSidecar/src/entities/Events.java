@@ -6,8 +6,8 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +23,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -52,34 +54,45 @@ public class Events implements Serializable {
     @Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
+    @NotNull
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
 	private Date date;
 	@Basic(optional = false)
+    @NotNull
     @Column(name = "DEADLINE")
     @Temporal(TemporalType.DATE)
 	private Date deadline;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "DESCRIPTION")
 	private String description;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "LOCATION")
 	private String location;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "NAME")
 	private String name;
 	@Basic(optional = false)
+    @NotNull
     @Column(name = "SUBMISSIONSTART")
     @Temporal(TemporalType.DATE)
 	private Date submissionstart;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "WEBSITE")
 	private String website;
 	@JoinTable(name = "EVENTS_ARTICLES", joinColumns = {
     	@JoinColumn(name = "EVENT_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
     	@JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")})
     @ManyToMany
-	private Collection<Articles> articlesCollection;
+	private List<Articles> articlesList;
 	@JoinColumn(name = "EDITOR_ID", referencedColumnName = "ID")
     @ManyToOne
 	private Users editorId;
@@ -167,12 +180,12 @@ public class Events implements Serializable {
 	}
 
 	@XmlTransient
-	public Collection<Articles> getArticlesCollection() {
-		return articlesCollection;
+	public List<Articles> getArticlesList() {
+		return articlesList;
 	}
 
-	public void setArticlesCollection(Collection<Articles> articlesCollection) {
-		this.articlesCollection = articlesCollection;
+	public void setArticlesList(List<Articles> articlesList) {
+		this.articlesList = articlesList;
 	}
 
 	public Users getEditorId() {

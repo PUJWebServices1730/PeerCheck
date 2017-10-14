@@ -6,8 +6,8 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -50,32 +52,42 @@ public class Users implements Serializable {
     @Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
+    @NotNull
     @Column(name = "BIRTHDATE")
     @Temporal(TemporalType.DATE)
 	private Date birthdate;
+	// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "EMAIL")
 	private String email;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "NAME")
 	private String name;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "PASSWORD")
 	private String password;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "ROLE")
 	private String role;
 	@JoinTable(name = "USERS_ARTICLES", joinColumns = {
     	@JoinColumn(name = "USER_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
     	@JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")})
     @ManyToMany
-	private Collection<Articles> articlesCollection;
+	private List<Articles> articlesList;
 	@OneToMany(mappedBy = "reviewerId")
-	private Collection<Reviews> reviewsCollection;
+	private List<Reviews> reviewsList;
 	@OneToMany(mappedBy = "editorId")
-	private Collection<Events> eventsCollection;
+	private List<Events> eventsList;
 	@OneToMany(mappedBy = "mainAuthorId")
-	private Collection<Articles> articlesCollection1;
+	private List<Articles> articlesList1;
 
 	public Users() {
 	}
@@ -142,39 +154,39 @@ public class Users implements Serializable {
 	}
 
 	@XmlTransient
-	public Collection<Articles> getArticlesCollection() {
-		return articlesCollection;
+	public List<Articles> getArticlesList() {
+		return articlesList;
 	}
 
-	public void setArticlesCollection(Collection<Articles> articlesCollection) {
-		this.articlesCollection = articlesCollection;
-	}
-
-	@XmlTransient
-	public Collection<Reviews> getReviewsCollection() {
-		return reviewsCollection;
-	}
-
-	public void setReviewsCollection(Collection<Reviews> reviewsCollection) {
-		this.reviewsCollection = reviewsCollection;
+	public void setArticlesList(List<Articles> articlesList) {
+		this.articlesList = articlesList;
 	}
 
 	@XmlTransient
-	public Collection<Events> getEventsCollection() {
-		return eventsCollection;
+	public List<Reviews> getReviewsList() {
+		return reviewsList;
 	}
 
-	public void setEventsCollection(Collection<Events> eventsCollection) {
-		this.eventsCollection = eventsCollection;
+	public void setReviewsList(List<Reviews> reviewsList) {
+		this.reviewsList = reviewsList;
 	}
 
 	@XmlTransient
-	public Collection<Articles> getArticlesCollection1() {
-		return articlesCollection1;
+	public List<Events> getEventsList() {
+		return eventsList;
 	}
 
-	public void setArticlesCollection1(Collection<Articles> articlesCollection1) {
-		this.articlesCollection1 = articlesCollection1;
+	public void setEventsList(List<Events> eventsList) {
+		this.eventsList = eventsList;
+	}
+
+	@XmlTransient
+	public List<Articles> getArticlesList1() {
+		return articlesList1;
+	}
+
+	public void setArticlesList1(List<Articles> articlesList1) {
+		this.articlesList1 = articlesList1;
 	}
 
 	@Override

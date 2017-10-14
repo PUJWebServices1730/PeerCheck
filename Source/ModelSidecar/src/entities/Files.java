@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -41,12 +43,18 @@ public class Files implements Serializable {
     @Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "DESCRIPTION")
 	private String description;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "TITLE")
 	private String title;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "URL")
 	private String url;
 	@JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")

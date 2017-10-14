@@ -20,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -45,16 +47,22 @@ public class Reviews implements Serializable {
     @Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
+    @NotNull
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
 	private Date date;
 	@Basic(optional = false)
+    @NotNull
     @Column(name = "GRADE")
 	private int grade;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "MESSAGE")
 	private String message;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "STATUS")
 	private String status;
 	@JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")

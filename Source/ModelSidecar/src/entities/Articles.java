@@ -6,7 +6,7 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -46,28 +48,36 @@ public class Articles implements Serializable {
     @Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "ABSTRACT")
 	private String abstract1;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 80)
     @Column(name = "CATEGORY")
 	private String category;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "KEYWORDS")
 	private String keywords;
 	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "TITLE")
 	private String title;
-	@ManyToMany(mappedBy = "articlesCollection")
-	private Collection<Users> usersCollection;
-	@ManyToMany(mappedBy = "articlesCollection")
-	private Collection<Events> eventsCollection;
+	@ManyToMany(mappedBy = "articlesList")
+	private List<Users> usersList;
+	@ManyToMany(mappedBy = "articlesList")
+	private List<Events> eventsList;
 	@OneToMany(mappedBy = "articleId")
-	private Collection<Reviews> reviewsCollection;
+	private List<Reviews> reviewsList;
 	@JoinColumn(name = "MAIN_AUTHOR_ID", referencedColumnName = "ID")
     @ManyToOne
 	private Users mainAuthorId;
 	@OneToMany(mappedBy = "articleId")
-	private Collection<Files> filesCollection;
+	private List<Files> filesList;
 
 	public Articles() {
 	}
@@ -125,30 +135,30 @@ public class Articles implements Serializable {
 	}
 
 	@XmlTransient
-	public Collection<Users> getUsersCollection() {
-		return usersCollection;
+	public List<Users> getUsersList() {
+		return usersList;
 	}
 
-	public void setUsersCollection(Collection<Users> usersCollection) {
-		this.usersCollection = usersCollection;
-	}
-
-	@XmlTransient
-	public Collection<Events> getEventsCollection() {
-		return eventsCollection;
-	}
-
-	public void setEventsCollection(Collection<Events> eventsCollection) {
-		this.eventsCollection = eventsCollection;
+	public void setUsersList(List<Users> usersList) {
+		this.usersList = usersList;
 	}
 
 	@XmlTransient
-	public Collection<Reviews> getReviewsCollection() {
-		return reviewsCollection;
+	public List<Events> getEventsList() {
+		return eventsList;
 	}
 
-	public void setReviewsCollection(Collection<Reviews> reviewsCollection) {
-		this.reviewsCollection = reviewsCollection;
+	public void setEventsList(List<Events> eventsList) {
+		this.eventsList = eventsList;
+	}
+
+	@XmlTransient
+	public List<Reviews> getReviewsList() {
+		return reviewsList;
+	}
+
+	public void setReviewsList(List<Reviews> reviewsList) {
+		this.reviewsList = reviewsList;
 	}
 
 	public Users getMainAuthorId() {
@@ -160,12 +170,12 @@ public class Articles implements Serializable {
 	}
 
 	@XmlTransient
-	public Collection<Files> getFilesCollection() {
-		return filesCollection;
+	public List<Files> getFilesList() {
+		return filesList;
 	}
 
-	public void setFilesCollection(Collection<Files> filesCollection) {
-		this.filesCollection = filesCollection;
+	public void setFilesList(List<Files> filesList) {
+		this.filesList = filesList;
 	}
 
 	@Override

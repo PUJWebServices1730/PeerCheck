@@ -32,13 +32,23 @@ public class UsersFacade extends AbstractFacade<Users> {
 		super(Users.class);
 	}
 	
-	public Users editAuthorRole(Object id) {
+	/**
+	 * Convierte y guarda en la base de datos al usuario con el id dado al rol Reviewer.
+	 * @param id
+	 * @return el usuario modificado.
+	 */
+	public Users convertToReviewer(Object id) {
 		Users user = super.find(id);
 		user.setRole("Reviewer");
 		super.edit(user);
 		return user;
 	}
 	
+	/**
+	 * Encuentra al usuario con el correo dado en la base de datos.
+	 * @param email
+	 * @return el usuario encontrado.
+	 */
 	public Users findByEmail(String email) {
 		Query q = em.createNamedQuery("Users.findByEmail", Users.class);
 		try {
@@ -48,16 +58,16 @@ public class UsersFacade extends AbstractFacade<Users> {
 		}
 	}
 	
-	public List<Users> findByEmail(List<String> emails) {
+	/**
+	 * Encuentra a los usuarios con los correos dados en la base de datos.
+	 * @param emails
+	 * @return los usuarios encontrados.
+	 */
+	public List<Users> findAllByEmail(List<String> emails) {
 		List<Users> users = new ArrayList<>(emails.size());
 		for (int i = 0; i < emails.size(); i++) {
 			String email = emails.get(i);
-			Query q = em.createNamedQuery("Users.findByEmail", Users.class);
-			try {
-				users.set(i, (Users) q.setParameter("email", email).getSingleResult());
-			} catch(Exception e) {
-				users.set(i, null);
-			}
+			users.set(i, findByEmail(email));
 		}
 		return users;
 	}

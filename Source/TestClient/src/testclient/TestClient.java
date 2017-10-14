@@ -25,7 +25,7 @@ public class TestClient {
 		/**
 		 * Volver reviewer a un usuario.
 		 */
-		editAuthorRole(1);
+		convertToReviewer(1);
     }
 
 	private static void create(integration.users.Users entity) {
@@ -34,9 +34,9 @@ public class TestClient {
 		port.create(entity);
 	}
 
-	private static Users editAuthorRole(java.lang.Object id) {
+	private static Users convertToReviewer(java.lang.Object id) {
 		integration.users.UsersService_Service service = new integration.users.UsersService_Service();
 		integration.users.UsersService port = service.getUsersServicePort();
-		return port.editAuthorRole(id);
+		return port.convertToReviewer(id);
 	}
 }
