@@ -4,6 +4,3 @@ Source/*/nbbuild/
 Source/*/dist/
 Source/*/nbdist/
 Source/*/.nb-gradle/
-/PresentacionWeb/nbproject/private/
-/PresentacionWeb/build/
-/PresentacionWeb/dist/
