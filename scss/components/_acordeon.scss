@@ -1,0 +1,19 @@
+.acordeon {
+	.acordeon_title {
+		border-bottom: 3px solid black;
+		display: flex;
+		justify-content: space-between;
+		cursor: pointer;
+
+		&::after {
+			font-family: "FontAwesome";
+			content: '\f0d7';
+			display: inline;
+			font-size: 0.8em;
+		}
+	}
+
+	.acordeon_content {
+		display: none;
+	}
+}

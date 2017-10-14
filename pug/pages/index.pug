@@ -1,0 +1,16 @@
+extends ../templates/base
+
+append config
+
+block footer
+	include ../components/footer
+
+block main
+	section.cover
+		section.cover_data
+			img(src="resources/svgs/document.svg").logo_x200
+			h1 Peercheck
+			h4 Projecto de web services
+			section.cover_links
+				a(href="login.html").cover_link Ingresar
+				a(href="signup.html").cover_link Registrarme

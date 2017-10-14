@@ -1,0 +1,27 @@
+.navbar {
+	background: $navbar-background;
+	color: $navbar-color;
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+
+	.navbar_header, .navbar_finder, .navbar_profile {
+		display: flex;
+		align-items: center;
+	}
+
+	.navbar_header {
+
+	}
+
+	.navbar_finder {
+		flex-grow: 1;
+		padding: 0 $gutter * 4;
+	}
+
+	.navbar_profile {
+
+	}
+}

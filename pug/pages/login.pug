@@ -1,0 +1,30 @@
+extends ../templates/base
+
+append config
+	-title= 'Ingresar'
+
+block footer
+	include ../components/footer
+
+block main
+	section.cover
+		section.cover_data
+			a(href="index.html")
+				img(src="resources/svgs/document.svg").logo_x200
+			form(action='' method='post' autocomplete='off').form
+				fieldset
+					input(type='text' name='user' required autofocus)#user
+					label(for='user') Usuario
+				fieldset
+					input(type='password' name='password' required)#password
+					label(for='password') Contraseña
+				fieldset
+					input(type='checkbox' name='remember')#remember
+					label(for='remember') Recordar
+				section.form-group
+					button(type='submit') Ingresar
+					button(type='reset') Borrar
+				.form-group
+					label
+			section.cover_links.cover_center
+				a(href="signup.html").cover_link Registrarme

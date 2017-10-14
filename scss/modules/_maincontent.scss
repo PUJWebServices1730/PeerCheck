@@ -1,0 +1,19 @@
+.maincontent {
+	width: 100%;
+	margin: $gutter auto $gutter;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+
+	@include from(tablet) {
+		width: 85%;
+	}
+
+	@include from(pc) {
+		width: 70%;
+	}
+
+	@include from(large) {
+		width: 65%;
+	}
+}
