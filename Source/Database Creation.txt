@@ -1,7 +1,7 @@
-Nombre: peerCheckDB
+-- Nombre: peerCheckDB
 
-Usuatio: root
-Contraseña: pass
+-- Usuatio: root
+-- Contraseña: pass
 
 --------------------------------------------------------
 
