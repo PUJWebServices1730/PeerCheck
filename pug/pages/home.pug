@@ -10,7 +10,8 @@ block footer
 	include ../components/footer
 
 block main
-	section.article_list#AL
+	.maincontent
+		section.article_list#AL
 	
 block script
 	| createArticleView("#AL", "Algoritmos", "Porgramación avanzada en c++", ["Sebatian Bobadilla", "Juan Manuel Sánchez"], ["Algoritmos", "Programación", "C++", "Análisis", "Investigación", "Desarrollo"], 4.5);
