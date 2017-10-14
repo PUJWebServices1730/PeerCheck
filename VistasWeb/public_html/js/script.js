@@ -6,16 +6,18 @@
 
 
 $(function () {
-	$.get("entities.users", function () {
-		alert("success");
-	})
-		.done(function () {
-			alert("second success");
-		})
-		.fail(function () {
-			alert("error");
-		})
-		.always(function () {
-			alert("finished");
-		});
+	$.ajax({
+		url : 'webresources/entities.users',
+		type : 'GET',
+		dataType:'json',
+		success : function(data) {
+			console.log('data');
+			console.log(data);
+		},
+		error : function(request,error)
+		{
+			console.log('request');
+			console.log(request);
+		}
+	});
 });
