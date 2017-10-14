@@ -74,10 +74,43 @@ create table "ROOT".REVIEWS
 
 --------------
 
-INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
-	VALUES (CURRENT_DATE, 'editor@mail.com', 'Editor', 'editor', 'Editor');
-INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
-	VALUES (CURRENT_DATE, 'autor1@mail.com', 'Autor', 'autor', 'Author');
-INSERT INTO ROOT.EVENTS ("DATE", DEADLINE, DESCRIPTION, LOCATION, "NAME", SUBMISSIONSTART, WEBSITE, EDITOR_ID) 
-	VALUES (CURRENT_DATE, '2017-12-12', 'Mi primer evento', 'Bogota', 'Evento 1', CURRENT_DATE, 'evento.com', 2);
+INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
+	VALUES ('Programación avanzada en c++', 'Ingeniería', 'Algoritmos, Programación', 'Programación avanzada en c++ ', 1);
+INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
+	VALUES ('Programación dinamica vs Algoritmos voraces ', 'Ingeniería', 'Análisis, Programación dinamica', 'Programación dinamica vs Algoritmos voraces ', 1);
 
+INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
+	VALUES ('Programación avanzada en c++', 'Ingeniería', 'Algoritmos, Programación', 'Programación avanzada en c++ ', 1);
+INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
+	VALUES ('Programación dinamica vs Algoritmos voraces ', 'Ingeniería', 'Análisis, Programación dinamica', 'Programación dinamica vs Algoritmos voraces ', 1);
+
+INSERT INTO ROOT.EVENTS_ARTICLES (EVENT_ID, ARTICLE_ID) 
+	VALUES (1, 1);
+INSERT INTO ROOT.EVENTS_ARTICLES (EVENT_ID, ARTICLE_ID) 
+	VALUES (1, 2);
+
+INSERT INTO ROOT.FILES (DESCRIPTION, TITLE, URL, ARTICLE_ID) 
+	VALUES ('Artículo completo', 'Artículo completo', 'example.com/documento', 1);
+INSERT INTO ROOT.FILES (DESCRIPTION, TITLE, URL, ARTICLE_ID) 
+	VALUES ('Artículo completo', 'Artículo completo', 'example.com/documento2', 2);
+
+INSERT INTO ROOT.REVIEWS ("DATE", GRADE, MESSAGE, STATUS, REVIEWER_ID, ARTICLE_ID) 
+	VALUES ('2017-10-14', 4, 'Buen artículo', 'Reviewed', 1, 2);
+INSERT INTO ROOT.REVIEWS ("DATE", GRADE, MESSAGE, STATUS, REVIEWER_ID, ARTICLE_ID) 
+	VALUES ('2017-10-14', 3, 'Mediocre!', 'Reviewed', 1, 1);
+
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'editor@mail.com', 'Editor', 'editor', 'Editor');
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'autor1@mail.com', 'Autor', 'autor', 'Author');
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'bobadilla@mail.com', 'Sebatian Bobadilla', 'pass', 'Author');
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'sanchez@mail.com', 'Juan Manuel Sánchez', 'pass', 'Reviewer');
+
+INSERT INTO ROOT.USERS_ARTICLES (USER_ID, ARTICLE_ID) 
+	VALUES (1, 2);
+INSERT INTO ROOT.USERS_ARTICLES (USER_ID, ARTICLE_ID) 
+	VALUES (2, 1);
+INSERT INTO ROOT.USERS_ARTICLES (USER_ID, ARTICLE_ID) 
+	VALUES (2, 2);
