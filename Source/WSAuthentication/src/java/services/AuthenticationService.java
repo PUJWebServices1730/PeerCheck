@@ -30,9 +30,9 @@ public class AuthenticationService {
     private UsersService_Service service;
     
     @WebMethod(operationName = "authenticate")
-    public Users authenticate(@WebParam(name = "username") java.lang.Object username, @WebParam(name = "password") java.lang.Object password) {
+    public Users authenticate(@WebParam(name = "email") String email, @WebParam(name = "password") String password) {
         integration.users.UsersService port = service.getUsersServicePort();
-        Users user =  port.findByUsername(username);
+        Users user = port.findUserByEmail(email);
         if(ejbRef.authenticate(user, password)){
             return user;
         }

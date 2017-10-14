@@ -121,18 +121,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findUserByEmail">
-<xs:sequence>
-<xs:element name="email" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findUserByEmailResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:users" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="convertToReviewer">
 <xs:sequence>
 <xs:element name="id" type="xs:anyType" minOccurs="0"/>
@@ -140,6 +128,18 @@
 </xs:complexType>
 
 <xs:complexType name="convertToReviewerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:users" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUserByEmail">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUserByEmailResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:users" minOccurs="0"/>
 </xs:sequence>

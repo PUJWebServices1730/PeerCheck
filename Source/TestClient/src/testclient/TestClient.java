@@ -5,7 +5,9 @@
  */
 package testclient;
 
+import integration.articles.Articles;
 import integration.users.Users;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -26,6 +28,15 @@ public class TestClient {
 		 * Volver reviewer a un usuario.
 		 */
 		convertToReviewer(1);
+		/**
+		 * Crear artículo
+		 */
+		Articles article = new Articles();
+		article.setAbstract1("Lorem ipsum dolor sit amet...");
+		article.setCategory("Engineering");
+		article.setKeywords("test, proyect, web services");
+		article.setTitle("Test Article");
+		create1(article, "email@email.com", new ArrayList<>(), new ArrayList<>());
     }
 
 	private static void create(integration.users.Users entity) {
@@ -39,4 +50,12 @@ public class TestClient {
 		integration.users.UsersService port = service.getUsersServicePort();
 		return port.convertToReviewer(id);
 	}
+
+	private static java.util.List<java.lang.String> create1(integration.articles.Articles article, java.lang.String mainAuthorEmail, java.util.List<java.lang.String> authorsEmails, java.util.List<java.lang.Integer> eventsIds) {
+		integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
+		integration.articles.ArticlesService port = service.getArticlesServicePort();
+		return port.create1(article, mainAuthorEmail, authorsEmails, eventsIds);
+	}
+	
+	
 }

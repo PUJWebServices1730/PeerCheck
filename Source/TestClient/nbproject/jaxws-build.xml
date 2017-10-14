@@ -50,5 +50,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/AuthenticationService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/integration/authentication"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-UsersService, wsimport-client-AuthenticationService"/>
+    <target name="wsimport-client-ArticlesService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ArticlesService"/>
+        <property name="wsdl-ArticlesService" location="xml-resources/web-service-references/ArticlesService/wsdl/localhost_8080/ArticlesService/ArticlesService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ArticlesService" destdir="${build.generated.dir}/jax-wsCache/ArticlesService" wsdl="${wsdl-ArticlesService}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ArticlesService/ArticlesService?wsdl" xnocompile="true" xendorsed="true" package="integration.articles">
+            <depends file="${wsdl-ArticlesService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ArticlesService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ArticlesService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-ArticlesService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/ArticlesService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/integration/articles"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-UsersService, wsimport-client-AuthenticationService, wsimport-client-ArticlesService"/>
 </project>
