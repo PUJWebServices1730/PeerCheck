@@ -5,6 +5,17 @@
  */
 
 
-$(function() {
-	$.get('entities.users', )
+$(function () {
+	$.get("entities.users", function () {
+		alert("success");
+	})
+		.done(function () {
+			alert("second success");
+		})
+		.fail(function () {
+			alert("error");
+		})
+		.always(function () {
+			alert("finished");
+		});
 });
