@@ -32,6 +32,10 @@
 
 <xs:element name="findUsersByEmailsResponse" type="tns:findUsersByEmailsResponse"/>
 
+<xs:element name="findUsersByRole" type="tns:findUsersByRole"/>
+
+<xs:element name="findUsersByRoleResponse" type="tns:findUsersByRoleResponse"/>
+
 <xs:element name="remove" type="tns:remove"/>
 
 <xs:element name="users" type="tns:users"/>
@@ -93,6 +97,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="findUsersByRole">
+<xs:sequence>
+<xs:element name="role" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUsersByRoleResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="remove">
 <xs:sequence>
 <xs:element name="entity" type="tns:users" minOccurs="0"/>
@@ -123,7 +139,7 @@
 
 <xs:complexType name="convertToReviewer">
 <xs:sequence>
-<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+<xs:element name="entity" type="tns:users" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

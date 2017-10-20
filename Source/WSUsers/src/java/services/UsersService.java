@@ -69,8 +69,8 @@ public class UsersService {
 	 * Web service operation
 	 */
 	@WebMethod(operationName = "convertToReviewer")
-	public Users convertToReviewer(@WebParam(name = "id") Object id) {
-		return ejbRef.convertToReviewer(id);
+	public Users convertToReviewer(@WebParam(name = "entity") Users entity) {
+		return ejbRef.convertToReviewer(entity);
 	}
 	
 	/**
@@ -87,6 +87,14 @@ public class UsersService {
 	@WebMethod(operationName = "findUserByEmail")
 	public Users findUserByEmail(@WebParam(name = "email") String email) {
 		return ejbRef.findByEmail(email);
+	}
+        
+        /**
+	 * Web service operation
+	 */
+	@WebMethod(operationName = "findUsersByRole")
+	public List<Users> findUsersByRole(@WebParam(name = "role") String role) {
+		return ejbRef.findByRole(role);
 	}
 	
 	

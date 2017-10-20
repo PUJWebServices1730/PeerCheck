@@ -33,18 +33,6 @@ public class EventsService {
         ejbRef.create(entity);
     }
 
-    @WebMethod(operationName = "edit")
-    @Oneway
-    public void edit(@WebParam(name = "entity") Events entity) {
-        ejbRef.edit(entity);
-    }
-
-    @WebMethod(operationName = "remove")
-    @Oneway
-    public void remove(@WebParam(name = "entity") Events entity) {
-        ejbRef.remove(entity);
-    }
-
     @WebMethod(operationName = "find")
     public Events find(@WebParam(name = "id") Object id) {
         return ejbRef.find(id);
@@ -54,15 +42,5 @@ public class EventsService {
     public List<Events> findAll() {
         return ejbRef.findAll();
     }
-
-    @WebMethod(operationName = "findRange")
-    public List<Events> findRange(@WebParam(name = "range") int[] range) {
-        return ejbRef.findRange(range);
-    }
-
-    @WebMethod(operationName = "count")
-    public int count() {
-        return ejbRef.count();
-    }
-    
+   
 }
