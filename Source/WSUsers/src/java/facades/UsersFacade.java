@@ -37,13 +37,21 @@ public class UsersFacade extends AbstractFacade<Users> {
 	 * @param id
 	 * @return el usuario modificado.
 	 */
-	public Users convertToReviewer(Object id) {
-		Users user = super.find(id);
+	public Users convertToReviewer(Users user) {
 		user.setRole("Reviewer");
 		super.edit(user);
 		return user;
 	}
 	
+        public List<Users> findByRole(String role) {
+            Query q = em.createNamedQuery("Users.findByRole", Users.class);
+            try {
+			return (List<Users>) q.setParameter("role", role).getResultList();
+		} catch(Exception e) {
+			return null;
+		}
+        }
+        
 	/**
 	 * Encuentra al usuario con el correo dado en la base de datos.
 	 * @param email

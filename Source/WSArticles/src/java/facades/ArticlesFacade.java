@@ -53,18 +53,12 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 	 * @param eventsIds
 	 * @return una lista con los correos que no se encontraron, o null si el mainAuthor o alguno de los eventsIds no se encontró.
 	 */
-	public List<String> create(Articles article, String mainAuthorEmail, List<String> authorsEmails, List<Integer> eventsIds) {
+	public List<String> create(Articles article, List<String> authorsEmails, List<Events> events) {
 		// Obtener usuarios a partir de los emails
 		List<integration.users.Users> usersDtos = findUsersByEmails(authorsEmails);
 		List<Users> users = new ArrayList<>(usersDtos.size());
-		integration.users.Users userDto = findUserByEmail(mainAuthorEmail);
 		
-		// Obtener eventos a partir de los ids
-		// TODO conexión con eventos findEventsBy
-		List<Events> events = new ArrayList<>();
-		
-		// Convertir DTOs a JPA Entities
-		Users user = UsersMapper.INSTANCE.usersDtoToUsers(userDto);
+                
 		for (int i = 0; i < usersDtos.size(); i++) {
 			integration.users.Users uDto = usersDtos.get(i);
 			users.set(i, UsersMapper.INSTANCE.usersDtoToUsers(uDto));
@@ -86,11 +80,10 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 		article.getEventsList().addAll(events);
 		
 		// Agregar autores al artículo
-		article.setMainAuthorId(user);
 		article.setUsersList(users);
 		
 		// Agregar el artículo a sus autores
-		user.getArticlesList1().add(article);
+		//user.getArticlesList1().add(article);
 		for (Users u : users) {
 			u.getArticlesList().add(article);
 		}
