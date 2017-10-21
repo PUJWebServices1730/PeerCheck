@@ -153,32 +153,27 @@ public class ConsoleClient {
         int n, i = 0, j;
         List<Events> events = callFindAllEvents();
         List<integration.articles.Events> articleEvents = new ArrayList<integration.articles.Events>();
-        
-        System.out.println("Eventos:");
-        for(Events event : events){
-           System.out.println(String.format("%d. %s %s", i, event.getName(), event.getDescription()));
-           i++; 
-        }
-        
+        System.out.print("titulo abstract categoria palabras_clave: ");
         String[] args = input.nextLine().split(" ");
         String title = args[0];
         String abstract1 = args[1];
         String category = args[2];
         String keywords = args[3];
-        
+        System.out.println("\nEventos:");
+        for(Events event : events){
+           System.out.println(String.format("%d. %s %s", i, event.getName(), event.getDescription()));
+           i++; 
+        }
         System.out.print("Ingresar eventos: ");
         String eventsString = input.nextLine();
-        
         String[] eventsNumbers = eventsString.split(",");
         for(j = 0; j < eventsNumbers.length; j++){
             integration.articles.Events nEvent = new integration.articles.Events();
             ClassAdapter.copyObject(events.get(Integer.parseInt(eventsNumbers[j])), nEvent);
             articleEvents.add(nEvent);
         }
-        
         System.out.print("Ingresar correos: ");
         List<String> emails = Arrays.asList(input.nextLine().split(","));
-        
         Articles article = ClassAdapter.initArticle(abstract1, category, keywords, title, currentUser);
         callCreateArticle(article, emails, articleEvents);
     }
