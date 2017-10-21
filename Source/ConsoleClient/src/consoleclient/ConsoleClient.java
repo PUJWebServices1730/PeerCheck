@@ -187,7 +187,11 @@ public class ConsoleClient {
     }
 
     private static void getGradeAverage() {
-        System.out.println(calculateAverage(2));
+        Scanner input = new Scanner(System.in);
+        String line = "";
+        line = input.nextLine();
+        int n = Integer.parseInt(line);
+        System.out.println(calculateAverage(n));
     }
 
     private static Float calculateAverage(int id) {
