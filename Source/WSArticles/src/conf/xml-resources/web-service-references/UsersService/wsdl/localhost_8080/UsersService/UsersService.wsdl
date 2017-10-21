@@ -28,6 +28,18 @@
 <message name="findAllResponse">
 <part name="parameters" element="tns:findAllResponse"/>
 </message>
+<message name="findUsersByRole">
+<part name="parameters" element="tns:findUsersByRole"/>
+</message>
+<message name="findUsersByRoleResponse">
+<part name="parameters" element="tns:findUsersByRoleResponse"/>
+</message>
+<message name="findUserByEmail">
+<part name="parameters" element="tns:findUserByEmail"/>
+</message>
+<message name="findUserByEmailResponse">
+<part name="parameters" element="tns:findUserByEmailResponse"/>
+</message>
 <message name="convertToReviewer">
 <part name="parameters" element="tns:convertToReviewer"/>
 </message>
@@ -49,18 +61,6 @@
 <message name="findRangeResponse">
 <part name="parameters" element="tns:findRangeResponse"/>
 </message>
-<message name="findUsersByRole">
-<part name="parameters" element="tns:findUsersByRole"/>
-</message>
-<message name="findUsersByRoleResponse">
-<part name="parameters" element="tns:findUsersByRoleResponse"/>
-</message>
-<message name="findUserByEmail">
-<part name="parameters" element="tns:findUserByEmail"/>
-</message>
-<message name="findUserByEmailResponse">
-<part name="parameters" element="tns:findUserByEmailResponse"/>
-</message>
 <portType name="UsersService">
 <operation name="remove">
 <input wsam:Action="http://services/UsersService/remove" message="tns:remove"/>
@@ -80,6 +80,14 @@
 <input wsam:Action="http://services/UsersService/findAllRequest" message="tns:findAll"/>
 <output wsam:Action="http://services/UsersService/findAllResponse" message="tns:findAllResponse"/>
 </operation>
+<operation name="findUsersByRole">
+<input wsam:Action="http://services/UsersService/findUsersByRoleRequest" message="tns:findUsersByRole"/>
+<output wsam:Action="http://services/UsersService/findUsersByRoleResponse" message="tns:findUsersByRoleResponse"/>
+</operation>
+<operation name="findUserByEmail">
+<input wsam:Action="http://services/UsersService/findUserByEmailRequest" message="tns:findUserByEmail"/>
+<output wsam:Action="http://services/UsersService/findUserByEmailResponse" message="tns:findUserByEmailResponse"/>
+</operation>
 <operation name="convertToReviewer">
 <input wsam:Action="http://services/UsersService/convertToReviewerRequest" message="tns:convertToReviewer"/>
 <output wsam:Action="http://services/UsersService/convertToReviewerResponse" message="tns:convertToReviewerResponse"/>
@@ -94,14 +102,6 @@
 <operation name="findRange">
 <input wsam:Action="http://services/UsersService/findRangeRequest" message="tns:findRange"/>
 <output wsam:Action="http://services/UsersService/findRangeResponse" message="tns:findRangeResponse"/>
-</operation>
-<operation name="findUsersByRole">
-<input wsam:Action="http://services/UsersService/findUsersByRoleRequest" message="tns:findUsersByRole"/>
-<output wsam:Action="http://services/UsersService/findUsersByRoleResponse" message="tns:findUsersByRoleResponse"/>
-</operation>
-<operation name="findUserByEmail">
-<input wsam:Action="http://services/UsersService/findUserByEmailRequest" message="tns:findUserByEmail"/>
-<output wsam:Action="http://services/UsersService/findUserByEmailResponse" message="tns:findUserByEmailResponse"/>
 </operation>
 </portType>
 <binding name="UsersServicePortBinding" type="tns:UsersService">
@@ -145,6 +145,24 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="findUsersByRole">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findUserByEmail">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="convertToReviewer">
 <soap:operation soapAction=""/>
 <input>
@@ -170,24 +188,6 @@
 </input>
 </operation>
 <operation name="findRange">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="findUsersByRole">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="findUserByEmail">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

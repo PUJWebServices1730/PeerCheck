@@ -39,6 +39,7 @@ public class ConsoleClient {
                     + "3. Listar usuarios\n"
                     + "4. Autenticar / Iniciar sesión\n"
                     + "5. Crear artículo\n"
+                    + "6. Obtener calificacion final"
                     + "------\n");
             n = input.nextInt();
             input.nextLine();
@@ -57,6 +58,9 @@ public class ConsoleClient {
                     break;
                 case 5:
                     createArticle();
+                    break;
+                case 6:
+                    getGradeAverage();
                     break;
             }
         }
@@ -182,8 +186,15 @@ public class ConsoleClient {
         return port.findAll();
     }
 
-    
-    
+    private static void getGradeAverage() {
+        System.out.println(calculateAverage(2));
+    }
+
+    private static Float calculateAverage(int id) {
+        integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
+        integration.articles.ArticlesService port = service.getArticlesServicePort();
+        return port.calculateAverage(id);
+    }
     
     
 }

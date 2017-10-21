@@ -9,9 +9,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for users complex type.
+ * <p>Clase Java para users complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="users"&gt;
@@ -52,7 +52,7 @@ public class Users {
     protected String role;
 
     /**
-     * Gets the value of the birthdate property.
+     * Obtiene el valor de la propiedad birthdate.
      * 
      * @return
      *     possible object is
@@ -64,7 +64,7 @@ public class Users {
     }
 
     /**
-     * Sets the value of the birthdate property.
+     * Define el valor de la propiedad birthdate.
      * 
      * @param value
      *     allowed object is
@@ -76,7 +76,7 @@ public class Users {
     }
 
     /**
-     * Gets the value of the email property.
+     * Obtiene el valor de la propiedad email.
      * 
      * @return
      *     possible object is
@@ -88,7 +88,7 @@ public class Users {
     }
 
     /**
-     * Sets the value of the email property.
+     * Define el valor de la propiedad email.
      * 
      * @param value
      *     allowed object is
@@ -100,7 +100,7 @@ public class Users {
     }
 
     /**
-     * Gets the value of the id property.
+     * Obtiene el valor de la propiedad id.
      * 
      * @return
      *     possible object is
@@ -112,7 +112,7 @@ public class Users {
     }
 
     /**
-     * Sets the value of the id property.
+     * Define el valor de la propiedad id.
      * 
      * @param value
      *     allowed object is
@@ -124,7 +124,7 @@ public class Users {
     }
 
     /**
-     * Gets the value of the name property.
+     * Obtiene el valor de la propiedad name.
      * 
      * @return
      *     possible object is
@@ -136,7 +136,7 @@ public class Users {
     }
 
     /**
-     * Sets the value of the name property.
+     * Define el valor de la propiedad name.
      * 
      * @param value
      *     allowed object is
@@ -148,7 +148,7 @@ public class Users {
     }
 
     /**
-     * Gets the value of the password property.
+     * Obtiene el valor de la propiedad password.
      * 
      * @return
      *     possible object is
@@ -160,7 +160,7 @@ public class Users {
     }
 
     /**
-     * Sets the value of the password property.
+     * Define el valor de la propiedad password.
      * 
      * @param value
      *     allowed object is
@@ -172,7 +172,7 @@ public class Users {
     }
 
     /**
-     * Gets the value of the role property.
+     * Obtiene el valor de la propiedad role.
      * 
      * @return
      *     possible object is
@@ -184,7 +184,7 @@ public class Users {
     }
 
     /**
-     * Sets the value of the role property.
+     * Define el valor de la propiedad role.
      * 
      * @param value
      *     allowed object is

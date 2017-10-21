@@ -44,3 +44,40 @@ var createArticleView = (articleList, eventName, name, authors, topics, grade) =
 $('.acordeon_title').on('click', function() {
 	$(this).next('.acordeon_content').slideToggle();
 });
+
+
+$(function () {
+    $.ajax({
+        url : 'http://localhost:8080/ServletWeb/webresources/entities.users',
+        type : 'GET',
+        dataType:'json',
+        success : function(data) {
+            console.log('data');
+            console.log(data);
+        },
+        error : function(request,error)
+        {
+            console.log('request');
+            console.log(request);
+        }
+    });
+});
+
+var login = function() {
+    var email = $('#email').val();
+    var pass = $('#password').val();
+    $.ajax({
+        url : 'http://localhost:8080/ServletWeb/webresources/entities.users/login?email=' + email + '&password=' + pass,
+        type : 'GET',
+        //dataType:'json',
+        success : function(data) {
+            console.log('data');
+            console.log(data);
+        },
+        error : function(request,error)
+        {
+            console.log('request');
+            console.log(request);
+        }
+    });
+}

@@ -6,6 +6,8 @@
 package services;
 
 import entities.Users;
+import integration.authentication.AuthenticationService_Service;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,7 +21,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.xml.ws.WebServiceRef;
+import mappers.DTOMapper;
 
 /**
  *
@@ -30,64 +35,86 @@ import javax.ws.rs.core.MediaType;
 @Path("entities.users")
 public class UsersFacadeREST extends AbstractFacade<Users> {
 
-	@PersistenceContext(unitName = "ServletWebPU")
-	private EntityManager em;
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AuthenticationService/AuthenticationService.wsdl")
+    private AuthenticationService_Service service;
 
-	public UsersFacadeREST() {
-		super(Users.class);
-	}
+    @PersistenceContext(unitName = "ServletWebPU")
+    private EntityManager em;
 
-	@POST
+    public UsersFacadeREST() {
+        super(Users.class);
+    }
+
+    @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public void create(Users entity) {
-		super.create(entity);
-	}
+    public void create(Users entity) {
+        super.create(entity);
+    }
 
-	@PUT
+    @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public void edit(@PathParam("id") Integer id, Users entity) {
-		super.edit(entity);
-	}
+    public void edit(@PathParam("id") Integer id, Users entity) {
+        super.edit(entity);
+    }
 
-	@DELETE
+    @DELETE
     @Path("{id}")
-	public void remove(@PathParam("id") Integer id) {
-		super.remove(super.find(id));
-	}
+    public void remove(@PathParam("id") Integer id) {
+        super.remove(super.find(id));
+    }
 
-	@GET
+    @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Users find(@PathParam("id") Integer id) {
-		return super.find(id);
-	}
+    public Users find(@PathParam("id") Integer id) {
+        return super.find(id);
+    }
 
-	@GET
+    @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<Users> findAll() {
-		return super.findAll();
-	}
+    public List<Users> findAll() {
+        return super.findAll();
+    }
 
-	@GET
+    @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<Users> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-		return super.findRange(new int[]{from, to});
-	}
+    public List<Users> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+        return super.findRange(new int[]{from, to});
+    }
 
-	@GET
+    @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
-	public String countREST() {
-		return String.valueOf(super.count());
-	}
+    public String countREST() {
+        return String.valueOf(super.count());
+    }
+    
+    @GET
+    @Path("login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Users exists(@QueryParam("email") String email, @QueryParam("password") String password) {
+        integration.authentication.Users iauser = authenticate(email, password);
+        Users user = DTOMapper.INSTANCE.usersDtoToUsers(iauser);
+        //Users user = new Users(iauser.getId(), new Date(iauser.getBirthdate().toString()), iauser.getEmail(), iauser.getName(), iauser.getPassword(), iauser.getRole());
+        return user;
+    }
 
-	@Override
-	protected EntityManager getEntityManager() {
-		return em;
-	}
-	
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    private integration.authentication.Users authenticate(java.lang.String email, java.lang.String password) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        integration.authentication.AuthenticationService port = service.getAuthenticationServicePort();
+        return port.authenticate(email, password);
+    }
+    
+    
+
 }

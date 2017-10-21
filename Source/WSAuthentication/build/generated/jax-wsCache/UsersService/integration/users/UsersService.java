@@ -91,36 +91,6 @@ public interface UsersService {
 
     /**
      * 
-     * @param emails
-     * @return
-     *     returns java.util.List<integration.users.Users>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findUsersByEmails", targetNamespace = "http://services/", className = "integration.users.FindUsersByEmails")
-    @ResponseWrapper(localName = "findUsersByEmailsResponse", targetNamespace = "http://services/", className = "integration.users.FindUsersByEmailsResponse")
-    @Action(input = "http://services/UsersService/findUsersByEmailsRequest", output = "http://services/UsersService/findUsersByEmailsResponse")
-    public List<Users> findUsersByEmails(
-        @WebParam(name = "emails", targetNamespace = "")
-        List<String> emails);
-
-    /**
-     * 
-     * @param id
-     * @return
-     *     returns integration.users.Users
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "convertToReviewer", targetNamespace = "http://services/", className = "integration.users.ConvertToReviewer")
-    @ResponseWrapper(localName = "convertToReviewerResponse", targetNamespace = "http://services/", className = "integration.users.ConvertToReviewerResponse")
-    @Action(input = "http://services/UsersService/convertToReviewerRequest", output = "http://services/UsersService/convertToReviewerResponse")
-    public Users convertToReviewer(
-        @WebParam(name = "id", targetNamespace = "")
-        Object id);
-
-    /**
-     * 
      * @param entity
      */
     @WebMethod
@@ -160,5 +130,50 @@ public interface UsersService {
     public Users findUserByEmail(
         @WebParam(name = "email", targetNamespace = "")
         String email);
+
+    /**
+     * 
+     * @param role
+     * @return
+     *     returns java.util.List<integration.users.Users>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findUsersByRole", targetNamespace = "http://services/", className = "integration.users.FindUsersByRole")
+    @ResponseWrapper(localName = "findUsersByRoleResponse", targetNamespace = "http://services/", className = "integration.users.FindUsersByRoleResponse")
+    @Action(input = "http://services/UsersService/findUsersByRoleRequest", output = "http://services/UsersService/findUsersByRoleResponse")
+    public List<Users> findUsersByRole(
+        @WebParam(name = "role", targetNamespace = "")
+        String role);
+
+    /**
+     * 
+     * @param entity
+     * @return
+     *     returns integration.users.Users
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "convertToReviewer", targetNamespace = "http://services/", className = "integration.users.ConvertToReviewer")
+    @ResponseWrapper(localName = "convertToReviewerResponse", targetNamespace = "http://services/", className = "integration.users.ConvertToReviewerResponse")
+    @Action(input = "http://services/UsersService/convertToReviewerRequest", output = "http://services/UsersService/convertToReviewerResponse")
+    public Users convertToReviewer(
+        @WebParam(name = "entity", targetNamespace = "")
+        Users entity);
+
+    /**
+     * 
+     * @param emails
+     * @return
+     *     returns java.util.List<integration.users.Users>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findUsersByEmails", targetNamespace = "http://services/", className = "integration.users.FindUsersByEmails")
+    @ResponseWrapper(localName = "findUsersByEmailsResponse", targetNamespace = "http://services/", className = "integration.users.FindUsersByEmailsResponse")
+    @Action(input = "http://services/UsersService/findUsersByEmailsRequest", output = "http://services/UsersService/findUsersByEmailsResponse")
+    public List<Users> findUsersByEmails(
+        @WebParam(name = "emails", targetNamespace = "")
+        List<String> emails);
 
 }

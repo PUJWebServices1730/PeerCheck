@@ -7,6 +7,7 @@ package services;
 
 import entities.Articles;
 import entities.Events;
+import entities.Reviews;
 import facades.ArticlesFacade;
 import java.util.List;
 import javax.ejb.EJB;
@@ -74,5 +75,13 @@ public class ArticlesService {
 	public List<String> create(@WebParam(name = "article") Articles article, @WebParam(name = "authorsEmails") List<String> authorsEmails, @WebParam(name = "eventsIds") List<Events> events) {
 		return ejbRef.create(article, authorsEmails, events);
 	}
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "calculateAverage")
+    public Float calculateAverage(@WebParam(name = "id") int id) {
+        return ejbRef.calculateAverage(id);
+    }
 	
 }

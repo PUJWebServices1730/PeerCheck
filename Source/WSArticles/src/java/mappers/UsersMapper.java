@@ -18,8 +18,8 @@ public interface UsersMapper {
 
     UsersMapper INSTANCE = Mappers.getMapper( UsersMapper.class );
 
-    @Mapping(source = "dto", target = "entity")
+    @Mapping(source = "id", target = "id")
     integration.users.Users usersToUsersDto(entities.Users user);
-	@Mapping(source = "entity", target = "dto")
+    @Mapping(source = "id", target = "id")
     entities.Users usersDtoToUsers(integration.users.Users user);
 }

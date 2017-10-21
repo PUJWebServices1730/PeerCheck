@@ -19,14 +19,14 @@
 <message name="findResponse">
 <part name="parameters" element="tns:findResponse"/>
 </message>
+<message name="create">
+<part name="parameters" element="tns:create"/>
+</message>
 <message name="create_1">
 <part name="parameters" element="tns:create_1"/>
 </message>
 <message name="create_1Response">
 <part name="parameters" element="tns:create_1Response"/>
-</message>
-<message name="create">
-<part name="parameters" element="tns:create"/>
 </message>
 <message name="findAll">
 <part name="parameters" element="tns:findAll"/>
@@ -43,6 +43,12 @@
 <message name="findRangeResponse">
 <part name="parameters" element="tns:findRangeResponse"/>
 </message>
+<message name="calculateAverage">
+<part name="parameters" element="tns:calculateAverage"/>
+</message>
+<message name="calculateAverageResponse">
+<part name="parameters" element="tns:calculateAverageResponse"/>
+</message>
 <portType name="ArticlesService">
 <operation name="remove">
 <input wsam:Action="http://services/ArticlesService/remove" message="tns:remove"/>
@@ -55,12 +61,12 @@
 <input wsam:Action="http://services/ArticlesService/findRequest" message="tns:find"/>
 <output wsam:Action="http://services/ArticlesService/findResponse" message="tns:findResponse"/>
 </operation>
+<operation name="create">
+<input wsam:Action="http://services/ArticlesService/create" message="tns:create"/>
+</operation>
 <operation name="create_1">
 <input wsam:Action="http://services/ArticlesService/create_1Request" message="tns:create_1"/>
 <output wsam:Action="http://services/ArticlesService/create_1Response" message="tns:create_1Response"/>
-</operation>
-<operation name="create">
-<input wsam:Action="http://services/ArticlesService/create" message="tns:create"/>
 </operation>
 <operation name="findAll">
 <input wsam:Action="http://services/ArticlesService/findAllRequest" message="tns:findAll"/>
@@ -72,6 +78,10 @@
 <operation name="findRange">
 <input wsam:Action="http://services/ArticlesService/findRangeRequest" message="tns:findRange"/>
 <output wsam:Action="http://services/ArticlesService/findRangeResponse" message="tns:findRangeResponse"/>
+</operation>
+<operation name="calculateAverage">
+<input wsam:Action="http://services/ArticlesService/calculateAverageRequest" message="tns:calculateAverage"/>
+<output wsam:Action="http://services/ArticlesService/calculateAverageResponse" message="tns:calculateAverageResponse"/>
 </operation>
 </portType>
 <binding name="ArticlesServicePortBinding" type="tns:ArticlesService">
@@ -100,6 +110,12 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="create">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
 <operation name="create_1">
 <soap:operation soapAction=""/>
 <input>
@@ -108,12 +124,6 @@
 <output>
 <soap:body use="literal"/>
 </output>
-</operation>
-<operation name="create">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
 </operation>
 <operation name="findAll">
 <soap:operation soapAction=""/>
@@ -131,6 +141,15 @@
 </input>
 </operation>
 <operation name="findRange">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="calculateAverage">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

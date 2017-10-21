@@ -40,6 +40,8 @@ public class ObjectFactory {
     private final static QName _FindUserByEmailResponse_QNAME = new QName("http://services/", "findUserByEmailResponse");
     private final static QName _FindUsersByEmails_QNAME = new QName("http://services/", "findUsersByEmails");
     private final static QName _FindUsersByEmailsResponse_QNAME = new QName("http://services/", "findUsersByEmailsResponse");
+    private final static QName _FindUsersByRole_QNAME = new QName("http://services/", "findUsersByRole");
+    private final static QName _FindUsersByRoleResponse_QNAME = new QName("http://services/", "findUsersByRoleResponse");
     private final static QName _Remove_QNAME = new QName("http://services/", "remove");
     private final static QName _Users_QNAME = new QName("http://services/", "users");
 
@@ -176,6 +178,22 @@ public class ObjectFactory {
      */
     public FindUsersByEmailsResponse createFindUsersByEmailsResponse() {
         return new FindUsersByEmailsResponse();
+    }
+
+    /**
+     * Create an instance of {@link FindUsersByRole }
+     * 
+     */
+    public FindUsersByRole createFindUsersByRole() {
+        return new FindUsersByRole();
+    }
+
+    /**
+     * Create an instance of {@link FindUsersByRoleResponse }
+     * 
+     */
+    public FindUsersByRoleResponse createFindUsersByRoleResponse() {
+        return new FindUsersByRoleResponse();
     }
 
     /**
@@ -336,6 +354,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://services/", name = "findUsersByEmailsResponse")
     public JAXBElement<FindUsersByEmailsResponse> createFindUsersByEmailsResponse(FindUsersByEmailsResponse value) {
         return new JAXBElement<FindUsersByEmailsResponse>(_FindUsersByEmailsResponse_QNAME, FindUsersByEmailsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindUsersByRole }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services/", name = "findUsersByRole")
+    public JAXBElement<FindUsersByRole> createFindUsersByRole(FindUsersByRole value) {
+        return new JAXBElement<FindUsersByRole>(_FindUsersByRole_QNAME, FindUsersByRole.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindUsersByRoleResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services/", name = "findUsersByRoleResponse")
+    public JAXBElement<FindUsersByRoleResponse> createFindUsersByRoleResponse(FindUsersByRoleResponse value) {
+        return new JAXBElement<FindUsersByRoleResponse>(_FindUsersByRoleResponse_QNAME, FindUsersByRoleResponse.class, null, value);
     }
 
     /**

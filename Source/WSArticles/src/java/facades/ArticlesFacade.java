@@ -7,6 +7,7 @@ package facades;
 
 import entities.Articles;
 import entities.Events;
+import entities.Reviews;
 import entities.Users;
 import integration.users.UsersService_Service;
 import javax.ejb.Stateless;
@@ -21,6 +22,7 @@ import javax.xml.ws.Service;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import javax.jws.WebParam;
 import mappers.UsersMapper;
 
 /**
@@ -105,5 +107,13 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 		return port.findUserByEmail(email);
 	}
 	
-	
+	public Float calculateAverage(@WebParam(name = "id") int id) {
+            float sum = 0;
+            Articles article = find(id);
+            List<Reviews> reviewsList = article.getReviewsList();
+            for(Reviews review : reviewsList) {
+                sum += review.getGrade();
+            }
+            return sum / reviewsList.size();
+        }
 }
