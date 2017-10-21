@@ -69,7 +69,7 @@ var login = function() {
     $.ajax({
         url : 'http://localhost:8080/ServletWeb/webresources/entities.users/login?email=' + email + '&password=' + pass,
         type : 'GET',
-        //dataType:'json',
+        dataType:'json',
         success : function(data) {
             console.log('data');
             console.log(data);

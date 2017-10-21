@@ -7,6 +7,7 @@ package consoleclient;
 
 import integration.users.Users;
 import integration.articles.Articles;
+import integration.authentication.AuthenticationService_Service;
 import integration.events.Events;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -148,7 +149,7 @@ public class ConsoleClient {
     }
     
     private static integration.authentication.Users callAuthenticate(java.lang.String email, java.lang.String password) {
-        integration.authentication.AuthenticationService_Service service = new integration.authentication.AuthenticationService_Service();
+        AuthenticationService_Service service = new integration.authentication.AuthenticationService_Service();
         integration.authentication.AuthenticationService port = service.getAuthenticationServicePort();
         return port.authenticate(email, password);
     }

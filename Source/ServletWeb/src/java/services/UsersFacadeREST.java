@@ -99,7 +99,6 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
     public Users exists(@QueryParam("email") String email, @QueryParam("password") String password) {
         integration.authentication.Users iauser = authenticate(email, password);
         Users user = DTOMapper.INSTANCE.usersDtoToUsers(iauser);
-        //Users user = new Users(iauser.getId(), new Date(iauser.getBirthdate().toString()), iauser.getEmail(), iauser.getName(), iauser.getPassword(), iauser.getRole());
         return user;
     }
 
@@ -110,10 +109,12 @@ public class UsersFacadeREST extends AbstractFacade<Users> {
 
     private integration.authentication.Users authenticate(java.lang.String email, java.lang.String password) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        integration.authentication.AuthenticationService port = service.getAuthenticationServicePort();
+        AuthenticationService_Service service_s = new integration.authentication.AuthenticationService_Service();
+        integration.authentication.AuthenticationService port = service_s.getAuthenticationServicePort();
         return port.authenticate(email, password);
     }
+
+    
     
     
 
