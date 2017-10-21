@@ -21,7 +21,7 @@ import java.util.Scanner;
 public class ConsoleClient {
     
     static Scanner input = new Scanner(System.in);
-    static Users currentUser = new Users();
+    static Users currentUser = null;
     
     /**
      * @param args the command line arguments
@@ -33,15 +33,26 @@ public class ConsoleClient {
     public static void menu(){
         int n = -1;
         while(n != 0){
-            System.out.println("\n------\n"
-                    + "1. Crear usuario\n"
-                    + "2. Convertir usuario a revisor\n"
-                    + "3. Listar usuarios\n"
-                    + "4. Autenticar / Iniciar sesión\n"
-                    + "5. Crear artículo\n"
+            System.out.println("\n-------\n"
+                + "0. Salir"
+            );
+            if(currentUser == null) {
+                System.out.println(
+                    "1. Crear usuario\n"
+                    + "2. Iniciar sesión\n"
+                    + "3. Buscar articulo"
+                );
+            }
+            if(currentUser != null) {
+                System.out.println(
+                    "3. Buscar articulo\n"
+                    + "4. Crear artículo\n"
+                    + "5. Convertir usuario a revisor\n"
                     + "6. Obtener calificacion final\n"
-                    + "7. Buscar articulos"
-                    + "------\n");
+                    + "7. Cerrar sesión"
+                );
+            }  
+            System.out.println("-------\n");
             n = input.nextInt();
             input.nextLine();
             switch(n){
@@ -49,50 +60,42 @@ public class ConsoleClient {
                     createUser();
                     break;
                 case 2:
-                    createReviewer();
-                    break;
-                case 3:
-                    listUsers();
-                    break;
-                case 4:
                     authenticate();
                     break;
-                case 5:
+                case 3:
+                    searchArticles();
+                    break;
+                case 4:
                     createArticle();
+                    break;
+                case 5:
+                    createReviewer();
                     break;
                 case 6:
                     getGradeAverage();
                     break;
                 case 7:
-                    searchArticles();
+                    currentUser = null;
                     break;
             }
         }
         System.exit(0);
     }
     
-    public static void authenticate(){
-        String[] args = input.nextLine().split(" ");
-        String email = args[0];
-        String password = args[1];
-        ClassAdapter.copyObject(callAuthenticate(email, password), currentUser);
-        System.out.println(String.format(" %s authenticated", currentUser.getEmail()));
-    }
-    
-    private static integration.authentication.Users callAuthenticate(java.lang.String email, java.lang.String password) {
-        integration.authentication.AuthenticationService_Service service = new integration.authentication.AuthenticationService_Service();
-        integration.authentication.AuthenticationService port = service.getAuthenticationServicePort();
-        return port.authenticate(email, password);
-    }
-    
     public static void createUser(){
+        System.out.print("name email password: ");
         String[] args = input.nextLine().split(" ");
         String name = args[0];
-        String mail = args[1];
-        String pass = args[2];
-        Users user = ClassAdapter.initUser(new Date(), mail, name, pass);
-        callCreateUser(user);
-
+        String email = args[1];
+        String password = args[2];
+        if(callFindUserByEmail(email) != null) {
+            System.out.println("El correo ya está registrado");
+        }
+        else {
+            Users user = ClassAdapter.initUser(new Date(), email, name, password);
+            callCreateUser(user);
+            System.out.println("Usuario creado");
+        }
     }
     
     private static void callCreateUser(Users entity) {
@@ -101,46 +104,49 @@ public class ConsoleClient {
         port.create(entity);
     }
     
-    public static void createReviewer(){
-        int n, i = 0;
-        List<Users> authors = callFindUsersByRole("Author");
-        
-        System.out.println("Autores:");
-        for(Users user : authors){
-            System.out.println(String.format("  %d. %s %s %s", i, user.getName(), user.getEmail(), user.getRole()));
-            i++;
+    private static Users callFindUserByEmail(java.lang.String email) {
+        integration.users.UsersService_Service service = new integration.users.UsersService_Service();
+        integration.users.UsersService port = service.getUsersServicePort();
+        return port.findUserByEmail(email);
+    }
+    
+    public static void authenticate(){
+        System.out.print("email password: ");
+        String[] args = input.nextLine().split(" ");
+        String email = args[0];
+        String password = args[1];
+        integration.authentication.Users user = callAuthenticate(email, password);
+        if(user != null) {
+            currentUser = new Users();
+            ClassAdapter.copyObject(user, currentUser);
+            System.out.println(String.format("%s autenticado", currentUser.getEmail()));
         }
-        
-        System.out.print("\n ¿Autor a cambiar?: ");
-        n = input.nextInt();
-        input.nextLine();
-        callConvertToReviewer(authors.get(n));
-    }
-    
-    private static List<Users> callFindUsersByRole(java.lang.String role) {
-        integration.users.UsersService_Service service = new integration.users.UsersService_Service();
-        integration.users.UsersService port = service.getUsersServicePort();
-        return port.findUsersByRole(role);
-    }
-    
-    private static Users callConvertToReviewer(Users entity) {
-        integration.users.UsersService_Service service = new integration.users.UsersService_Service();
-        integration.users.UsersService port = service.getUsersServicePort();
-        return port.convertToReviewer(entity);
-    }
-    
-    public static void listUsers(){
-        List<Users> users = callFindAllUsers();
-        
-        for(Users user : users){
-            System.out.println(String.format("  - %s %s %s", user.getName(), user.getEmail(), user.getRole()));
+        else {
+            System.out.println("El usuario o contraseña son incorrectos");
         }
     }
     
-    private static List<Users> callFindAllUsers() {
-        integration.users.UsersService_Service service = new integration.users.UsersService_Service();
-        integration.users.UsersService port = service.getUsersServicePort();
-        return port.findAll();
+    private static integration.authentication.Users callAuthenticate(java.lang.String email, java.lang.String password) {
+        integration.authentication.AuthenticationService_Service service = new integration.authentication.AuthenticationService_Service();
+        integration.authentication.AuthenticationService port = service.getAuthenticationServicePort();
+        return port.authenticate(email, password);
+    }
+    
+    public static void searchArticles(){
+        System.out.print("filtro valor: ");
+        String[] args = input.nextLine().split(" ");
+        String type = args[0];
+        String param = args[1];
+        List<integration.articles.Articles> articles = callSearchArticles(type, param);
+        for(integration.articles.Articles article : articles){
+            System.out.println(String.format("%s %s %s %s", article.getTitle(), article.getAbstract1(), article.getCategory(), article.getKeywords()));
+        }
+    }
+
+    private static java.util.List<integration.articles.Articles> callSearchArticles(java.lang.String type, java.lang.String param) {
+        integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
+        integration.articles.ArticlesService port = service.getArticlesServicePort();
+        return port.search(type, param);
     }
     
     public static void createArticle(){
@@ -150,7 +156,7 @@ public class ConsoleClient {
         
         System.out.println("Eventos:");
         for(Events event : events){
-           System.out.println(String.format("  %d. %s %s", i, event.getName(), event.getDescription()));
+           System.out.println(String.format("%d. %s %s", i, event.getName(), event.getDescription()));
            i++; 
         }
         
@@ -183,40 +189,61 @@ public class ConsoleClient {
         return port.create1(article, authorsEmails, eventsIds);
     }
     
-
     private static java.util.List<integration.events.Events> callFindAllEvents() {
         integration.events.EventsService_Service service = new integration.events.EventsService_Service();
         integration.events.EventsService port = service.getEventsServicePort();
         return port.findAll();
     }
-
-    private static void getGradeAverage() {
-        Scanner input = new Scanner(System.in);
-        String line = "";
-        line = input.nextLine();
-        int n = Integer.parseInt(line);
-        System.out.println(calculateAverage(n));
+    
+    public static void createReviewer(){
+        int n, i = 0;
+        List<Users> authors = callFindUsersByRole("Author");
+        System.out.println("Autores:");
+        for(Users user : authors){
+            System.out.println(String.format("%d. %s %s %s", i, user.getName(), user.getEmail(), user.getRole()));
+            i++;
+        }
+        System.out.print("\n¿Autor a cambiar?: ");
+        n = input.nextInt();
+        input.nextLine();
+        callConvertToReviewer(authors.get(n));
+        System.out.println(authors.get(n).getName() + " promovido a revisor");
+    }
+    
+    private static Users callConvertToReviewer(Users entity) {
+        integration.users.UsersService_Service service = new integration.users.UsersService_Service();
+        integration.users.UsersService port = service.getUsersServicePort();
+        return port.convertToReviewer(entity);
+    }
+    
+    private static List<Users> callFindUsersByRole(java.lang.String role) {
+        integration.users.UsersService_Service service = new integration.users.UsersService_Service();
+        integration.users.UsersService port = service.getUsersServicePort();
+        return port.findUsersByRole(role);
     }
 
+    private static void getGradeAverage() {
+        int n, i = 0;
+        List<Articles> articles = callFindAllArticles();
+        for(Articles article: articles) {
+            System.out.println(String.format("%d. %s %s %s", article.getId(), article.getTitle(), article.getCategory(), article.getAbstract1()));
+            i++;
+        }
+        System.out.print("\n¿Articulo a revisar?: ");
+        n = input.nextInt();
+        input.nextLine();
+        System.out.println("Promedio de revisión de: " + calculateAverage(n));
+    }
+
+    private static java.util.List<integration.articles.Articles> callFindAllArticles() {
+        integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
+        integration.articles.ArticlesService port = service.getArticlesServicePort();
+        return port.findAll();
+    }
+    
     private static Float calculateAverage(int id) {
         integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
         integration.articles.ArticlesService port = service.getArticlesServicePort();
         return port.calculateAverage(id);
-    }
-    
-    public static void searchArticles(){
-        String[] args = input.nextLine().split(" ");
-        String type = args[0];
-        String param = args[1];
-        List<integration.articles.Articles> articles = callSearchArticles(type, param);
-        for(integration.articles.Articles article : articles){
-            System.out.println(String.format(" %s %s %s %s", article.getTitle(), article.getAbstract1(), article.getCategory(), article.getKeywords()));
-        }
-    }
-
-    private static java.util.List<integration.articles.Articles> callSearchArticles(java.lang.String type, java.lang.String param) {
-        integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
-        integration.articles.ArticlesService port = service.getArticlesServicePort();
-        return port.search(type, param);
     }
 }

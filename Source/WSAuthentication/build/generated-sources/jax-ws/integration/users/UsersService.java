@@ -91,6 +91,36 @@ public interface UsersService {
 
     /**
      * 
+     * @param role
+     * @return
+     *     returns java.util.List<integration.users.Users>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findUsersByRole", targetNamespace = "http://services/", className = "integration.users.FindUsersByRole")
+    @ResponseWrapper(localName = "findUsersByRoleResponse", targetNamespace = "http://services/", className = "integration.users.FindUsersByRoleResponse")
+    @Action(input = "http://services/UsersService/findUsersByRoleRequest", output = "http://services/UsersService/findUsersByRoleResponse")
+    public List<Users> findUsersByRole(
+        @WebParam(name = "role", targetNamespace = "")
+        String role);
+
+    /**
+     * 
+     * @param email
+     * @return
+     *     returns integration.users.Users
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findUserByEmail", targetNamespace = "http://services/", className = "integration.users.FindUserByEmail")
+    @ResponseWrapper(localName = "findUserByEmailResponse", targetNamespace = "http://services/", className = "integration.users.FindUserByEmailResponse")
+    @Action(input = "http://services/UsersService/findUserByEmailRequest", output = "http://services/UsersService/findUserByEmailResponse")
+    public Users findUserByEmail(
+        @WebParam(name = "email", targetNamespace = "")
+        String email);
+
+    /**
+     * 
      * @param entity
      */
     @WebMethod
@@ -115,36 +145,6 @@ public interface UsersService {
     public List<Users> findRange(
         @WebParam(name = "range", targetNamespace = "")
         List<Integer> range);
-
-    /**
-     * 
-     * @param email
-     * @return
-     *     returns integration.users.Users
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findUserByEmail", targetNamespace = "http://services/", className = "integration.users.FindUserByEmail")
-    @ResponseWrapper(localName = "findUserByEmailResponse", targetNamespace = "http://services/", className = "integration.users.FindUserByEmailResponse")
-    @Action(input = "http://services/UsersService/findUserByEmailRequest", output = "http://services/UsersService/findUserByEmailResponse")
-    public Users findUserByEmail(
-        @WebParam(name = "email", targetNamespace = "")
-        String email);
-
-    /**
-     * 
-     * @param role
-     * @return
-     *     returns java.util.List<integration.users.Users>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findUsersByRole", targetNamespace = "http://services/", className = "integration.users.FindUsersByRole")
-    @ResponseWrapper(localName = "findUsersByRoleResponse", targetNamespace = "http://services/", className = "integration.users.FindUsersByRoleResponse")
-    @Action(input = "http://services/UsersService/findUsersByRoleRequest", output = "http://services/UsersService/findUsersByRoleResponse")
-    public List<Users> findUsersByRole(
-        @WebParam(name = "role", targetNamespace = "")
-        String role);
 
     /**
      * 

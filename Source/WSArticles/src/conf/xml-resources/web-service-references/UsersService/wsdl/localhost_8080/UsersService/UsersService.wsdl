@@ -40,6 +40,15 @@
 <message name="findUserByEmailResponse">
 <part name="parameters" element="tns:findUserByEmailResponse"/>
 </message>
+<message name="edit">
+<part name="parameters" element="tns:edit"/>
+</message>
+<message name="findRange">
+<part name="parameters" element="tns:findRange"/>
+</message>
+<message name="findRangeResponse">
+<part name="parameters" element="tns:findRangeResponse"/>
+</message>
 <message name="convertToReviewer">
 <part name="parameters" element="tns:convertToReviewer"/>
 </message>
@@ -51,15 +60,6 @@
 </message>
 <message name="findUsersByEmailsResponse">
 <part name="parameters" element="tns:findUsersByEmailsResponse"/>
-</message>
-<message name="edit">
-<part name="parameters" element="tns:edit"/>
-</message>
-<message name="findRange">
-<part name="parameters" element="tns:findRange"/>
-</message>
-<message name="findRangeResponse">
-<part name="parameters" element="tns:findRangeResponse"/>
 </message>
 <portType name="UsersService">
 <operation name="remove">
@@ -88,6 +88,13 @@
 <input wsam:Action="http://services/UsersService/findUserByEmailRequest" message="tns:findUserByEmail"/>
 <output wsam:Action="http://services/UsersService/findUserByEmailResponse" message="tns:findUserByEmailResponse"/>
 </operation>
+<operation name="edit">
+<input wsam:Action="http://services/UsersService/edit" message="tns:edit"/>
+</operation>
+<operation name="findRange">
+<input wsam:Action="http://services/UsersService/findRangeRequest" message="tns:findRange"/>
+<output wsam:Action="http://services/UsersService/findRangeResponse" message="tns:findRangeResponse"/>
+</operation>
 <operation name="convertToReviewer">
 <input wsam:Action="http://services/UsersService/convertToReviewerRequest" message="tns:convertToReviewer"/>
 <output wsam:Action="http://services/UsersService/convertToReviewerResponse" message="tns:convertToReviewerResponse"/>
@@ -95,13 +102,6 @@
 <operation name="findUsersByEmails">
 <input wsam:Action="http://services/UsersService/findUsersByEmailsRequest" message="tns:findUsersByEmails"/>
 <output wsam:Action="http://services/UsersService/findUsersByEmailsResponse" message="tns:findUsersByEmailsResponse"/>
-</operation>
-<operation name="edit">
-<input wsam:Action="http://services/UsersService/edit" message="tns:edit"/>
-</operation>
-<operation name="findRange">
-<input wsam:Action="http://services/UsersService/findRangeRequest" message="tns:findRange"/>
-<output wsam:Action="http://services/UsersService/findRangeResponse" message="tns:findRangeResponse"/>
 </operation>
 </portType>
 <binding name="UsersServicePortBinding" type="tns:UsersService">
@@ -163,6 +163,21 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="edit">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="findRange">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="convertToReviewer">
 <soap:operation soapAction=""/>
 <input>
@@ -173,21 +188,6 @@
 </output>
 </operation>
 <operation name="findUsersByEmails">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="edit">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="findRange">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
