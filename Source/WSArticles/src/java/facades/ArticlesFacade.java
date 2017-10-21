@@ -9,6 +9,7 @@ import entities.Articles;
 import entities.Events;
 import entities.Reviews;
 import entities.Users;
+import integration.events.EventsService_Service;
 import integration.users.UsersService_Service;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,6 +26,7 @@ import java.util.List;
 import javax.jws.WebParam;
 import mappers.UsersMapper;
 import javax.persistence.Query;
+import mappers.EventsMapper;
 
 /**
  *
@@ -32,6 +34,9 @@ import javax.persistence.Query;
  */
 @Stateless
 public class ArticlesFacade extends AbstractFacade<Articles> {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/EventsService/EventsService.wsdl")
+    private EventsService_Service service_1;
 
 	@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/UsersService/UsersService.wsdl")
 	private UsersService_Service service;
@@ -56,17 +61,24 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 	 * @param eventsIds
 	 * @return una lista con los correos que no se encontraron, o null si el mainAuthor o alguno de los eventsIds no se encontró.
 	 */
-	public List<String> create(Articles article, List<String> authorsEmails, List<Events> events) {
+	public List<String> create(Articles article, List<String> authorsEmails, List<Integer> ids) {
 		// Obtener usuarios a partir de los emails
 		List<integration.users.Users> usersDtos = findUsersByEmails(authorsEmails);
-		List<Users> users = new ArrayList<>(usersDtos.size());
+		List<integration.events.Events> eventsDtos = findEventsById(ids);
+                
+                List<Users> users = new ArrayList<>(usersDtos.size());
+                List<Events> events = new ArrayList<>(eventsDtos.size());
 		
                 
 		for (int i = 0; i < usersDtos.size(); i++) {
 			integration.users.Users uDto = usersDtos.get(i);
-			users.set(i, UsersMapper.INSTANCE.usersDtoToUsers(uDto));
+			users.add(UsersMapper.INSTANCE.usersDtoToUsers(uDto));
 		}
-		
+                for (int i = 0; i < eventsDtos.size(); i++) {
+			integration.events.Events eDto = eventsDtos.get(i);
+			events.add(EventsMapper.INSTANCE.eventsDtoToEvents(eDto));
+		}
+                
 		// Obtener emails que no se encontraron
 		List<String> missing = new ArrayList<>();
 		for (int i = users.size() - 1; i >= 0; --i) {
@@ -76,21 +88,31 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 			}
 		}
 		
-		// Agregar artículo a la base de datos
-		em.persist(article);
-		
+                for (Users u : users) {
+                    if(u.getArticlesList() == null){
+                        u.setArticlesList(new ArrayList<Articles>());
+                    }
+                    u.getArticlesList().add(article);
+                    em.merge(u);
+		}
+                
+                for (Events e : events) {
+                    if(e.getArticlesList() == null){
+                        e.setArticlesList(new ArrayList<Articles>());
+                    }
+                    e.getArticlesList().add(article);
+                    em.merge(e);
+		}
+                
 		// Agregar evento al artículo
-		article.getEventsList().addAll(events);
+		article.setEventsList(events);
 		
 		// Agregar autores al artículo
 		article.setUsersList(users);
-		
-		// Agregar el artículo a sus autores
-		//user.getArticlesList1().add(article);
-		for (Users u : users) {
-			u.getArticlesList().add(article);
-		}
-		
+                
+                // Agregar artículo a la base de datos
+		em.persist(article);
+                
 		return missing;
 	}
 
@@ -131,4 +153,11 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
             articles = q.setParameter("param", param).getResultList();
             return articles;
         }
+
+    private java.util.List<integration.events.Events> findEventsById(java.util.List<java.lang.Integer> ids) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        integration.events.EventsService port = service_1.getEventsServicePort();
+        return port.findEventsById(ids);
+    }
 }

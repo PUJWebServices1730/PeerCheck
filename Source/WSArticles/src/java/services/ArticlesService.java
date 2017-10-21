@@ -72,8 +72,8 @@ public class ArticlesService {
 	@WebMethod(operationName = "create_1")
     @RequestWrapper(className = "create_1")
     @ResponseWrapper(className = "create_1Response")
-	public List<String> create(@WebParam(name = "article") Articles article, @WebParam(name = "authorsEmails") List<String> authorsEmails, @WebParam(name = "eventsIds") List<Events> events) {
-		return ejbRef.create(article, authorsEmails, events);
+	public List<String> create(@WebParam(name = "article") Articles article, @WebParam(name = "authorsEmails") List<String> authorsEmails, @WebParam(name = "eventsIds") List<Integer> eventsIds) {
+		return ejbRef.create(article, authorsEmails, eventsIds);
 	}
 
     /**

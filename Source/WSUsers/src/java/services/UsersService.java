@@ -78,7 +78,8 @@ public class UsersService {
 	 */
 	@WebMethod(operationName = "findUsersByEmails")
 	public List<Users> findUsersByEmails(@WebParam(name = "emails") List<String> emails) {
-		return ejbRef.findAllByEmail(emails);
+            System.out.println("      ------- EMAILS: " + emails);
+            return ejbRef.findAllByEmail(emails);
 	}
 
 	/**

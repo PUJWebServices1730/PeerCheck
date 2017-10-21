@@ -44,13 +44,28 @@ public class ConsoleClient {
                 );
             }
             if(currentUser != null) {
-                System.out.println(
+                if(currentUser.getRole().equals("Author")){
+                    System.out.println(
                     "3. Buscar articulo\n"
                     + "4. Crear artículo\n"
-                    + "5. Convertir usuario a revisor\n"
-                    + "6. Obtener calificacion final\n"
-                    + "7. Cerrar sesión"
+                    + "5. Obtener calificacion final\n"
+                    + "9. Cerrar sesión\n"
                 );
+                } else if(currentUser.getRole().equals("Reviewer")){
+                    System.out.println(
+                    "3. Buscar articulo\n"
+                    + "4. Crear artículo\n"
+                    + "6. Enviar evaluación de artículo\n"
+                    + "9. Cerrar sesión\n"
+                );
+                } else if(currentUser.getRole().equals("Editor")){
+                    System.out.println(
+                    "3. Buscar articulo\n"
+                    + "7. Convertir usuario a revisor"
+                    + "8. Asignar revisor a articulo\n"
+                    + "9. Cerrar sesión\n");
+                }
+                
             }  
             System.out.println("-------\n");
             n = input.nextInt();
@@ -69,12 +84,18 @@ public class ConsoleClient {
                     createArticle();
                     break;
                 case 5:
-                    createReviewer();
-                    break;
-                case 6:
                     getGradeAverage();
                     break;
+                case 6:
+                    sendEvaluation();
+                    break;
                 case 7:
+                    createReviewer();
+                    break;
+                case 8:
+                    assignReviewer();
+                    break;
+                case 9:
                     currentUser = null;
                     break;
             }
@@ -152,7 +173,7 @@ public class ConsoleClient {
     public static void createArticle(){
         int n, i = 0, j;
         List<Events> events = callFindAllEvents();
-        List<integration.articles.Events> articleEvents = new ArrayList<integration.articles.Events>();
+        List<Integer> articleEventsIds = new ArrayList<Integer>();
         System.out.print("titulo abstract categoria palabras_clave: ");
         String[] args = input.nextLine().split(" ");
         String title = args[0];
@@ -168,17 +189,15 @@ public class ConsoleClient {
         String eventsString = input.nextLine();
         String[] eventsNumbers = eventsString.split(",");
         for(j = 0; j < eventsNumbers.length; j++){
-            integration.articles.Events nEvent = new integration.articles.Events();
-            ClassAdapter.copyObject(events.get(Integer.parseInt(eventsNumbers[j])), nEvent);
-            articleEvents.add(nEvent);
+            articleEventsIds.add(events.get(Integer.parseInt(eventsNumbers[j])).getId());
         }
         System.out.print("Ingresar correos: ");
         List<String> emails = Arrays.asList(input.nextLine().split(","));
         Articles article = ClassAdapter.initArticle(abstract1, category, keywords, title, currentUser);
-        callCreateArticle(article, emails, articleEvents);
+        callCreateArticle(article, emails, articleEventsIds);
     }
 
-    private static java.util.List<java.lang.String> callCreateArticle(integration.articles.Articles article, java.util.List<java.lang.String> authorsEmails, java.util.List<integration.articles.Events> eventsIds) {
+    private static java.util.List<java.lang.String> callCreateArticle(integration.articles.Articles article, java.util.List<java.lang.String> authorsEmails, java.util.List<java.lang.Integer> eventsIds) {
         integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
         integration.articles.ArticlesService port = service.getArticlesServicePort();
         return port.create1(article, authorsEmails, eventsIds);
@@ -240,5 +259,13 @@ public class ConsoleClient {
         integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
         integration.articles.ArticlesService port = service.getArticlesServicePort();
         return port.calculateAverage(id);
+    }
+    
+    public static void assignReviewer(){
+        
+    }
+    
+    public static void sendEvaluation(){
+        
     }
 }

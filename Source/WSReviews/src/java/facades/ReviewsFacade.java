@@ -38,7 +38,8 @@ public class ReviewsFacade extends AbstractFacade<Reviews> {
      * @param reviewer
      * @param article 
      */
-    public void create(Reviews review, Users reviewer, Articles article){
+    public void create(Users reviewer, Articles article){
+        Reviews review = new Reviews();
         review.setGrade(0);
         review.setStatus("Assigned");
         review.setReviewerId(reviewer);

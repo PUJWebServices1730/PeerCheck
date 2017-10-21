@@ -42,5 +42,9 @@ public class EventsService {
     public List<Events> findAll() {
         return ejbRef.findAll();
     }
-   
+    
+    @WebMethod(operationName = "findEventsById")
+    public List<Events> findEventsById(@WebParam(name="ids") List<Integer> ids) {
+        return ejbRef.findEventsByIds(ids);
+    }
 }

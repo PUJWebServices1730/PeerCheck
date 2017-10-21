@@ -18,8 +18,6 @@
 
 <xs:element name="edit" type="tns:edit"/>
 
-<xs:element name="events" type="tns:events"/>
-
 <xs:element name="find" type="tns:find"/>
 
 <xs:element name="findAll" type="tns:findAll"/>
@@ -82,21 +80,7 @@
 <xs:sequence>
 <xs:element name="article" type="tns:articles" minOccurs="0"/>
 <xs:element name="authorsEmails" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="eventsIds" type="tns:events" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="events">
-<xs:sequence>
-<xs:element name="date" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="deadline" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="description" type="xs:string" minOccurs="0"/>
-<xs:element name="editorId" type="tns:users" minOccurs="0"/>
-<xs:element name="id" type="xs:int" minOccurs="0"/>
-<xs:element name="location" type="xs:string" minOccurs="0"/>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-<xs:element name="submissionstart" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="website" type="xs:string" minOccurs="0"/>
+<xs:element name="eventsIds" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

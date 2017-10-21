@@ -12,4 +12,6 @@
     <system systemId="http://localhost:8080/EventsService/EventsService?xsd=1" uri="xml-resources/web-service-references/EventsService/wsdl/localhost_8080/EventsService/EventsService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArticlesService/ArticlesService?wsdl" uri="xml-resources/web-service-references/ArticlesService/wsdl/localhost_8080/ArticlesService/ArticlesService.wsdl"/>
     <system systemId="http://localhost:8080/ArticlesService/ArticlesService?xsd=1" uri="xml-resources/web-service-references/ArticlesService/wsdl/localhost_8080/ArticlesService/ArticlesService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ReviewsService/ReviewsService?wsdl" uri="xml-resources/web-service-references/ReviewsService/wsdl/localhost_8080/ReviewsService/ReviewsService.wsdl"/>
+    <system systemId="http://localhost:8080/ReviewsService/ReviewsService?xsd=1" uri="xml-resources/web-service-references/ReviewsService/wsdl/localhost_8080/ReviewsService/ReviewsService.xsd_1.xsd"/>
 </catalog>

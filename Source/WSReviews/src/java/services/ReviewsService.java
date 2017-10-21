@@ -74,8 +74,8 @@ public class ReviewsService {
     @WebMethod(operationName = "create_review")
     @RequestWrapper(className = "create_review")
     @Oneway
-    public void create(@WebParam(name = "review") Reviews review, @WebParam(name = "reviewer") Users reviewer, @WebParam(name = "article") Articles article) {
-        ejbRef.create(review, reviewer, article);
+    public void create(@WebParam(name = "reviewer") Users reviewer, @WebParam(name = "article") Articles article) {
+        ejbRef.create(reviewer, article);
     }
     
     /**

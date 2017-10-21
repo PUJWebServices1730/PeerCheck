@@ -59,5 +59,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/integration/users"/>
         <delete dir="${build.generated.dir}/jax-wsCache/UsersService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-UsersService"/>
+    <target name="wsimport-client-EventsService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/EventsService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/EventsService" destdir="${build.generated.dir}/jax-wsCache/EventsService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/EventsService/wsdl/localhost_8080/EventsService/EventsService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/EventsService/EventsService?wsdl" xnocompile="true" xendorsed="true" package="integration.events">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/EventsService/wsdl/localhost_8080/EventsService/EventsService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/EventsService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/EventsService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-EventsService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/integration/events"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/EventsService"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-UsersService, wsimport-client-EventsService"/>
 </project>

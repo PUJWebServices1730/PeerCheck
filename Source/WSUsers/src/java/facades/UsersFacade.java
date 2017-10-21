@@ -60,7 +60,7 @@ public class UsersFacade extends AbstractFacade<Users> {
 	public Users findByEmail(String email) {
 		Query q = em.createNamedQuery("Users.findByEmail", Users.class);
 		try {
-			return (Users) q.setParameter("email", email).getSingleResult();
+			return (Users)q.setParameter("email", email).getSingleResult();
 		} catch(Exception e) {
 			return null;
 		}
@@ -72,11 +72,13 @@ public class UsersFacade extends AbstractFacade<Users> {
 	 * @return los usuarios encontrados.
 	 */
 	public List<Users> findAllByEmail(List<String> emails) {
+            System.out.println("      ------- EMAILS: " + emails);
 		List<Users> users = new ArrayList<>(emails.size());
 		for (int i = 0; i < emails.size(); i++) {
 			String email = emails.get(i);
-			users.set(i, findByEmail(email));
+			users.add(findByEmail(email));
 		}
+                System.out.println("      ------- Users: " + users.size());
 		return users;
 	}
 }

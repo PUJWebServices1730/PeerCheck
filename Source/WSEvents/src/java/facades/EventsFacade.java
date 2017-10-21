@@ -6,6 +6,8 @@
 package facades;
 
 import entities.Events;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +31,11 @@ public class EventsFacade extends AbstractFacade<Events> {
         super(Events.class);
     }
     
+    public List<Events> findEventsByIds(List<Integer> ids){
+        List<Events> events = new ArrayList<Events>();
+        for(int id : ids){
+            events.add(super.find(id));
+        }
+        return events;
+    }
 }
