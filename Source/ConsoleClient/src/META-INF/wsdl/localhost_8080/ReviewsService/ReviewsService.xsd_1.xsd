@@ -112,16 +112,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="create">
+<xs:sequence>
+<xs:element name="entity" type="tns:reviews" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="create_review">
 <xs:sequence>
 <xs:element name="reviewer" type="tns:users" minOccurs="0"/>
 <xs:element name="article" type="tns:articles" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="create">
-<xs:sequence>
-<xs:element name="entity" type="tns:reviews" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

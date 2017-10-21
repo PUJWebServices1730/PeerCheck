@@ -34,11 +34,8 @@
 <message name="searchResponse">
 <part name="parameters" element="tns:searchResponse"/>
 </message>
-<message name="findAll">
-<part name="parameters" element="tns:findAll"/>
-</message>
-<message name="findAllResponse">
-<part name="parameters" element="tns:findAllResponse"/>
+<message name="edit">
+<part name="parameters" element="tns:edit"/>
 </message>
 <message name="findRange">
 <part name="parameters" element="tns:findRange"/>
@@ -46,8 +43,11 @@
 <message name="findRangeResponse">
 <part name="parameters" element="tns:findRangeResponse"/>
 </message>
-<message name="edit">
-<part name="parameters" element="tns:edit"/>
+<message name="findAll">
+<part name="parameters" element="tns:findAll"/>
+</message>
+<message name="findAllResponse">
+<part name="parameters" element="tns:findAllResponse"/>
 </message>
 <message name="calculateAverage">
 <part name="parameters" element="tns:calculateAverage"/>
@@ -78,16 +78,16 @@
 <input wsam:Action="http://services/ArticlesService/searchRequest" message="tns:search"/>
 <output wsam:Action="http://services/ArticlesService/searchResponse" message="tns:searchResponse"/>
 </operation>
-<operation name="findAll">
-<input wsam:Action="http://services/ArticlesService/findAllRequest" message="tns:findAll"/>
-<output wsam:Action="http://services/ArticlesService/findAllResponse" message="tns:findAllResponse"/>
+<operation name="edit">
+<input wsam:Action="http://services/ArticlesService/edit" message="tns:edit"/>
 </operation>
 <operation name="findRange">
 <input wsam:Action="http://services/ArticlesService/findRangeRequest" message="tns:findRange"/>
 <output wsam:Action="http://services/ArticlesService/findRangeResponse" message="tns:findRangeResponse"/>
 </operation>
-<operation name="edit">
-<input wsam:Action="http://services/ArticlesService/edit" message="tns:edit"/>
+<operation name="findAll">
+<input wsam:Action="http://services/ArticlesService/findAllRequest" message="tns:findAll"/>
+<output wsam:Action="http://services/ArticlesService/findAllResponse" message="tns:findAllResponse"/>
 </operation>
 <operation name="calculateAverage">
 <input wsam:Action="http://services/ArticlesService/calculateAverageRequest" message="tns:calculateAverage"/>
@@ -144,14 +144,11 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findAll">
+<operation name="edit">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
-<output>
-<soap:body use="literal"/>
-</output>
 </operation>
 <operation name="findRange">
 <soap:operation soapAction=""/>
@@ -162,11 +159,14 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="edit">
+<operation name="findAll">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 <operation name="calculateAverage">
 <soap:operation soapAction=""/>

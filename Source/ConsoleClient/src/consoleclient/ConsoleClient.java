@@ -194,14 +194,10 @@ public class ConsoleClient {
         System.out.print("Ingresar correos: ");
         List<String> emails = Arrays.asList(input.nextLine().split(","));
         Articles article = ClassAdapter.initArticle(abstract1, category, keywords, title, currentUser);
-        callCreateArticle(article, emails, articleEventsIds);
+        create1(article, emails, articleEventsIds);
     }
-
-    private static java.util.List<java.lang.String> callCreateArticle(integration.articles.Articles article, java.util.List<java.lang.String> authorsEmails, java.util.List<java.lang.Integer> eventsIds) {
-        integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
-        integration.articles.ArticlesService port = service.getArticlesServicePort();
-        return port.create1(article, authorsEmails, eventsIds);
-    }
+    
+    
     
     private static java.util.List<integration.events.Events> callFindAllEvents() {
         integration.events.EventsService_Service service = new integration.events.EventsService_Service();
@@ -267,5 +263,11 @@ public class ConsoleClient {
     
     public static void sendEvaluation(){
         
+    }
+
+    private static java.util.List<java.lang.String> create1(integration.articles.Articles article, java.util.List<java.lang.String> authorsEmails, java.util.List<java.lang.Integer> eventsIds) {
+        integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
+        integration.articles.ArticlesService port = service.getArticlesServicePort();
+        return port.create1(article, authorsEmails, eventsIds);
     }
 }

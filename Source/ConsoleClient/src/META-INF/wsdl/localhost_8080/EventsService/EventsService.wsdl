@@ -19,6 +19,12 @@
 <message name="findAllResponse">
 <part name="parameters" element="tns:findAllResponse"/>
 </message>
+<message name="findEventsById">
+<part name="parameters" element="tns:findEventsById"/>
+</message>
+<message name="findEventsByIdResponse">
+<part name="parameters" element="tns:findEventsByIdResponse"/>
+</message>
 <portType name="EventsService">
 <operation name="find">
 <input wsam:Action="http://services/EventsService/findRequest" message="tns:find"/>
@@ -30,6 +36,10 @@
 <operation name="findAll">
 <input wsam:Action="http://services/EventsService/findAllRequest" message="tns:findAll"/>
 <output wsam:Action="http://services/EventsService/findAllResponse" message="tns:findAllResponse"/>
+</operation>
+<operation name="findEventsById">
+<input wsam:Action="http://services/EventsService/findEventsByIdRequest" message="tns:findEventsById"/>
+<output wsam:Action="http://services/EventsService/findEventsByIdResponse" message="tns:findEventsByIdResponse"/>
 </operation>
 </portType>
 <binding name="EventsServicePortBinding" type="tns:EventsService">
@@ -50,6 +60,15 @@
 </input>
 </operation>
 <operation name="findAll">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findEventsById">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

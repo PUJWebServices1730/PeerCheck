@@ -56,9 +56,8 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 	/**
 	 * Crea una nuevo artículo en la base de datos con los autores con los correos dados, y los eventos con los ids dados.
 	 * @param article
-	 * @param mainAuthorEmail
 	 * @param authorsEmails
-	 * @param eventsIds
+         * @param ids
 	 * @return una lista con los correos que no se encontraron, o null si el mainAuthor o alguno de los eventsIds no se encontró.
 	 */
 	public List<String> create(Articles article, List<String> authorsEmails, List<Integer> ids) {
@@ -90,7 +89,7 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
 		
                 for (Users u : users) {
                     if(u.getArticlesList() == null){
-                        u.setArticlesList(new ArrayList<Articles>());
+                        u.setArticlesList(new ArrayList<>());
                     }
                     u.getArticlesList().add(article);
                     em.merge(u);
