@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebParam;
 import mappers.UsersMapper;
+import javax.persistence.Query;
 
 /**
  *
@@ -115,5 +116,19 @@ public class ArticlesFacade extends AbstractFacade<Articles> {
                 sum += review.getGrade();
             }
             return sum / reviewsList.size();
+        }
+				
+	public List<Articles> search(String type, String param){
+            List<Articles> articles;
+            String queryName = "";
+            Query q;
+            if(type.equals("title")){
+                queryName = "Articles.findInTitle";
+            } else if(type.equals("category")){
+                queryName = "Articles.findInCategory";
+            }
+            q = em.createNamedQuery(queryName, Articles.class);
+            articles = q.setParameter("param", param).getResultList();
+            return articles;
         }
 }

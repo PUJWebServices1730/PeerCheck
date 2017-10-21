@@ -34,6 +34,10 @@
 
 <xs:element name="remove" type="tns:remove"/>
 
+<xs:element name="search" type="tns:search"/>
+
+<xs:element name="searchResponse" type="tns:searchResponse"/>
+
 <xs:element name="users" type="tns:users"/>
 
 <xs:complexType name="count">
@@ -127,6 +131,19 @@
 <xs:complexType name="calculateAverageResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:float" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="search">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="param" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:articles" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

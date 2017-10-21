@@ -39,7 +39,8 @@ public class ConsoleClient {
                     + "3. Listar usuarios\n"
                     + "4. Autenticar / Iniciar sesión\n"
                     + "5. Crear artículo\n"
-                    + "6. Obtener calificacion final"
+                    + "6. Obtener calificacion final\n"
+                    + "7. Buscar articulos"
                     + "------\n");
             n = input.nextInt();
             input.nextLine();
@@ -61,6 +62,9 @@ public class ConsoleClient {
                     break;
                 case 6:
                     getGradeAverage();
+                    break;
+                case 7:
+                    searchArticles();
                     break;
             }
         }
@@ -200,5 +204,19 @@ public class ConsoleClient {
         return port.calculateAverage(id);
     }
     
-    
+    public static void searchArticles(){
+        String[] args = input.nextLine().split(" ");
+        String type = args[0];
+        String param = args[1];
+        List<integration.articles.Articles> articles = callSearchArticles(type, param);
+        for(integration.articles.Articles article : articles){
+            System.out.println(String.format(" %s %s %s %s", article.getTitle(), article.getAbstract1(), article.getCategory(), article.getKeywords()));
+        }
+    }
+
+    private static java.util.List<integration.articles.Articles> callSearchArticles(java.lang.String type, java.lang.String param) {
+        integration.articles.ArticlesService_Service service = new integration.articles.ArticlesService_Service();
+        integration.articles.ArticlesService port = service.getArticlesServicePort();
+        return port.search(type, param);
+    }
 }

@@ -83,5 +83,12 @@ public class ArticlesService {
     public Float calculateAverage(@WebParam(name = "id") int id) {
         return ejbRef.calculateAverage(id);
     }
+		
+		@WebMethod(operationName = "search")
+    @RequestWrapper(className = "search")
+    @ResponseWrapper(className = "searchResponse")
+    public List<Articles> search(@WebParam(name = "type") String type, @WebParam(name = "param") String param){
+        return ejbRef.search(type, param);
+    }
 	
 }
