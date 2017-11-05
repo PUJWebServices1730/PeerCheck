@@ -38,10 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 	, @NamedQuery(name = "Articles.findByAbstract1", query = "SELECT a FROM Articles a WHERE a.abstract1 = :abstract1")
 	, @NamedQuery(name = "Articles.findByCategory", query = "SELECT a FROM Articles a WHERE a.category = :category")
 	, @NamedQuery(name = "Articles.findByKeywords", query = "SELECT a FROM Articles a WHERE a.keywords = :keywords")
-	, @NamedQuery(name = "Articles.findByTitle", query = "SELECT a FROM Articles a WHERE a.title = :title")
-	, @NamedQuery(name = "Articles.findInTitle", query = "SELECT a FROM Articles a WHERE LOWER(a.title) LIKE CONCAT('%',LOWER(:param),'%')")
-  , @NamedQuery(name = "Articles.findInCategory", query = "SELECT a FROM Articles a WHERE LOWER(a.category) LIKE CONCAT('%',LOWER(:param),'%')")
-})
+	, @NamedQuery(name = "Articles.findByTitle", query = "SELECT a FROM Articles a WHERE a.title = :title")})
 public class Articles implements Serializable {
 
 	private static final long serialVersionUID = 1L;
