@@ -1,0 +1,6 @@
+Source/*/nbproject/private/
+Source/*/build/
+Source/*/nbbuild/
+Source/*/dist/
+Source/*/nbdist/
+Source/*/.nb-gradle/

@@ -1,3 +1,8 @@
-# PeerCheck - Another works
+# PeerCheck
 
-This branch is for another works and labs for the subject
+This is the master branch, where the web project is allocated
+
+### [About PeerCheck](https://github.com/PUJWebServices1730/PeerCheck/wiki)
+### [PeerCheck Team](https://github.com/PUJWebServices1730/PeerCheck/wiki/PeerCheck-Team)
+### [Deliverables](https://github.com/PUJWebServices1730/PeerCheck/wiki/Deliverables)
+### [Another works](https://github.com/PUJWebServices1730/PeerCheck/tree/Another-works)

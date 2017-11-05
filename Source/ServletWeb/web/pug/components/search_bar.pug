@@ -1,0 +1,17 @@
+form(id='form-search' method='post' enctype='multipart/form-data' autocomplete='off').search_bar_form
+	section.main-bar
+		input(type='search' name='search' placeholder='¿Que articulo deseas buscar?' maxlength=150).search-bar
+		.toggle#toggle-options(target='#radio-options')
+			i.icon.icon-caret-down
+		section.radio-group#radio-options
+			article.radio-option
+				input(type='radio' name='type' id='Autor' value='Autor' checked)
+				label(for='Autor') Autor
+			article.radio-option
+				input(type='radio' name='type' id='Nombre' value='Nombre')
+				label(for='Nombre') Nombre
+			article.radio-option
+				input(type='radio' name='type' id='Tema' value='Tema')
+				label(for='Tema') Tema
+	button.submit
+		i.icon.icon-search

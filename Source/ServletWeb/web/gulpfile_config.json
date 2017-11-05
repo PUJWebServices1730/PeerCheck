@@ -1,0 +1,40 @@
+{
+	"pug": {
+		"src": "./pug/pages/**/*.pug",
+		"dest": "./",
+		"watch": "./pug/**/*.pug",
+		"plugin": {
+			"pretty": "\t",
+			"locals": {}
+		},
+		"rename": {
+			"dirname": "",
+			"//basename": "",
+			"prefix": "",
+			"suffix": "",
+			"extname": ".html"
+		}
+	},
+	"sass": {
+		"src": "./scss/styles.scss",
+		"dest": "./css",
+		"watch": "./scss/**/*.scss",
+		"plugin": {
+			"outputStyle": "compressed",
+			"sourceComments": false
+		},
+		"autoprefixer": {
+			"browsers": "last 2 versions",
+			"cascade": false
+		}
+	},
+	"todo": {
+		"src": ["./pug/**/*.pug", ".scss/**/*.scss", "js/**/*.js"],
+		"dest": "./",
+		"plugin": {
+			"fileName": "todo.json",
+			"reporter": "json",
+			"skipUnsupported": true
+		}
+	}
+}

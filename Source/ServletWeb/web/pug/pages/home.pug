@@ -1,0 +1,28 @@
+extends ../templates/base
+
+append config
+	-title= 'Home'
+
+block nav
+	include ../components/navbar
+
+block footer
+	include ../components/footer
+
+block main
+	.maincontent
+		section.article_list#AL
+	
+block script
+	| createArticleView("#AL", "Algoritmos", "Porgramación avanzada en c++", ["Sebatian Bobadilla", "Juan Manuel Sánchez"], ["Algoritmos", "Programación", "C++", "Análisis", "Investigación", "Desarrollo"], 4.5);
+	| createArticleView("#AL", "Algoritmos", "Programación dinamica vs Algoritmos voraces", ["Juan Manuel Sánchez", "David villamizar"], ["Algoritmos", "Programación", "C++", "Análisis", "Investigación", "Programación dinamica", "Algoritmos voraces", "Complejidad"], 4.7);
+	| createArticleView("#AL", "Veterinaria", "Cuidado adecuado del pelo en perros de raza", ["Sergio Forero Gómez", "David villamizar"], ["Investigación", "Animales", "Perros", "Pelo", "Veterinaria"], 3.8);
+	| createArticleView("#AL", "Educación", "Como enseñar pensamiento algoritmico", ["Sergio Forero Gómez", "Sebastian Bobadilla"], ["Investigación", "Pensamiento", "Algoritmos", "Educación", "Aprendijaze"], 4.2);
+	| createArticleView("#AL", "Algoritmos", "Porgramación avanzada en c++", ["Sebatian Bobadilla", "Juan Manuel Sánchez"], ["Algoritmos", "Programación", "C++", "Análisis", "Investigación", "Desarrollo"], 4.5);
+	| createArticleView("#AL", "Algoritmos", "Programación dinamica vs Algoritmos voraces", ["Juan Manuel Sánchez", "David villamizar"], ["Algoritmos", "Programación", "C++", "Análisis", "Investigación", "Programación dinamica", "Algoritmos voraces", "Complejidad"], 4.7);
+	| createArticleView("#AL", "Veterinaria", "Cuidado adecuado del pelo en perros de raza", ["Sergio Forero Gómez", "David villamizar"], ["Investigación", "Animales", "Perros", "Pelo", "Veterinaria"], 3.8);
+	| createArticleView("#AL", "Educación", "Como enseñar pensamiento algoritmico", ["Sergio Forero Gómez", "Sebastian Bobadilla"], ["Investigación", "Pensamiento", "Algoritmos", "Educación", "Aprendijaze"], 4.2);
+	| createArticleView("#AL", "Algoritmos", "Porgramación avanzada en c++", ["Sebatian Bobadilla", "Juan Manuel Sánchez"], ["Algoritmos", "Programación", "C++", "Análisis", "Investigación", "Desarrollo"], 4.5);
+	| createArticleView("#AL", "Algoritmos", "Programación dinamica vs Algoritmos voraces", ["Juan Manuel Sánchez", "David villamizar"], ["Algoritmos", "Programación", "C++", "Análisis", "Investigación", "Programación dinamica", "Algoritmos voraces", "Complejidad"], 4.7);
+	| createArticleView("#AL", "Veterinaria", "Cuidado adecuado del pelo en perros de raza", ["Sergio Forero Gómez", "David villamizar"], ["Investigación", "Animales", "Perros", "Pelo", "Veterinaria"], 3.8);
+	| createArticleView("#AL", "Educación", "Como enseñar pensamiento algoritmico", ["Sergio Forero Gómez", "Sebastian Bobadilla"], ["Investigación", "Pensamiento", "Algoritmos", "Educación", "Aprendijaze"], 4.2);
