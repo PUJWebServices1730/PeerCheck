@@ -30,9 +30,9 @@ public class ArticlesFacade extends AbstractFacade<Articles> implements Articles
 
     @Override
     public List<Articles> findByName(String name) {
-        Query query = em.createNamedQuery("Articles.findByTitle", Articles.class);
+        Query query = em.createNamedQuery("Articles.findInTitle", Articles.class);
         try {
-            return (List<Articles>)query.setParameter("title", name).getResultList();
+            return (List<Articles>)query.setParameter("param", name).getResultList();
         } catch(Exception e) {
             return null;
         }
@@ -40,9 +40,9 @@ public class ArticlesFacade extends AbstractFacade<Articles> implements Articles
 
     @Override
     public List<Articles> findByCategory(String category) {
-        Query query = em.createNamedQuery("Articles.findByCategory", Articles.class);
+        Query query = em.createNamedQuery("Articles.findInCategory", Articles.class);
         try {
-            return (List<Articles>)query.setParameter("category", category).getResultList();
+            return (List<Articles>)query.setParameter("param", category).getResultList();
         } catch(Exception e) {
             return null;
         }
