@@ -1,4 +1,4 @@
--- Nombre: peerCheckDB
+-- Nombre: DBPeercheck
 
 -- Usuatio: root
 -- Contraseña: pass
@@ -77,7 +77,7 @@ create table "ROOT".REVIEWS
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
 	VALUES ('2017-10-14', 'bobadilla@mail.com', 'Sebatian Bobadilla', 'qwertyuiop', 'Author');
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
-	VALUES ('2017-10-14', 'sanchez@mail.com', 'Juan Manuel S�nchez', 'qwertyuiop', 'Reviewer');
+	VALUES ('2017-10-14', 'sanchez@mail.com', 'Juan Manuel Sánchez', 'qwertyuiop', 'Reviewer');
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
 	VALUES ('2017-10-14', 'villamizar@mail.com', 'David Villamizar', 'qwertyuiop', 'Author');
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
@@ -90,17 +90,17 @@ INSERT INTO ROOT.EVENTS ("DATE", DEADLINE, DESCRIPTION, LOCATION, "NAME", SUBMIS
 
 
 INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
-	VALUES ('Programaci�n avanzada en c++', 'Ingenier�a', 'Algoritmos, Programaci�n', 'Programaci�n avanzada en c++ ', 1);
+	VALUES ('Programación avanzada en c++', 'Ingeniería', 'Algoritmos, Programación', 'Programación avanzada en c++ ', 1);
 INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
-	VALUES ('Programaci�n dinamica vs Algoritmos voraces ', 'Ingenier�a', 'An�lisis, Programaci�n dinamica', 'Programaci�n dinamica vs Algoritmos voraces ', 1);
+	VALUES ('Programación dinamica vs Algoritmos voraces ', 'Ingeniería', 'Análisis, Programación dinamica', 'Programación dinamica vs Algoritmos voraces ', 1);
 
 INSERT INTO ROOT.FILES (DESCRIPTION, TITLE, URL, ARTICLE_ID) 
-	VALUES ('Art�culo completo', 'Art�culo completo', 'example.com/documento', 1);
+	VALUES ('Artículo completo', 'Artículo completo', 'example.com/documento', 1);
 INSERT INTO ROOT.FILES (DESCRIPTION, TITLE, URL, ARTICLE_ID) 
-	VALUES ('Art�culo completo', 'Art�culo completo', 'example.com/documento2', 2);
+	VALUES ('Artículo completo', 'Artículo completo', 'example.com/documento2', 2);
 
 INSERT INTO ROOT.REVIEWS ("DATE", GRADE, MESSAGE, STATUS, REVIEWER_ID, ARTICLE_ID) 
-	VALUES ('2017-10-14', 4, 'Buen art�culo', 'Reviewed', 1, 2);
+	VALUES ('2017-10-14', 4, 'Buen artículo', 'Reviewed', 1, 2);
 INSERT INTO ROOT.REVIEWS ("DATE", GRADE, MESSAGE, STATUS, REVIEWER_ID, ARTICLE_ID) 
 	VALUES ('2017-10-14', 3, 'Mediocre!', 'Reviewed', 1, 1);
 
