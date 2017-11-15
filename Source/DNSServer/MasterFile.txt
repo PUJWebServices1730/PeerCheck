@@ -1,0 +1,6 @@
+; private zone master file used by stealth server(s)
+; provides public and private services and hosts
+$ORIGIN peercheck.com
+; hosts
+database          IN      A       127.0.0.1
+server            IN      A       127.0.0.1

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="712.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="peercheckclient.controllers.HomeController">
+   <children>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="900.0">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="24.0" layoutY="33.6" onAction="#logout" prefHeight="25.0" prefWidth="138.0" ripplerFill="#b6dbfb" style="-fx-background-color: #0483D0;" text="Cerrar sesión" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+            <Label layoutX="43.6" layoutY="84.0" prefHeight="17.0" prefWidth="32.0" text="Hola," AnchorPane.leftAnchor="14.0" />
+            <Label fx:id="labelNombre" layoutX="57.6" layoutY="84.0" prefHeight="17.0" prefWidth="826.0" text="nombre" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="24.0" />
+            <Label fx:id="labelCorreo" layoutX="24.0" layoutY="107.0" prefHeight="17.0" prefWidth="77.0" text="Correo" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label fx:id="labelRol" layoutX="22.0" layoutY="130.0" text="Rol" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="43.6" layoutY="43.6" prefHeight="47.0" prefWidth="685.0" text="Peercheck" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Accordion prefHeight="425.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+        <panes>
+          <TitledPane animated="false" text="Buscar Articulo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextField fx:id="searchArticle" labelFloat="true" layoutX="33.6" layoutY="33.6" prefHeight="25.0" prefWidth="547.0" promptText="Busca un articulo" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="14.0" />
+                        <JFXComboBox fx:id="comboArticleFilter" labelFloat="true" layoutX="581.0" layoutY="21.0" prefHeight="25.0" prefWidth="160.0" promptText="Filtro" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="14.0" />
+                        <JFXButton layoutX="736.0" layoutY="24.0" onAction="#findArticle" prefHeight="25.0" prefWidth="138.0" ripplerFill="#43c650" style="-fx-background-color: #0C8A44;" text="Buscar" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                        <TableView fx:id="articleFoundTable" editable="true" layoutX="43.6" layoutY="91.6" prefHeight="287.0" prefWidth="312.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="63.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" resizable="false" text="ID" />
+                            <TableColumn editable="false" minWidth="100.0" prefWidth="236.0000228881836" resizable="false" text="Nombre" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label layoutX="330.0" layoutY="63.0" text="Articulo" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="63.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="articleFoundID" layoutX="453.0" layoutY="65.0" text="ID" AnchorPane.leftAnchor="453.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="63.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="articleFoundName" layoutX="369.0" layoutY="116.0" text="Nombre del articulo" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="14.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="articleFoundAutor" layoutX="369.0" layoutY="149.0" text="Nombre del autor" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="14.0" />
+                        <Label fx:id="articleFoundCetegory" layoutX="389.20000000000005" layoutY="178.0" text="Categoria" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="14.0" />
+                        <Label fx:id="articleFoundKeywords" layoutX="389.20000000000005" layoutY="205.0" text="Palabras clave" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="14.0" />
+                     </children></AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Cambiar rol">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextField labelFloat="true" layoutX="46.0" layoutY="32.0" prefHeight="25.0" prefWidth="706.0" promptText="Busca un usuario" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="14.0" />
+                        <JFXButton layoutX="736.0" layoutY="30.0" prefHeight="25.0" prefWidth="138.0" ripplerFill="#43c650" style="-fx-background-color: #0C8A44;" text="Buscar" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                        <TableView editable="true" layoutX="33.0" layoutY="76.0" prefHeight="287.0" prefWidth="312.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="63.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                              <TableColumn prefWidth="75.0" resizable="false" text="ID" />
+                              <TableColumn editable="false" minWidth="100.0" prefWidth="236.0000228881836" resizable="false" text="Nombre" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="470.0" layoutY="202.0" text="Usuario" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="63.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="593.0" layoutY="68.0" text="ID" AnchorPane.leftAnchor="453.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="63.0">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="561.0" layoutY="116.0" text="Nombre del usuario" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="14.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="370.0" layoutY="149.0" text="Rol" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="14.0" />
+                        <JFXComboBox labelFloat="true" layoutX="370.0" layoutY="189.0" promptText="Nuevo rol" AnchorPane.leftAnchor="360.0" />
+                        <JFXButton layoutX="379.6" layoutY="226.0" prefHeight="25.0" prefWidth="172.0" ripplerFill="#43c650" style="-fx-background-color: #0C8A44;" text="Guardar cambio" textFill="WHITE" AnchorPane.leftAnchor="360.0" />
+                     </children></AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Subir articulo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+            <TitledPane animated="false" text="Asignar revisor a articulo">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Enviar evaluación de un articulo">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Calcular evaluación final de un articulo">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Crear evento">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+            <TitledPane animated="false" text="Buscar eventos">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </TitledPane>
+        </panes>
+      </Accordion>
+   </children>
+</VBox>

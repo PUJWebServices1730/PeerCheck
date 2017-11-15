@@ -1,0 +1,117 @@
+-- Nombre: peerCheckDB
+
+-- Usuatio: root
+-- ContraseÃ±a: pass
+
+--------------------------------------------------------
+
+create table "ROOT".USERS
+(
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	BIRTHDATE DATE not null,
+	EMAIL VARCHAR(80) not null unique,
+	NAME VARCHAR(50) not null,
+	PASSWORD VARCHAR(80) not null,
+	ROLE VARCHAR(15) not null default 'Author'
+);
+
+create table "ROOT".EVENTS
+(
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	DATE DATE not null,
+	DEADLINE DATE not null,
+	DESCRIPTION VARCHAR(200) not null,
+	LOCATION VARCHAR(80) not null,
+	NAME VARCHAR(80) not null,
+	SUBMISSIONSTART DATE not null,
+	WEBSITE VARCHAR(80) not null,
+	EDITOR_ID INTEGER references USERS(ID)
+);
+
+create table "ROOT".ARTICLES
+(
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	ABSTRACT VARCHAR(200) not null,
+	CATEGORY VARCHAR(80) not null,
+	KEYWORDS VARCHAR(100) not null,
+	TITLE VARCHAR(100) not null,
+	MAIN_AUTHOR_ID INTEGER references USERS(ID)
+);
+
+create table "ROOT".FILES
+(
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	DESCRIPTION VARCHAR(200) not null,
+	TITLE VARCHAR(100) not null,
+	URL VARCHAR(200) not null,
+	ARTICLE_ID INTEGER references ARTICLES(ID)
+);
+
+create table "ROOT".USERS_ARTICLES
+(
+	USER_ID INTEGER references USERS(ID),
+	ARTICLE_ID INTEGER references ARTICLES(ID),
+	primary key (USER_ID, ARTICLE_ID)
+);
+
+create table "ROOT".EVENTS_ARTICLES
+(
+	EVENT_ID INTEGER references EVENTS(ID),
+	ARTICLE_ID INTEGER references ARTICLES(ID),
+	primary key (EVENT_ID, ARTICLE_ID)
+);
+
+create table "ROOT".REVIEWS
+(
+	ID INTEGER not null primary key generated always as identity (start with 1, increment by 1),
+	DATE DATE not null,
+	GRADE NUMERIC(5) not null,
+	MESSAGE VARCHAR(200) not null,
+	STATUS VARCHAR(20) not null,
+	REVIEWER_ID INTEGER references USERS(ID),
+	ARTICLE_ID INTEGER references ARTICLES(ID)
+);
+
+--------------
+
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'bobadilla@mail.com', 'Sebatian Bobadilla', 'qwertyuiop', 'Author');
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'sanchez@mail.com', 'Juan Manuel Sánchez', 'qwertyuiop', 'Reviewer');
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'villamizar@mail.com', 'David Villamizar', 'qwertyuiop', 'Author');
+INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
+	VALUES ('2017-10-14', 'forero@mail.com', 'Sergio Forero Gomez', 'qwertyuiop', 'Reviewer');
+
+INSERT INTO ROOT.EVENTS ("DATE", DEADLINE, DESCRIPTION, LOCATION, "NAME", SUBMISSIONSTART, WEBSITE, EDITOR_ID) 
+	VALUES ('2017-10-14', '2017-12-12', 'Mi primer evento', 'Bogota', 'Evento 1', '2017-10-14', 'evento.com', 1);
+INSERT INTO ROOT.EVENTS ("DATE", DEADLINE, DESCRIPTION, LOCATION, "NAME", SUBMISSIONSTART, WEBSITE, EDITOR_ID) 
+	VALUES ('2017-10-14', '2017-10-14', 'Todos moriraaaaan!', 'Sala A', 'Entrega de la muerte', '2017-10-14', 'javeriana.edu.co', 1);
+
+
+INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
+	VALUES ('Programación avanzada en c++', 'Ingeniería', 'Algoritmos, Programación', 'Programación avanzada en c++ ', 1);
+INSERT INTO ROOT.ARTICLES (ABSTRACT, CATEGORY, KEYWORDS, TITLE, MAIN_AUTHOR_ID) 
+	VALUES ('Programación dinamica vs Algoritmos voraces ', 'Ingeniería', 'Análisis, Programación dinamica', 'Programación dinamica vs Algoritmos voraces ', 1);
+
+INSERT INTO ROOT.FILES (DESCRIPTION, TITLE, URL, ARTICLE_ID) 
+	VALUES ('Artículo completo', 'Artículo completo', 'example.com/documento', 1);
+INSERT INTO ROOT.FILES (DESCRIPTION, TITLE, URL, ARTICLE_ID) 
+	VALUES ('Artículo completo', 'Artículo completo', 'example.com/documento2', 2);
+
+INSERT INTO ROOT.REVIEWS ("DATE", GRADE, MESSAGE, STATUS, REVIEWER_ID, ARTICLE_ID) 
+	VALUES ('2017-10-14', 4, 'Buen artículo', 'Reviewed', 1, 2);
+INSERT INTO ROOT.REVIEWS ("DATE", GRADE, MESSAGE, STATUS, REVIEWER_ID, ARTICLE_ID) 
+	VALUES ('2017-10-14', 3, 'Mediocre!', 'Reviewed', 1, 1);
+
+INSERT INTO ROOT.EVENTS_ARTICLES (EVENT_ID, ARTICLE_ID) 
+	VALUES (1, 1);
+INSERT INTO ROOT.EVENTS_ARTICLES (EVENT_ID, ARTICLE_ID) 
+	VALUES (1, 2);
+
+INSERT INTO ROOT.USERS_ARTICLES (USER_ID, ARTICLE_ID) 
+	VALUES (1, 2);
+INSERT INTO ROOT.USERS_ARTICLES (USER_ID, ARTICLE_ID) 
+	VALUES (2, 1);
+INSERT INTO ROOT.USERS_ARTICLES (USER_ID, ARTICLE_ID) 
+	VALUES (2, 2);

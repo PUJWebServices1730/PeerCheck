@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://wsdl.peercheck.com:8080/WSPeercheck/WSPeercheck?WSDL" uri="wsdl/wsdl.peercheck.com_8080/WSPeercheck/WSPeercheck.wsdl"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSPeercheck/WSPeercheck?xsd=1" uri="wsdl/wsdl.peercheck.com_8080/WSPeercheck/WSPeercheck.xsd_1.xsd"/>
+    <system systemId="http://server.peercheck.com:8080/WSPeercheck/WSPeercheck?WSDL" uri="wsdl/server.peercheck.com_8080/WSPeercheck/WSPeercheck.wsdl"/>
+    <system systemId="http://server.peercheck.com:8080/WSPeercheck/WSPeercheck?xsd=1" uri="wsdl/server.peercheck.com_8080/WSPeercheck/WSPeercheck.xsd_1.xsd"/>
+</catalog>

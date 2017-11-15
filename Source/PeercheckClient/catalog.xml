@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://wsusers.peercheck.com:8080/WSUsers/WSUsers?WSDL" uri="xml-resources/web-service-references/WSUsers/wsdl/wsusers.peercheck.com_8080/WSUsers/WSUsers.wsdl"/>
+    <system systemId="http://wsusers.peercheck.com:8080/WSUsers/WSUsers?xsd=1" uri="xml-resources/web-service-references/WSUsers/wsdl/wsusers.peercheck.com_8080/WSUsers/WSUsers.xsd_1.xsd"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSUsers/WSUsers?WSDL" uri="xml-resources/web-service-references/WSUsers/wsdl/wsdl.peercheck.com_8080/WSUsers/WSUsers.wsdl"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSUsers/WSUsers?xsd=1" uri="xml-resources/web-service-references/WSUsers/wsdl/wsdl.peercheck.com_8080/WSUsers/WSUsers.xsd_1.xsd"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSArticles/WSArticles?WSDL" uri="xml-resources/web-service-references/WSArticles/wsdl/wsdl.peercheck.com_8080/WSArticles/WSArticles.wsdl"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSArticles/WSArticles?xsd=1" uri="xml-resources/web-service-references/WSArticles/wsdl/wsdl.peercheck.com_8080/WSArticles/WSArticles.xsd_1.xsd"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSEvents/WSEvents?WSDL" uri="xml-resources/web-service-references/WSEvents/wsdl/wsdl.peercheck.com_8080/WSEvents/WSEvents.wsdl"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSEvents/WSEvents?xsd=1" uri="xml-resources/web-service-references/WSEvents/wsdl/wsdl.peercheck.com_8080/WSEvents/WSEvents.xsd_1.xsd"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSFiles/WSFiles?WSDL" uri="xml-resources/web-service-references/WSFiles/wsdl/wsdl.peercheck.com_8080/WSFiles/WSFiles.wsdl"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSFiles/WSFiles?xsd=1" uri="xml-resources/web-service-references/WSFiles/wsdl/wsdl.peercheck.com_8080/WSFiles/WSFiles.xsd_1.xsd"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSReviews/WSReviews?WSDL" uri="xml-resources/web-service-references/WSReviews/wsdl/wsdl.peercheck.com_8080/WSReviews/WSReviews.wsdl"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSReviews/WSReviews?xsd=1" uri="xml-resources/web-service-references/WSReviews/wsdl/wsdl.peercheck.com_8080/WSReviews/WSReviews.xsd_1.xsd"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSPeercheck/WSPeercheck?Tester" uri="xml-resources/web-service-references/WSPeercheck_Tester/wsdl/wsdl.peercheck.com_8080/WSPeercheck/WSPeercheck.tester"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSPeercheck/WSPeercheck?WSDL" uri="xml-resources/web-service-references/WSPeercheck/wsdl/wsdl.peercheck.com_8080/WSPeercheck/WSPeercheck.wsdl"/>
+    <system systemId="http://wsdl.peercheck.com:8080/WSPeercheck/WSPeercheck?xsd=1" uri="xml-resources/web-service-references/WSPeercheck/wsdl/wsdl.peercheck.com_8080/WSPeercheck/WSPeercheck.xsd_1.xsd"/>
+    <system systemId="http://server.peercheck.com:8080/WSPeercheck/WSPeercheck?WSDL" uri="xml-resources/web-service-references/WSPeercheck/wsdl/server.peercheck.com_8080/WSPeercheck/WSPeercheck.wsdl"/>
+    <system systemId="http://server.peercheck.com:8080/WSPeercheck/WSPeercheck?xsd=1" uri="xml-resources/web-service-references/WSPeercheck/wsdl/server.peercheck.com_8080/WSPeercheck/WSPeercheck.xsd_1.xsd"/>
+</catalog>
