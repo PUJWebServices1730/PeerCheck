@@ -1,6 +1,0 @@
-@for $i from 1 through 20 {
-	.logo_x#{$i * 10} {
-		width: ($i * 10px);
-		margin: $gutter
-	}
-}
