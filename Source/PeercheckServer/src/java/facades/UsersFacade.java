@@ -6,6 +6,7 @@
 package facades;
 
 import entities.Users;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +37,16 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeRem
         Query query = em.createNamedQuery("Users.findByEmail", Users.class);
         try {
             return (Users)query.setParameter("email", email).getSingleResult();
+        } catch(Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Users> getAllUsers() {
+        Query query = em.createNamedQuery("Users.findAll", Users.class);
+        try {
+            return (List<Users>)query.getResultList();
         } catch(Exception e) {
             return null;
         }

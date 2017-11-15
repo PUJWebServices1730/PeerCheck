@@ -32,4 +32,6 @@ public interface UsersFacadeRemote {
 
     public Users findByEmail(String email);
     
+    public List<Users> getAllUsers();
+    
 }

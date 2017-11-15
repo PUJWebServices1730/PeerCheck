@@ -10,17 +10,11 @@
 <message name="loginResponse">
 <part name="parameters" element="tns:loginResponse"/>
 </message>
-<message name="assignReviewerToArticle">
-<part name="parameters" element="tns:assignReviewerToArticle"/>
+<message name="signup">
+<part name="parameters" element="tns:signup"/>
 </message>
-<message name="assignReviewerToArticleResponse">
-<part name="parameters" element="tns:assignReviewerToArticleResponse"/>
-</message>
-<message name="calculateFinalGradeToArticle">
-<part name="parameters" element="tns:calculateFinalGradeToArticle"/>
-</message>
-<message name="calculateFinalGradeToArticleResponse">
-<part name="parameters" element="tns:calculateFinalGradeToArticleResponse"/>
+<message name="signupResponse">
+<part name="parameters" element="tns:signupResponse"/>
 </message>
 <message name="findArticleBy">
 <part name="parameters" element="tns:findArticleBy"/>
@@ -28,17 +22,17 @@
 <message name="findArticleByResponse">
 <part name="parameters" element="tns:findArticleByResponse"/>
 </message>
+<message name="changeRol">
+<part name="parameters" element="tns:changeRol"/>
+</message>
+<message name="changeRolResponse">
+<part name="parameters" element="tns:changeRolResponse"/>
+</message>
 <message name="addArticle">
 <part name="parameters" element="tns:addArticle"/>
 </message>
 <message name="addArticleResponse">
 <part name="parameters" element="tns:addArticleResponse"/>
-</message>
-<message name="signup">
-<part name="parameters" element="tns:signup"/>
-</message>
-<message name="signupResponse">
-<part name="parameters" element="tns:signupResponse"/>
 </message>
 <message name="addReview">
 <part name="parameters" element="tns:addReview"/>
@@ -46,44 +40,60 @@
 <message name="addReviewResponse">
 <part name="parameters" element="tns:addReviewResponse"/>
 </message>
-<message name="changeRol">
-<part name="parameters" element="tns:changeRol"/>
+<message name="getAllUsers">
+<part name="parameters" element="tns:getAllUsers"/>
 </message>
-<message name="changeRolResponse">
-<part name="parameters" element="tns:changeRolResponse"/>
+<message name="getAllUsersResponse">
+<part name="parameters" element="tns:getAllUsersResponse"/>
+</message>
+<message name="calculateFinalGradeToArticle">
+<part name="parameters" element="tns:calculateFinalGradeToArticle"/>
+</message>
+<message name="calculateFinalGradeToArticleResponse">
+<part name="parameters" element="tns:calculateFinalGradeToArticleResponse"/>
+</message>
+<message name="assignReviewerToArticle">
+<part name="parameters" element="tns:assignReviewerToArticle"/>
+</message>
+<message name="assignReviewerToArticleResponse">
+<part name="parameters" element="tns:assignReviewerToArticleResponse"/>
 </message>
 <portType name="WSPeercheck">
 <operation name="login">
 <input wsam:Action="http://services/WSPeercheck/loginRequest" message="tns:login"/>
 <output wsam:Action="http://services/WSPeercheck/loginResponse" message="tns:loginResponse"/>
 </operation>
-<operation name="assignReviewerToArticle">
-<input wsam:Action="http://services/WSPeercheck/assignReviewerToArticleRequest" message="tns:assignReviewerToArticle"/>
-<output wsam:Action="http://services/WSPeercheck/assignReviewerToArticleResponse" message="tns:assignReviewerToArticleResponse"/>
-</operation>
-<operation name="calculateFinalGradeToArticle">
-<input wsam:Action="http://services/WSPeercheck/calculateFinalGradeToArticleRequest" message="tns:calculateFinalGradeToArticle"/>
-<output wsam:Action="http://services/WSPeercheck/calculateFinalGradeToArticleResponse" message="tns:calculateFinalGradeToArticleResponse"/>
+<operation name="signup">
+<input wsam:Action="http://services/WSPeercheck/signupRequest" message="tns:signup"/>
+<output wsam:Action="http://services/WSPeercheck/signupResponse" message="tns:signupResponse"/>
 </operation>
 <operation name="findArticleBy">
 <input wsam:Action="http://services/WSPeercheck/findArticleByRequest" message="tns:findArticleBy"/>
 <output wsam:Action="http://services/WSPeercheck/findArticleByResponse" message="tns:findArticleByResponse"/>
 </operation>
+<operation name="changeRol">
+<input wsam:Action="http://services/WSPeercheck/changeRolRequest" message="tns:changeRol"/>
+<output wsam:Action="http://services/WSPeercheck/changeRolResponse" message="tns:changeRolResponse"/>
+</operation>
 <operation name="addArticle">
 <input wsam:Action="http://services/WSPeercheck/addArticleRequest" message="tns:addArticle"/>
 <output wsam:Action="http://services/WSPeercheck/addArticleResponse" message="tns:addArticleResponse"/>
-</operation>
-<operation name="signup">
-<input wsam:Action="http://services/WSPeercheck/signupRequest" message="tns:signup"/>
-<output wsam:Action="http://services/WSPeercheck/signupResponse" message="tns:signupResponse"/>
 </operation>
 <operation name="addReview">
 <input wsam:Action="http://services/WSPeercheck/addReviewRequest" message="tns:addReview"/>
 <output wsam:Action="http://services/WSPeercheck/addReviewResponse" message="tns:addReviewResponse"/>
 </operation>
-<operation name="changeRol">
-<input wsam:Action="http://services/WSPeercheck/changeRolRequest" message="tns:changeRol"/>
-<output wsam:Action="http://services/WSPeercheck/changeRolResponse" message="tns:changeRolResponse"/>
+<operation name="getAllUsers">
+<input wsam:Action="http://services/WSPeercheck/getAllUsersRequest" message="tns:getAllUsers"/>
+<output wsam:Action="http://services/WSPeercheck/getAllUsersResponse" message="tns:getAllUsersResponse"/>
+</operation>
+<operation name="calculateFinalGradeToArticle">
+<input wsam:Action="http://services/WSPeercheck/calculateFinalGradeToArticleRequest" message="tns:calculateFinalGradeToArticle"/>
+<output wsam:Action="http://services/WSPeercheck/calculateFinalGradeToArticleResponse" message="tns:calculateFinalGradeToArticleResponse"/>
+</operation>
+<operation name="assignReviewerToArticle">
+<input wsam:Action="http://services/WSPeercheck/assignReviewerToArticleRequest" message="tns:assignReviewerToArticle"/>
+<output wsam:Action="http://services/WSPeercheck/assignReviewerToArticleResponse" message="tns:assignReviewerToArticleResponse"/>
 </operation>
 </portType>
 <binding name="WSPeercheckPortBinding" type="tns:WSPeercheck">
@@ -97,16 +107,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="assignReviewerToArticle">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="calculateFinalGradeToArticle">
+<operation name="signup">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -124,7 +125,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="addArticle">
+<operation name="changeRol">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -133,7 +134,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="signup">
+<operation name="addArticle">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -151,7 +152,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="changeRol">
+<operation name="getAllUsers">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="calculateFinalGradeToArticle">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="assignReviewerToArticle">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

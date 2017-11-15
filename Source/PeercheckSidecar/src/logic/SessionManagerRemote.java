@@ -35,5 +35,7 @@ public interface SessionManagerRemote {
     boolean addReview(Reviews review);
 
     double calculateFinalGradeToArticle(Articles article);
+
+    public List<Users> getAllUsers();
     
 }

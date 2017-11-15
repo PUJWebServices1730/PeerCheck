@@ -39,7 +39,12 @@ public class WSPeercheck {
     public Users signup(@WebParam(name = "user") Users user) {
         return ejbRef.signup(user);
     }
-
+    
+    @WebMethod
+    public List<Users> getAllUsers() {
+        return ejbRef.getAllUsers();
+    }
+    
     @WebMethod(operationName = "changeRol")
     public boolean changeRol(@WebParam(name = "user") Users user, @WebParam(name = "role") UserRole role) {
         return ejbRef.changeRol(user, role);

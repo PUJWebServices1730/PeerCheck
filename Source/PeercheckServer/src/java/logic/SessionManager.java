@@ -73,7 +73,12 @@ public class SessionManager implements SessionManagerRemote {
         }
         return null;
     }
-
+    
+    @Override
+    public List<Users> getAllUsers(){
+        return usersFacade.getAllUsers();
+    }
+    
     @Override
     public boolean changeRol(Users user, UserRole role) {
         user.setRole(role.toString());

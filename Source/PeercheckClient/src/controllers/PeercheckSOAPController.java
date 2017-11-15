@@ -52,4 +52,8 @@ public class PeercheckSOAPController {
     public static boolean addArticle(integration.peercheck.Articles article) {
         return port.addArticle(article);
     }
+
+    public static java.util.List<integration.peercheck.Users> getAllUsers() {
+        return port.getAllUsers();
+    }
 }

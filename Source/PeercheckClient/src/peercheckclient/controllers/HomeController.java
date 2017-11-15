@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 import controllers.PeercheckSOAPController;
 import integration.peercheck.ArticleCriteria;
 import integration.peercheck.Articles;
+import integration.peercheck.Users;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -27,7 +28,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -70,6 +73,15 @@ public class HomeController implements Initializable {
     
     @FXML
     private TableView<Articles> articleFoundTable;
+    
+    @FXML
+    private TableView<Users> changeRoleUsersTable;
+    
+    @FXML
+    private TableColumn idColumn;
+    
+    @FXML
+    private TableColumn nameColumn;
 
     @FXML
     private JFXComboBox<ArticleCriteria> comboArticleFilter;
@@ -97,6 +109,17 @@ public class HomeController implements Initializable {
         } else {
             articleFoundID.setText("No encontrado");
         }
+    }
+    
+    @FXML
+    void getAllUsers(ActionEvent event) {
+        List<Users> users = PeercheckSOAPController.getAllUsers();
+        System.out.println(users.size());
+        
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));        
+//changeRoleUsersTable.getColumns().addAll(idColumn, nameColumn);
+        changeRoleUsersTable.getItems().addAll(users);
     }
     
     @Override
