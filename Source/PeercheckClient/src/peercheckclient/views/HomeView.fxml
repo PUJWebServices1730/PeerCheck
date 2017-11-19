@@ -19,7 +19,7 @@
             <Label layoutX="43.6" layoutY="84.0" prefHeight="17.0" prefWidth="32.0" text="Hola," AnchorPane.leftAnchor="14.0" />
             <Label fx:id="currentUserNameLabel" layoutX="57.6" layoutY="84.0" prefHeight="17.0" prefWidth="826.0" text="nombre" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="24.0" />
             <Label fx:id="currentUserMailLabel" layoutX="24.0" layoutY="107.0" prefHeight="17.0" prefWidth="77.0" text="Correo" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-            <Label fx:id="currentUserRoleLabel" layoutX="22.0" layoutY="130.0" text="Rol" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label fx:id="currentUserRoleLabel" layoutX="-8.0" layoutY="136.0" text="Rol" AnchorPane.leftAnchor="-8.0" AnchorPane.rightAnchor="36.0" />
             <Label layoutX="43.6" layoutY="43.6" prefHeight="47.0" prefWidth="685.0" text="Peercheck" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font size="32.0" />
@@ -96,10 +96,9 @@
                         <VBox layoutX="898.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
                            <children>
                               <JFXTextField fx:id="createArticleTitleTextFiled" prefHeight="25.0" prefWidth="425.0" promptText="Título del artículo" />
-                              <JFXTextArea fx:id="createArticleAbstractTextArea" prefHeight="106.0" prefWidth="425.0" promptText="Abstract" />
+                              <JFXTextArea fx:id="createArticleAbstractTextArea" prefHeight="49.0" prefWidth="425.0" promptText="Abstract" />
                               <JFXTextField fx:id="createArticleKeywordsTextField" prefHeight="25.0" prefWidth="425.0" promptText="Palabras clave" />
                               <JFXTextField fx:id="createArticleCategoryTextField" prefHeight="25.0" prefWidth="425.0" promptText="Categorias" />
-                              <JFXTextField fx:id="createArticleAuthorsTextField" prefHeight="25.0" prefWidth="337.0" text="Autores" />
                               <JFXButton buttonType="RAISED" onAction="#loadFile" style="-fx-background-color: #BBBBBB;" text="Cargar archivo" />
                               <Label layoutX="10.0" layoutY="266.0" text="ruta/ejemplo.ejm" />
                               <JFXButton buttonType="RAISED" onAction="#createArticle" ripplerFill="#b6dbfb" style="-fx-background-color: #0483D0;" text="Crear artículo" textFill="WHITE" />
