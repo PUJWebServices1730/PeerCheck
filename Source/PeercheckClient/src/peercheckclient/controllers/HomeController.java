@@ -13,6 +13,7 @@ import controllers.PeercheckSOAPController;
 import integration.peercheck.ArticleCriteria;
 import integration.peercheck.Articles;
 import integration.peercheck.Users;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -40,6 +41,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import peercheckclient.PeercheckClient;
@@ -93,6 +95,10 @@ public class HomeController implements Initializable {
     
     @FXML
     private JFXTextArea createArticleAbstractTextArea;
+    
+    
+    
+    private List<File> filesToUpload;
     
     @Override
     public void initialize(URL url, ResourceBundle resources) {
@@ -215,6 +221,13 @@ public class HomeController implements Initializable {
         
         List<String> authorsEMails = Arrays.asList(createArticleAuthorsTextField.getText().split("\\\\s*,\\\\s*"));
         PeercheckSOAPController.addArticle(article, authorsEMails);
+    }
+    
+    @FXML
+    void loadFile(){
+        FileChooser fileChooser = new FileChooser();
+        filesToUpload = fileChooser.showOpenMultipleDialog(new Stage());
+        System.out.println(filesToUpload);
     }
 
     @FXML

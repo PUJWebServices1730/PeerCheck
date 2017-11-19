@@ -100,7 +100,7 @@
                               <JFXTextField fx:id="createArticleKeywordsTextField" prefHeight="25.0" prefWidth="425.0" promptText="Palabras clave" />
                               <JFXTextField fx:id="createArticleCategoryTextField" prefHeight="25.0" prefWidth="425.0" promptText="Categorias" />
                               <JFXTextField fx:id="createArticleAuthorsTextField" prefHeight="25.0" prefWidth="337.0" text="Autores" />
-                              <JFXButton buttonType="RAISED" style="-fx-background-color: #BBBBBB;" text="Cargar archivo" />
+                              <JFXButton buttonType="RAISED" onAction="#loadFile" style="-fx-background-color: #BBBBBB;" text="Cargar archivo" />
                               <Label layoutX="10.0" layoutY="266.0" text="ruta/ejemplo.ejm" />
                               <JFXButton buttonType="RAISED" onAction="#createArticle" ripplerFill="#b6dbfb" style="-fx-background-color: #0483D0;" text="Crear artículo" textFill="WHITE" />
                            </children>
