@@ -4,11 +4,17 @@
 <xsd:import namespace="http://services/" schemaLocation="http://server.peercheck.com:8080/WSPeercheck/WSPeercheck?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="login">
-<part name="parameters" element="tns:login"/>
+<message name="getAllUsers">
+<part name="parameters" element="tns:getAllUsers"/>
 </message>
-<message name="loginResponse">
-<part name="parameters" element="tns:loginResponse"/>
+<message name="getAllUsersResponse">
+<part name="parameters" element="tns:getAllUsersResponse"/>
+</message>
+<message name="findUsersByEmail">
+<part name="parameters" element="tns:findUsersByEmail"/>
+</message>
+<message name="findUsersByEmailResponse">
+<part name="parameters" element="tns:findUsersByEmailResponse"/>
 </message>
 <message name="signup">
 <part name="parameters" element="tns:signup"/>
@@ -16,17 +22,17 @@
 <message name="signupResponse">
 <part name="parameters" element="tns:signupResponse"/>
 </message>
-<message name="findArticleBy">
-<part name="parameters" element="tns:findArticleBy"/>
-</message>
-<message name="findArticleByResponse">
-<part name="parameters" element="tns:findArticleByResponse"/>
-</message>
 <message name="changeRol">
 <part name="parameters" element="tns:changeRol"/>
 </message>
 <message name="changeRolResponse">
 <part name="parameters" element="tns:changeRolResponse"/>
+</message>
+<message name="findArticleBy">
+<part name="parameters" element="tns:findArticleBy"/>
+</message>
+<message name="findArticleByResponse">
+<part name="parameters" element="tns:findArticleByResponse"/>
 </message>
 <message name="addArticle">
 <part name="parameters" element="tns:addArticle"/>
@@ -40,11 +46,11 @@
 <message name="addReviewResponse">
 <part name="parameters" element="tns:addReviewResponse"/>
 </message>
-<message name="getAllUsers">
-<part name="parameters" element="tns:getAllUsers"/>
+<message name="login">
+<part name="parameters" element="tns:login"/>
 </message>
-<message name="getAllUsersResponse">
-<part name="parameters" element="tns:getAllUsersResponse"/>
+<message name="loginResponse">
+<part name="parameters" element="tns:loginResponse"/>
 </message>
 <message name="calculateFinalGradeToArticle">
 <part name="parameters" element="tns:calculateFinalGradeToArticle"/>
@@ -59,21 +65,25 @@
 <part name="parameters" element="tns:assignReviewerToArticleResponse"/>
 </message>
 <portType name="WSPeercheck">
-<operation name="login">
-<input wsam:Action="http://services/WSPeercheck/loginRequest" message="tns:login"/>
-<output wsam:Action="http://services/WSPeercheck/loginResponse" message="tns:loginResponse"/>
+<operation name="getAllUsers">
+<input wsam:Action="http://services/WSPeercheck/getAllUsersRequest" message="tns:getAllUsers"/>
+<output wsam:Action="http://services/WSPeercheck/getAllUsersResponse" message="tns:getAllUsersResponse"/>
+</operation>
+<operation name="findUsersByEmail">
+<input wsam:Action="http://services/WSPeercheck/findUsersByEmailRequest" message="tns:findUsersByEmail"/>
+<output wsam:Action="http://services/WSPeercheck/findUsersByEmailResponse" message="tns:findUsersByEmailResponse"/>
 </operation>
 <operation name="signup">
 <input wsam:Action="http://services/WSPeercheck/signupRequest" message="tns:signup"/>
 <output wsam:Action="http://services/WSPeercheck/signupResponse" message="tns:signupResponse"/>
 </operation>
-<operation name="findArticleBy">
-<input wsam:Action="http://services/WSPeercheck/findArticleByRequest" message="tns:findArticleBy"/>
-<output wsam:Action="http://services/WSPeercheck/findArticleByResponse" message="tns:findArticleByResponse"/>
-</operation>
 <operation name="changeRol">
 <input wsam:Action="http://services/WSPeercheck/changeRolRequest" message="tns:changeRol"/>
 <output wsam:Action="http://services/WSPeercheck/changeRolResponse" message="tns:changeRolResponse"/>
+</operation>
+<operation name="findArticleBy">
+<input wsam:Action="http://services/WSPeercheck/findArticleByRequest" message="tns:findArticleBy"/>
+<output wsam:Action="http://services/WSPeercheck/findArticleByResponse" message="tns:findArticleByResponse"/>
 </operation>
 <operation name="addArticle">
 <input wsam:Action="http://services/WSPeercheck/addArticleRequest" message="tns:addArticle"/>
@@ -83,9 +93,9 @@
 <input wsam:Action="http://services/WSPeercheck/addReviewRequest" message="tns:addReview"/>
 <output wsam:Action="http://services/WSPeercheck/addReviewResponse" message="tns:addReviewResponse"/>
 </operation>
-<operation name="getAllUsers">
-<input wsam:Action="http://services/WSPeercheck/getAllUsersRequest" message="tns:getAllUsers"/>
-<output wsam:Action="http://services/WSPeercheck/getAllUsersResponse" message="tns:getAllUsersResponse"/>
+<operation name="login">
+<input wsam:Action="http://services/WSPeercheck/loginRequest" message="tns:login"/>
+<output wsam:Action="http://services/WSPeercheck/loginResponse" message="tns:loginResponse"/>
 </operation>
 <operation name="calculateFinalGradeToArticle">
 <input wsam:Action="http://services/WSPeercheck/calculateFinalGradeToArticleRequest" message="tns:calculateFinalGradeToArticle"/>
@@ -98,7 +108,16 @@
 </portType>
 <binding name="WSPeercheckPortBinding" type="tns:WSPeercheck">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="login">
+<operation name="getAllUsers">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findUsersByEmail">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -116,7 +135,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findArticleBy">
+<operation name="changeRol">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -125,7 +144,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="changeRol">
+<operation name="findArticleBy">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -152,7 +171,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getAllUsers">
+<operation name="login">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

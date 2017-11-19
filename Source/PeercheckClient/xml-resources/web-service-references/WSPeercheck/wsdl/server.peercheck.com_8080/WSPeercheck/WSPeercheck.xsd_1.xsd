@@ -26,6 +26,10 @@
 
 <xs:element name="findArticleByResponse" type="tns:findArticleByResponse"/>
 
+<xs:element name="findUsersByEmail" type="tns:findUsersByEmail"/>
+
+<xs:element name="findUsersByEmailResponse" type="tns:findUsersByEmailResponse"/>
+
 <xs:element name="getAllUsers" type="tns:getAllUsers"/>
 
 <xs:element name="getAllUsersResponse" type="tns:getAllUsersResponse"/>
@@ -69,6 +73,7 @@
 <xs:complexType name="addArticle">
 <xs:sequence>
 <xs:element name="article" type="tns:articles" minOccurs="0"/>
+<xs:element name="emails" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -106,6 +111,18 @@
 </xs:complexType>
 
 <xs:complexType name="getAllUsersResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUsersByEmail">
+<xs:sequence>
+<xs:element name="emails" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUsersByEmailResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>

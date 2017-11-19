@@ -7,6 +7,7 @@ package peercheckclient.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import controllers.PeercheckSOAPController;
 import integration.peercheck.ArticleCriteria;
@@ -14,6 +15,7 @@ import integration.peercheck.Articles;
 import integration.peercheck.Users;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -85,6 +87,13 @@ public class HomeController implements Initializable {
     @FXML
     private Label changeRoleIdLabel, changeRoleNameLabel, changeRoleRoleLabel;
 
+    // ------------- Add article components -------------
+    @FXML
+    private JFXTextField createArticleTitleTextFiled, createArticleKeywordsTextField, createArticleCategoryTextField, createArticleAuthorsTextField;
+    
+    @FXML
+    private JFXTextArea createArticleAbstractTextArea;
+    
     @Override
     public void initialize(URL url, ResourceBundle resources) {
 
@@ -193,6 +202,19 @@ public class HomeController implements Initializable {
         } else {
             fillTable(searchArticlesTable, articles);
         }
+    }
+    
+    @FXML
+    void createArticle(){
+        Articles article = new Articles();
+        article.setTitle(createArticleTitleTextFiled.getText());
+        article.setAbstract1(createArticleAbstractTextArea.getText());
+        article.setCategory(createArticleCategoryTextField.getText());
+        article.setKeywords(createArticleKeywordsTextField.getText());
+        article.setMainAuthorId(UserSession.user);
+        
+        List<String> authorsEMails = Arrays.asList(createArticleAuthorsTextField.getText().split("\\\\s*,\\\\s*"));
+        PeercheckSOAPController.addArticle(article, authorsEMails);
     }
 
     @FXML

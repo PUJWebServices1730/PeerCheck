@@ -28,7 +28,7 @@ public interface SessionManagerRemote {
 
     List<Articles> findArticleBy(ArticleCriteria criteria, String value);
 
-    boolean addArticle(Articles article);
+    boolean addArticle(Articles article, List<String> emails);
 
     boolean assignReviewerToArticle(Users user, Articles article);
 
@@ -37,5 +37,7 @@ public interface SessionManagerRemote {
     double calculateFinalGradeToArticle(Articles article);
 
     public List<Users> getAllUsers();
+    
+    public List<Users> findUsersByEmail(List<String> emails);
     
 }

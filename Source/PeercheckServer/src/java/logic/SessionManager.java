@@ -14,6 +14,7 @@ import facades.ArticlesFacadeRemote;
 import facades.ReviewsFacadeRemote;
 import facades.UsersFacade;
 import facades.UsersFacadeRemote;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -98,9 +99,11 @@ public class SessionManager implements SessionManagerRemote {
     }
 
     @Override
-    public boolean addArticle(Articles article) {
+    public boolean addArticle(Articles article, List<String> emails) {
+        List<Users> authors = findUsersByEmail(emails);
+        article.setUsersList(authors);
         articlesFacade.create(article);
-        return false;
+        return true;
     }
 
     @Override
@@ -124,5 +127,14 @@ public class SessionManager implements SessionManagerRemote {
         }
         grade /= (double)reviewsList.size();
         return grade;
+    }
+
+    @Override
+    public List<Users> findUsersByEmail(List<String> emails) {
+        List<Users> users = new ArrayList<>();
+        for(String email : emails){
+            users.add(usersFacade.findByEmail(email));
+        }
+        return users;
     }
 }

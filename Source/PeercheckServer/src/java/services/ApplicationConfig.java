@@ -10,7 +10,7 @@ import javax.ws.rs.core.Application;
 
 /**
  *
- * @author juanm
+ * @author Sebas
  */
 @javax.ws.rs.ApplicationPath("restservices")
 public class ApplicationConfig extends Application {

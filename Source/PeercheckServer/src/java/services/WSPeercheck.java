@@ -40,9 +40,14 @@ public class WSPeercheck {
         return ejbRef.signup(user);
     }
     
-    @WebMethod
+    @WebMethod(operationName = "getAllUsers")
     public List<Users> getAllUsers() {
         return ejbRef.getAllUsers();
+    }
+    
+    @WebMethod(operationName = "findUsersByEmail")
+    public List<Users> findUsersByEMail(@WebParam(name = "emails") List<String> emails) {
+        return ejbRef.findUsersByEmail(emails);
     }
     
     @WebMethod(operationName = "changeRol")
@@ -56,8 +61,8 @@ public class WSPeercheck {
     }
 
     @WebMethod(operationName = "addArticle")
-    public boolean addArticle(@WebParam(name = "article") Articles article) {
-        return ejbRef.addArticle(article);
+    public boolean addArticle(@WebParam(name = "article") Articles article, @WebParam(name = "emails") List<String> emails) {
+        return ejbRef.addArticle(article, emails);
     }
 
     @WebMethod(operationName = "assignReviewerToArticle")

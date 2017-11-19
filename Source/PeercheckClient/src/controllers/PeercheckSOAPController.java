@@ -48,12 +48,16 @@ public class PeercheckSOAPController {
     public static boolean addReview(integration.peercheck.Reviews review) {
         return port.addReview(review);
     }
-
-    public static boolean addArticle(integration.peercheck.Articles article) {
-        return port.addArticle(article);
-    }
-
+    
     public static java.util.List<integration.peercheck.Users> getAllUsers() {
         return port.getAllUsers();
+    }
+
+    public static java.util.List<integration.peercheck.Users> findUsersByEmail(java.util.List<java.lang.String> emails) {
+        return port.findUsersByEmail(emails);
+    }
+
+    public static boolean addArticle(integration.peercheck.Articles article, java.util.List<java.lang.String> emails) {
+        return port.addArticle(article, emails);
     }
 }

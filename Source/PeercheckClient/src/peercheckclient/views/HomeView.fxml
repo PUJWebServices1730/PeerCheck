@@ -90,9 +90,28 @@
             </content>
           </TitledPane>
           <TitledPane animated="false" text="Subir articulo">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
+               <content>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                     <children>
+                        <VBox layoutX="898.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                           <children>
+                              <JFXTextField fx:id="createArticleTitleTextFiled" prefHeight="25.0" prefWidth="425.0" promptText="Título del artículo" />
+                              <JFXTextArea fx:id="createArticleAbstractTextArea" prefHeight="106.0" prefWidth="425.0" promptText="Abstract" />
+                              <JFXTextField fx:id="createArticleKeywordsTextField" prefHeight="25.0" prefWidth="425.0" promptText="Palabras clave" />
+                              <JFXTextField fx:id="createArticleCategoryTextField" prefHeight="25.0" prefWidth="425.0" promptText="Categorias" />
+                              <JFXTextField fx:id="createArticleAuthorsTextField" prefHeight="25.0" prefWidth="337.0" text="Autores" />
+                              <JFXButton buttonType="RAISED" style="-fx-background-color: #BBBBBB;" text="Cargar archivo" />
+                              <Label layoutX="10.0" layoutY="266.0" text="ruta/ejemplo.ejm" />
+                              <JFXButton buttonType="RAISED" onAction="#createArticle" ripplerFill="#b6dbfb" style="-fx-background-color: #0483D0;" text="Crear artículo" textFill="WHITE" />
+                           </children>
+                        </VBox>
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </content>
           </TitledPane>
             <TitledPane animated="false" text="Asignar revisor a articulo">
                <content>
