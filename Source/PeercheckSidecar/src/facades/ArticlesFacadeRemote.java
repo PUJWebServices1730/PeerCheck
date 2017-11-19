@@ -8,6 +8,7 @@ package facades;
 import entities.Articles;
 import java.util.List;
 import javax.ejb.Remote;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -15,7 +16,7 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface ArticlesFacadeRemote {
-
+    
     void create(Articles articles);
 
     void edit(Articles articles);

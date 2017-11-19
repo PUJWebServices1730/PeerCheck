@@ -12,10 +12,15 @@ import com.jfoenix.controls.JFXTextField;
 import controllers.PeercheckSOAPController;
 import integration.peercheck.ArticleCriteria;
 import integration.peercheck.Articles;
+import integration.peercheck.TrannyFile;
 import integration.peercheck.Users;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -98,7 +103,7 @@ public class HomeController implements Initializable {
     
     
     
-    private List<File> filesToUpload;
+    private TrannyFile fileToUpload;
     
     @Override
     public void initialize(URL url, ResourceBundle resources) {
@@ -219,15 +224,18 @@ public class HomeController implements Initializable {
         article.setKeywords(createArticleKeywordsTextField.getText());
         article.setMainAuthorId(UserSession.user);
         
-        List<String> authorsEMails = Arrays.asList(createArticleAuthorsTextField.getText().split("\\\\s*,\\\\s*"));
-        PeercheckSOAPController.addArticle(article, authorsEMails);
+        //List<String> authorsEMails = Arrays.asList(createArticleAuthorsTextField.getText().split(","));
+        PeercheckSOAPController.addArticle(article, fileToUpload);
     }
     
     @FXML
-    void loadFile(){
+    void loadFile() throws FileNotFoundException, IOException{
         FileChooser fileChooser = new FileChooser();
-        filesToUpload = fileChooser.showOpenMultipleDialog(new Stage());
-        System.out.println(filesToUpload);
+        File choosenFile = fileChooser.showOpenDialog(new Stage());
+        
+        fileToUpload = new TrannyFile();
+        fileToUpload.setContent(Files.readAllBytes(Paths.get(choosenFile.getAbsolutePath())));
+        fileToUpload.setName(choosenFile.getName());
     }
 
     @FXML

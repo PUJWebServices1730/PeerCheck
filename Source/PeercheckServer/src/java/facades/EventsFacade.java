@@ -22,7 +22,7 @@ public class EventsFacade extends AbstractFacade<Events> implements EventsFacade
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return em;
     }
 

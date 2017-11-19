@@ -22,7 +22,7 @@ public class FilesFacade extends AbstractFacade<Files> implements FilesFacadeRem
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return em;
     }
 

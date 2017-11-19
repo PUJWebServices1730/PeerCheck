@@ -44,6 +44,8 @@
 
 <xs:element name="signupResponse" type="tns:signupResponse"/>
 
+<xs:element name="trannyFile" type="tns:trannyFile"/>
+
 <xs:element name="users" type="tns:users"/>
 
 <xs:complexType name="changeRol">
@@ -73,7 +75,7 @@
 <xs:complexType name="addArticle">
 <xs:sequence>
 <xs:element name="article" type="tns:articles" minOccurs="0"/>
-<xs:element name="emails" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="file" type="tns:trannyFile" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -85,6 +87,13 @@
 <xs:element name="keywords" type="xs:string" minOccurs="0"/>
 <xs:element name="mainAuthorId" type="tns:users" minOccurs="0"/>
 <xs:element name="title" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="trannyFile">
+<xs:sequence>
+<xs:element name="content" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -72,10 +73,18 @@ public class Articles implements Serializable {
     private List<Files> filesList;
 
     public Articles() {
+        usersList = new ArrayList<>();
+        eventsList = new ArrayList<>();
+        reviewsList = new ArrayList<>();
+        filesList = new ArrayList<>();
     }
 
     public Articles(Integer id) {
         this.id = id;
+        usersList = new ArrayList<>();
+        eventsList = new ArrayList<>();
+        reviewsList = new ArrayList<>();
+        filesList = new ArrayList<>();
     }
 
     public Articles(Integer id, String abstract1, String category, String keywords, String title) {
@@ -84,6 +93,10 @@ public class Articles implements Serializable {
         this.category = category;
         this.keywords = keywords;
         this.title = title;
+        usersList = new ArrayList<>();
+        eventsList = new ArrayList<>();
+        reviewsList = new ArrayList<>();
+        filesList = new ArrayList<>();
     }
 
     public Integer getId() {

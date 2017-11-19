@@ -7,17 +7,27 @@ package logic;
 
 import entities.Articles;
 import entities.Reviews;
+import entities.TrannyFile;
 import entities.Users;
 import enums.ArticleCriteria;
 import enums.UserRole;
+import facades.AbstractFacade;
 import facades.ArticlesFacadeRemote;
 import facades.ReviewsFacadeRemote;
 import facades.UsersFacade;
 import facades.UsersFacadeRemote;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -34,6 +44,9 @@ import javax.ws.rs.core.MediaType;
 @Path("peercheck")
 public class SessionManager implements SessionManagerRemote {
 
+    @PersistenceContext(unitName = "PeercheckServerPU")
+    private EntityManager em;
+    
     @EJB
     private ReviewsFacadeRemote reviewsFacade;
 
@@ -99,10 +112,26 @@ public class SessionManager implements SessionManagerRemote {
     }
 
     @Override
-    public boolean addArticle(Articles article, List<String> emails) {
-        List<Users> authors = findUsersByEmail(emails);
-        article.setUsersList(authors);
-        articlesFacade.create(article);
+    public boolean addArticle(Articles article, TrannyFile file) {
+        article.getMainAuthorId().getArticlesList1().add(article);
+        articlesFacade.edit(article);
+        System.out.println("\n\n ------ ");
+        System.out.println("   --------- File Name:" + file.getName());
+        System.out.println("   --------- File Content:" + file.getContent().length);
+        System.out.println("\n\n ------ ");
+        
+        try {
+            FileOutputStream outstream = new FileOutputStream(file.getName());
+            outstream.write(file.getContent());
+            outstream.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SessionManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SessionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         return true;
     }
 
@@ -135,6 +164,6 @@ public class SessionManager implements SessionManagerRemote {
         for(String email : emails){
             users.add(usersFacade.findByEmail(email));
         }
-        return users;
+            return users;
     }
 }

@@ -7,6 +7,7 @@ package services;
 
 import entities.Articles;
 import entities.Reviews;
+import entities.TrannyFile;
 import entities.Users;
 import enums.ArticleCriteria;
 import enums.UserRole;
@@ -61,8 +62,8 @@ public class WSPeercheck {
     }
 
     @WebMethod(operationName = "addArticle")
-    public boolean addArticle(@WebParam(name = "article") Articles article, @WebParam(name = "emails") List<String> emails) {
-        return ejbRef.addArticle(article, emails);
+    public boolean addArticle(@WebParam(name = "article") Articles article, @WebParam(name = "file") TrannyFile file) {
+        return ejbRef.addArticle(article, file);
     }
 
     @WebMethod(operationName = "assignReviewerToArticle")

@@ -6,11 +6,13 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,7 +70,7 @@ public class Users implements Serializable {
     @JoinTable(name = "USERS_ARTICLES", joinColumns = {
         @JoinColumn(name = "USER_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Articles> articlesList;
     @OneToMany(mappedBy = "reviewerId")
     private List<Reviews> reviewsList;
@@ -78,10 +80,18 @@ public class Users implements Serializable {
     private List<Articles> articlesList1;
 
     public Users() {
+        articlesList = new ArrayList<>();
+        eventsList = new ArrayList<>();
+        reviewsList = new ArrayList<>();
+        articlesList1 = new ArrayList<>();
     }
 
     public Users(Integer id) {
         this.id = id;
+        articlesList = new ArrayList<>();
+        eventsList = new ArrayList<>();
+        reviewsList = new ArrayList<>();
+        articlesList1 = new ArrayList<>();
     }
 
     public Users(Integer id, Date birthdate, String email, String name, String password, String role) {
@@ -91,6 +101,10 @@ public class Users implements Serializable {
         this.name = name;
         this.password = password;
         this.role = role;
+        articlesList = new ArrayList<>();
+        eventsList = new ArrayList<>();
+        reviewsList = new ArrayList<>();
+        articlesList1 = new ArrayList<>();
     }
 
     public Integer getId() {

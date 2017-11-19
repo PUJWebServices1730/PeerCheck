@@ -7,6 +7,7 @@ package logic;
 
 import entities.Articles;
 import entities.Reviews;
+import entities.TrannyFile;
 import entities.Users;
 import enums.ArticleCriteria;
 import enums.UserRole;
@@ -28,7 +29,7 @@ public interface SessionManagerRemote {
 
     List<Articles> findArticleBy(ArticleCriteria criteria, String value);
 
-    boolean addArticle(Articles article, List<String> emails);
+    boolean addArticle(Articles article, TrannyFile file);
 
     boolean assignReviewerToArticle(Users user, Articles article);
 

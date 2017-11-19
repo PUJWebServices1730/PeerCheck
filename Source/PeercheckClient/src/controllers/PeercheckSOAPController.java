@@ -57,7 +57,7 @@ public class PeercheckSOAPController {
         return port.findUsersByEmail(emails);
     }
 
-    public static boolean addArticle(integration.peercheck.Articles article, java.util.List<java.lang.String> emails) {
-        return port.addArticle(article, emails);
+    public static boolean addArticle(integration.peercheck.Articles article, integration.peercheck.TrannyFile file) {
+        return port.addArticle(article, file);
     }
 }
