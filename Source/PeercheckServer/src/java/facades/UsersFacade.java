@@ -43,6 +43,16 @@ public class UsersFacade extends AbstractFacade<Users> implements UsersFacadeRem
     }
 
     @Override
+    public List<Users> findByRole(String role) {
+        Query query = em.createNamedQuery("Users.findByRole", Users.class);
+        try {
+            return (List<Users>) query.setParameter("role", role).getResultList();
+        } catch(Exception e) {
+            return null;
+        }
+    }
+    
+    @Override
     public List<Users> getAllUsers() {
         Query query = em.createNamedQuery("Users.findAll", Users.class);
         try {

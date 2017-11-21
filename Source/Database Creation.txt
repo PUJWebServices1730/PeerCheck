@@ -75,15 +75,15 @@ create table "ROOT".REVIEWS
 --------------
 
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
-	VALUES ('2017-10-14', 'bobadilla@mail.com', 'Sebatian Bobadilla Zubieta', 'qwertyuiop', 'AUTOR');
+	VALUES ('2017-10-14', 'bobadilla@mail.com', 'Sebastián Bobadilla Zubieta', 'qwertyuiop', 'AUTOR');
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
 	VALUES ('2017-10-14', 'sanchez@mail.com', 'Juan Manuel Sánchez Lozano', 'qwertyuiop', 'REVISOR');
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
-	VALUES ('2017-10-14', 'villamizar@mail.com', 'David Villamizar', 'qwertyuiop', 'AUTOR');
+	VALUES ('2017-10-14', 'villamizar@mail.com', 'David Alfonso Villamizar Lizcano', 'qwertyuiop', 'AUTOR');
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
 	VALUES ('2017-10-14', 'forero@mail.com', 'Sergio Forero Gomez', 'qwertyuiop', 'REVISOR');
 INSERT INTO ROOT.USERS (BIRTHDATE, EMAIL, "NAME", PASSWORD, "ROLE") 
-	VALUES ('2017-10-14', 'parra@mail.com', 'Carlos Andres Parra Acevedo', 'qwertyuiop', 'EDITOR');
+	VALUES ('2017-10-14', 'parra@mail.com', 'Carlos Andrés Parra Acevedo', 'qwertyuiop', 'EDITOR');
 
 INSERT INTO ROOT.EVENTS ("DATE", DEADLINE, DESCRIPTION, LOCATION, "NAME", SUBMISSIONSTART, WEBSITE, EDITOR_ID) 
 	VALUES ('2017-10-14', '2017-12-12', 'Mi primer evento', 'Bogota', 'Evento 1', '2017-10-14', 'evento.com', 1);

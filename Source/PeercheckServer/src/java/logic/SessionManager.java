@@ -12,14 +12,12 @@ import entities.TrannyFile;
 import entities.Users;
 import enums.ArticleCriteria;
 import enums.UserRole;
-import facades.AbstractFacade;
 import facades.ArticlesFacadeRemote;
 import facades.FilesFacade;
 import facades.FilesFacadeRemote;
 import facades.ReviewsFacadeRemote;
 import facades.UsersFacade;
 import facades.UsersFacadeRemote;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -119,6 +117,11 @@ public class SessionManager implements SessionManagerRemote {
     }
 
     @Override
+    public List<Articles> getAllArticles() {
+        return articlesFacade.getAllArticles();
+    }
+    
+    @Override
     public boolean addArticle(Articles article, TrannyFile file) {
         article.getMainAuthorId().getArticlesList1().add(article);
         try {
@@ -141,6 +144,7 @@ public class SessionManager implements SessionManagerRemote {
 
     @Override
     public boolean assignReviewerToArticle(Users user, Articles article) {
+        //TODO Relate user to article
         return false;
     }
 
@@ -171,6 +175,11 @@ public class SessionManager implements SessionManagerRemote {
         return users;
     }
 
+    @Override
+    public List<Users> findUsersByRole(String role) {
+        return usersFacade.findByRole(role);
+    }
+    
     @Override
     public TrannyFile getArticleFile(Articles article) {
         return filesFacade.findByArticleId(article);

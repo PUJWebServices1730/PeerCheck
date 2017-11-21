@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.ws.rs.Path;
 
 @Stateless
 public class ArticlesFacade extends AbstractFacade<Articles> implements ArticlesFacadeRemote {
@@ -48,4 +47,13 @@ public class ArticlesFacade extends AbstractFacade<Articles> implements Articles
         }
     }
     
+    @Override
+    public List<Articles> getAllArticles() {
+        Query query = em.createNamedQuery("Articles.findAll", Articles.class);
+        try {
+            return (List<Articles>)query.getResultList();
+        } catch(Exception e) {
+            return null;
+        }
+    }
 }

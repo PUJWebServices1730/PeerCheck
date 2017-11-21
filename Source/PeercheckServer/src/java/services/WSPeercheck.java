@@ -47,8 +47,13 @@ public class WSPeercheck {
     }
     
     @WebMethod(operationName = "findUsersByEmail")
-    public List<Users> findUsersByEMail(@WebParam(name = "emails") List<String> emails) {
+    public List<Users> findUsersByEmail(@WebParam(name = "emails") List<String> emails) {
         return ejbRef.findUsersByEmail(emails);
+    }
+    
+    @WebMethod(operationName = "findUsersByRole")
+    public List<Users> findUsersByRole(@WebParam(name = "role") String role) {
+        return ejbRef.findUsersByRole(role);
     }
     
     @WebMethod(operationName = "changeRol")
@@ -59,6 +64,11 @@ public class WSPeercheck {
     @WebMethod(operationName = "findArticleBy")
     public List<Articles> findArticleBy(@WebParam(name = "criteria") ArticleCriteria criteria, @WebParam(name = "value") String value) {
         return ejbRef.findArticleBy(criteria, value);
+    }
+    
+    @WebMethod(operationName = "getAllArticles")
+    public List<Articles> getAllArticles() {
+        return ejbRef.getAllArticles();
     }
     
     @WebMethod(operationName = "getArticleFile")
@@ -85,5 +95,4 @@ public class WSPeercheck {
     public double calculateFinalGradeToArticle(@WebParam(name = "article") Articles article) {
         return ejbRef.calculateFinalGradeToArticle(article);
     }
-    
 }

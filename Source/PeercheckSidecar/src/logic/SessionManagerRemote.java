@@ -28,6 +28,8 @@ public interface SessionManagerRemote {
     boolean changeRol(Users user, UserRole role);
 
     List<Articles> findArticleBy(ArticleCriteria criteria, String value);
+    
+    List<Articles> getAllArticles();
 
     boolean addArticle(Articles article, TrannyFile file);
 
@@ -41,6 +43,7 @@ public interface SessionManagerRemote {
     
     public List<Users> findUsersByEmail(List<String> emails);
     
-    public TrannyFile getArticleFile(Articles article);
+    public List<Users> findUsersByRole(String role);
     
+    public TrannyFile getArticleFile(Articles article);
 }

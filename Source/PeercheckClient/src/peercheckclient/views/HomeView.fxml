@@ -34,24 +34,24 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <JFXTextField fx:id="searchArticleQueryTextField" labelFloat="true" layoutX="33.6" layoutY="33.6" prefHeight="25.0" prefWidth="547.0" promptText="Busca un articulo" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="14.0" />
-                        <JFXComboBox fx:id="searchArticleFilterCombo" labelFloat="true" layoutX="581.0" layoutY="21.0" prefHeight="25.0" prefWidth="160.0" promptText="Filtro" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="14.0" />
+                        <JFXComboBox fx:id="searchArticleFilterCombo" labelFloat="true" layoutX="581.0" layoutY="43.6" prefHeight="25.0" prefWidth="123.0" promptText="Filtro" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0" />
                         <JFXButton layoutX="736.0" layoutY="24.0" onAction="#findArticle" prefHeight="25.0" prefWidth="138.0" ripplerFill="#43c650" style="-fx-background-color: #0C8A44;" text="Buscar" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-                        <TableView fx:id="searchArticlesTable" layoutX="33.6" layoutY="81.6" prefHeight="257.0" prefWidth="443.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="72.0">
+                        <TableView fx:id="searchArticlesTable" layoutX="33.6" layoutY="111.6" prefHeight="148.0" prefWidth="500.0" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="102.0">
                            <columns>
                               <TableColumn fx:id="searchArticleTableTitleColumn" prefWidth="75.0" text="Título" />
-                              <TableColumn fx:id="searchArticleTableCategoryColumn" prefWidth="75.0" text="Categoria" />
-                              <TableColumn fx:id="searchArticleTableKeyWordsColumn" prefWidth="75.0" text="Palabras Clave" />
+                              <TableColumn fx:id="searchArticleTableCategoryColumn" prefWidth="75.0" text="Categoría" />
+                              <TableColumn fx:id="searchArticleTableKeyWordsColumn" prefWidth="75.0" text="Palabras clave" />
                            </columns>
                         </TableView>
-                        <Label fx:id="searchArticleTitleLabel" layoutX="489.0" layoutY="82.0" prefHeight="27.0" prefWidth="394.0" text="Nombre del articulo" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="14.0">
+                        <Label fx:id="searchArticleTitleLabel" layoutX="576.0" layoutY="82.0" prefHeight="27.0" prefWidth="394.0" text="Articulo" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="14.000000000000227">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="searchArticleAuthorLabel" layoutX="489.0" layoutY="115.0" prefHeight="17.0" prefWidth="396.0" text="Nombre del autor" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="14.0" />
-                        <Label fx:id="searchArticleAbstractLabel" layoutX="499.6" layoutY="171.0" prefHeight="85.0" prefWidth="385.0" text="Abstract" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="14.0" />
-                        <Label fx:id="searchArticleKeywordsLabel" layoutX="498.0" layoutY="145.0" text="Palabras clave" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="14.0" />
-                        <JFXButton buttonType="RAISED" layoutX="490.0" layoutY="231.0" onAction="#downloadFile" prefHeight="25.0" prefWidth="170.0" ripplerFill="#aea757" style="-fx-background-color: #0C8A44;" text="Descargar archivo" textFill="WHITE" />
+                        <Label fx:id="searchArticleAuthorLabel" layoutX="576.0" layoutY="115.0" prefHeight="17.0" prefWidth="396.0" text="Autor" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="14.000000000000227" />
+                        <Label fx:id="searchArticleAbstractLabel" layoutX="576.0" layoutY="171.0" prefHeight="85.0" prefWidth="385.0" text="Abstract" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="14.000000000000227" />
+                        <Label fx:id="searchArticleKeywordsLabel" layoutX="576.0" layoutY="145.0" text="Palabras clave" AnchorPane.leftAnchor="576.0" AnchorPane.rightAnchor="14.000000000000227" />
+                        <JFXButton buttonType="RAISED" layoutX="586.0" layoutY="244.0" onAction="#downloadFile" prefHeight="25.0" prefWidth="138.0" ripplerFill="#aea757" style="-fx-background-color: #0C8A44;" text="Descargar archivo" textFill="WHITE" />
                      </children></AnchorPane>
             </content>
           </TitledPane>
@@ -106,9 +106,25 @@
                   </HBox>
                </content>
           </TitledPane>
-            <TitledPane animated="false" text="Asignar revisor a articulo">
+            <TitledPane fx:id="paneAssignReviewer" animated="false" text="Asignar revisor a articulo">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="assignReviewerArticlesTable" layoutX="29.6" layoutY="69.6" prefHeight="200.0" prefWidth="500.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
+                          <columns>
+                            <TableColumn fx:id="assignReviewerArticlesTableTitleColumn" prefWidth="75.0" text="Título" />
+                            <TableColumn fx:id="assignReviewerArticlesTableCategoryColumn" prefWidth="75.0" text="Categoría" />
+                              <TableColumn fx:id="assignReviewerArticlesTableKeyWordsColumn" prefWidth="75.0" text="Palabras clave" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="assignReviewerUsersTable" layoutX="488.0" layoutY="51.0" prefHeight="200.0" prefWidth="300.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+                          <columns>
+                            <TableColumn fx:id="assignReviewerUsersTableIdColumn" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="assignReviewerUsersTableNameColumn" prefWidth="75.0" text="Nombre" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="402.0" layoutY="294.0" mnemonicParsing="false" onAction="#assignReviewer" style="-fx-background-color: #0C8A44;" text="Asignar revisor" textFill="WHITE" />
+                     </children></AnchorPane>
                </content>
             </TitledPane>
             <TitledPane animated="false" text="Enviar evaluación de un articulo">

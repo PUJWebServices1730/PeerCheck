@@ -169,6 +169,10 @@ public class Users implements Serializable {
         return reviewsList;
     }
 
+    public void addToReviewsList(Reviews review) {
+        this.reviewsList.add(review);
+    }
+    
     public void setReviewsList(List<Reviews> reviewsList) {
         this.reviewsList = reviewsList;
     }

@@ -34,5 +34,6 @@ public interface ArticlesFacadeRemote {
     List<Articles> findByName(String name);
     
     List<Articles> findByCategory(String category);
-    
+
+    public List<Articles> getAllArticles();
 }

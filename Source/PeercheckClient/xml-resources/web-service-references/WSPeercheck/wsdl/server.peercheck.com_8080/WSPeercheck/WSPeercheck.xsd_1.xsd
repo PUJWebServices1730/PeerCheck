@@ -30,6 +30,14 @@
 
 <xs:element name="findUsersByEmailResponse" type="tns:findUsersByEmailResponse"/>
 
+<xs:element name="findUsersByRole" type="tns:findUsersByRole"/>
+
+<xs:element name="findUsersByRoleResponse" type="tns:findUsersByRoleResponse"/>
+
+<xs:element name="getAllArticles" type="tns:getAllArticles"/>
+
+<xs:element name="getAllArticlesResponse" type="tns:getAllArticlesResponse"/>
+
 <xs:element name="getAllUsers" type="tns:getAllUsers"/>
 
 <xs:element name="getAllUsersResponse" type="tns:getAllUsersResponse"/>
@@ -52,34 +60,9 @@
 
 <xs:element name="users" type="tns:users"/>
 
-<xs:complexType name="changeRol">
-<xs:sequence>
-<xs:element name="user" type="tns:users" minOccurs="0"/>
-<xs:element name="role" type="tns:userRole" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="users">
-<xs:sequence>
-<xs:element name="birthdate" type="xs:dateTime" minOccurs="0"/>
-<xs:element name="email" type="xs:string" minOccurs="0"/>
-<xs:element name="id" type="xs:int" minOccurs="0"/>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="role" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="changeRolResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="addArticle">
+<xs:complexType name="calculateFinalGradeToArticle">
 <xs:sequence>
 <xs:element name="article" type="tns:articles" minOccurs="0"/>
-<xs:element name="file" type="tns:trannyFile" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -94,22 +77,14 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="trannyFile">
+<xs:complexType name="users">
 <xs:sequence>
-<xs:element name="content" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="birthdate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
 <xs:element name="name" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="addArticleResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="calculateFinalGradeToArticle">
-<xs:sequence>
-<xs:element name="article" type="tns:articles" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="role" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -119,50 +94,25 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getAllUsers">
+<xs:complexType name="getAllArticles">
 <xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="getAllUsersResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findUsersByEmail">
-<xs:sequence>
-<xs:element name="emails" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findUsersByEmailResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findArticleBy">
-<xs:sequence>
-<xs:element name="criteria" type="tns:articleCriteria" minOccurs="0"/>
-<xs:element name="value" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findArticleByResponse">
+<xs:complexType name="getAllArticlesResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:articles" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getArticleFile">
+<xs:complexType name="findUsersByRole">
 <xs:sequence>
-<xs:element name="article" type="tns:articles" minOccurs="0"/>
+<xs:element name="role" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getArticleFileResponse">
+<xs:complexType name="findUsersByRoleResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:trannyFile" minOccurs="0"/>
+<xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -200,6 +150,86 @@
 <xs:complexType name="addReviewResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeRol">
+<xs:sequence>
+<xs:element name="user" type="tns:users" minOccurs="0"/>
+<xs:element name="role" type="tns:userRole" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeRolResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addArticle">
+<xs:sequence>
+<xs:element name="article" type="tns:articles" minOccurs="0"/>
+<xs:element name="file" type="tns:trannyFile" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="trannyFile">
+<xs:sequence>
+<xs:element name="content" type="xs:base64Binary" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addArticleResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllUsers">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllUsersResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findArticleBy">
+<xs:sequence>
+<xs:element name="criteria" type="tns:articleCriteria" minOccurs="0"/>
+<xs:element name="value" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findArticleByResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:articles" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUsersByEmail">
+<xs:sequence>
+<xs:element name="emails" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findUsersByEmailResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getArticleFile">
+<xs:sequence>
+<xs:element name="article" type="tns:articles" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getArticleFileResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:trannyFile" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

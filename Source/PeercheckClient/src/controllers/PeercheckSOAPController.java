@@ -22,8 +22,6 @@ public class PeercheckSOAPController {
         port = service.getWSPeercheckPort();
     }
 
-    
-    
     public static Users login(java.lang.String email, java.lang.String password) {
         return port.login(email, password);
     }
@@ -66,5 +64,13 @@ public class PeercheckSOAPController {
 
     public static TrannyFile getArticleFile(integration.peercheck.Articles article) {
         return port.getArticleFile(article);
+    }
+
+    public static java.util.List<integration.peercheck.Articles> getAllArticles() {
+        return port.getAllArticles();
+    }
+
+    public static java.util.List<integration.peercheck.Users> findUsersByRole(java.lang.String role) {
+        return port.findUsersByRole(role);
     }
 }
