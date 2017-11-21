@@ -34,6 +34,10 @@
 
 <xs:element name="getAllUsersResponse" type="tns:getAllUsersResponse"/>
 
+<xs:element name="getArticleFile" type="tns:getArticleFile"/>
+
+<xs:element name="getArticleFileResponse" type="tns:getArticleFileResponse"/>
+
 <xs:element name="login" type="tns:login"/>
 
 <xs:element name="loginResponse" type="tns:loginResponse"/>
@@ -147,6 +151,18 @@
 <xs:complexType name="findArticleByResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:articles" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getArticleFile">
+<xs:sequence>
+<xs:element name="article" type="tns:articles" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getArticleFileResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:trannyFile" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

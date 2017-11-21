@@ -6,6 +6,7 @@
 package logic;
 
 import entities.Articles;
+import entities.Files;
 import entities.Reviews;
 import entities.TrannyFile;
 import entities.Users;
@@ -13,6 +14,8 @@ import enums.ArticleCriteria;
 import enums.UserRole;
 import facades.AbstractFacade;
 import facades.ArticlesFacadeRemote;
+import facades.FilesFacade;
+import facades.FilesFacadeRemote;
 import facades.ReviewsFacadeRemote;
 import facades.UsersFacade;
 import facades.UsersFacadeRemote;
@@ -54,10 +57,14 @@ public class SessionManager implements SessionManagerRemote {
     private ArticlesFacadeRemote articlesFacade;
 
     @EJB
-    private final UsersFacadeRemote usersFacade;
+    private UsersFacadeRemote usersFacade;
+    
+    @EJB
+    private FilesFacadeRemote filesFacade;
     
     public SessionManager() {
         usersFacade = new UsersFacade();
+        filesFacade = new FilesFacade();
     }
     
     @GET
@@ -114,24 +121,21 @@ public class SessionManager implements SessionManagerRemote {
     @Override
     public boolean addArticle(Articles article, TrannyFile file) {
         article.getMainAuthorId().getArticlesList1().add(article);
-        articlesFacade.edit(article);
-        System.out.println("\n\n ------ ");
-        System.out.println("   --------- File Name:" + file.getName());
-        System.out.println("   --------- File Content:" + file.getContent().length);
-        System.out.println("\n\n ------ ");
-        
         try {
             FileOutputStream outstream = new FileOutputStream(file.getName());
             outstream.write(file.getContent());
             outstream.close();
-            
+            Files newFile = new Files();
+            newFile.setArticleId(article);
+            newFile.setUrl(file.getName());
+            newFile.setDescription("");
+            newFile.setTitle(file.getName());
+            filesFacade.create(newFile);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(SessionManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(SessionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         return true;
     }
 
@@ -164,6 +168,11 @@ public class SessionManager implements SessionManagerRemote {
         for(String email : emails){
             users.add(usersFacade.findByEmail(email));
         }
-            return users;
+        return users;
+    }
+
+    @Override
+    public TrannyFile getArticleFile(Articles article) {
+        return filesFacade.findByArticleId(article);
     }
 }

@@ -41,4 +41,6 @@ public interface SessionManagerRemote {
     
     public List<Users> findUsersByEmail(List<String> emails);
     
+    public TrannyFile getArticleFile(Articles article);
+    
 }

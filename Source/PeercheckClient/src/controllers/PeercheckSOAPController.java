@@ -6,6 +6,7 @@
 package controllers;
 
 import integration.peercheck.Articles;
+import integration.peercheck.TrannyFile;
 import integration.peercheck.Users;
 import integration.peercheck.WSPeercheck;
 import integration.peercheck.WSPeercheck_Service;
@@ -21,6 +22,8 @@ public class PeercheckSOAPController {
         port = service.getWSPeercheckPort();
     }
 
+    
+    
     public static Users login(java.lang.String email, java.lang.String password) {
         return port.login(email, password);
     }
@@ -59,5 +62,9 @@ public class PeercheckSOAPController {
 
     public static boolean addArticle(integration.peercheck.Articles article, integration.peercheck.TrannyFile file) {
         return port.addArticle(article, file);
+    }
+
+    public static TrannyFile getArticleFile(integration.peercheck.Articles article) {
+        return port.getArticleFile(article);
     }
 }

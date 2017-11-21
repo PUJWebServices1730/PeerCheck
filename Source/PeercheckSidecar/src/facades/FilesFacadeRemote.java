@@ -5,7 +5,9 @@
  */
 package facades;
 
+import entities.Articles;
 import entities.Files;
+import entities.TrannyFile;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -29,5 +31,7 @@ public interface FilesFacadeRemote {
     List<Files> findRange(int[] range);
 
     int count();
+
+    public TrannyFile findByArticleId(Articles article);
     
 }

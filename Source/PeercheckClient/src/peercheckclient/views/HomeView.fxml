@@ -19,7 +19,7 @@
             <Label layoutX="43.6" layoutY="84.0" prefHeight="17.0" prefWidth="32.0" text="Hola," AnchorPane.leftAnchor="14.0" />
             <Label fx:id="currentUserNameLabel" layoutX="57.6" layoutY="84.0" prefHeight="17.0" prefWidth="826.0" text="nombre" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="24.0" />
             <Label fx:id="currentUserMailLabel" layoutX="24.0" layoutY="107.0" prefHeight="17.0" prefWidth="77.0" text="Correo" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-            <Label fx:id="currentUserRoleLabel" layoutX="-8.0" layoutY="136.0" text="Rol" AnchorPane.leftAnchor="-8.0" AnchorPane.rightAnchor="36.0" />
+            <Label fx:id="currentUserRoleLabel" layoutX="-8.0" layoutY="136.0" text="Rol" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="36.0" />
             <Label layoutX="43.6" layoutY="43.6" prefHeight="47.0" prefWidth="685.0" text="Peercheck" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font size="32.0" />
@@ -51,6 +51,7 @@
                         <Label fx:id="searchArticleAuthorLabel" layoutX="489.0" layoutY="115.0" prefHeight="17.0" prefWidth="396.0" text="Nombre del autor" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="14.0" />
                         <Label fx:id="searchArticleAbstractLabel" layoutX="499.6" layoutY="171.0" prefHeight="85.0" prefWidth="385.0" text="Abstract" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="14.0" />
                         <Label fx:id="searchArticleKeywordsLabel" layoutX="498.0" layoutY="145.0" text="Palabras clave" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="14.0" />
+                        <JFXButton buttonType="RAISED" layoutX="490.0" layoutY="231.0" onAction="#downloadFile" prefHeight="25.0" prefWidth="170.0" ripplerFill="#aea757" style="-fx-background-color: #0C8A44;" text="Descargar archivo" textFill="WHITE" />
                      </children></AnchorPane>
             </content>
           </TitledPane>
@@ -68,24 +69,17 @@
                               <TableColumn fx:id="changeRoleTableRoleColumn" prefWidth="75.0" text="Rol" />
                            </columns>
                         </TableView>
-                        <Label layoutX="470.0" layoutY="202.0" text="Usuario" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="24.0">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="changeRoleIdLabel" layoutX="593.0" layoutY="68.0" text="ID" AnchorPane.leftAnchor="453.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="24.0">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
                         <Label fx:id="changeRoleNameLabel" layoutX="369.0" layoutY="69.0" text="Nombre del usuario" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="24.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="changeRoleRoleLabel" layoutX="364.0" layoutY="96.0" text="Rol" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="24.0" />
-                        <JFXComboBox labelFloat="true" layoutX="370.0" layoutY="124.0" promptText="Nuevo rol" AnchorPane.leftAnchor="360.0" />
-                        <JFXButton layoutX="365.0" layoutY="177.0" prefHeight="25.0" prefWidth="172.0" ripplerFill="#43c650" style="-fx-background-color: #0C8A44;" text="Guardar cambio" textFill="WHITE" AnchorPane.leftAnchor="360.0" />
+                        <Label fx:id="changeRoleRoleLabel" layoutX="364.0" layoutY="96.0" text="Rol" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="24.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <JFXComboBox fx:id="changeRoleCombo" labelFloat="true" layoutX="370.0" layoutY="132.0" promptText="Nuevo rol" AnchorPane.leftAnchor="360.0" />
+                        <JFXButton layoutX="365.0" layoutY="177.0" onAction="#changeRole" prefHeight="25.0" prefWidth="172.0" ripplerFill="#43c650" style="-fx-background-color: #0C8A44;" text="Actualizar rol" textFill="WHITE" AnchorPane.leftAnchor="360.0" />
                      </children></AnchorPane>
             </content>
           </TitledPane>
@@ -100,7 +94,7 @@
                               <JFXTextField fx:id="createArticleKeywordsTextField" prefHeight="25.0" prefWidth="425.0" promptText="Palabras clave" />
                               <JFXTextField fx:id="createArticleCategoryTextField" prefHeight="25.0" prefWidth="425.0" promptText="Categorias" />
                               <JFXButton buttonType="RAISED" onAction="#loadFile" style="-fx-background-color: #BBBBBB;" text="Cargar archivo" />
-                              <Label layoutX="10.0" layoutY="266.0" text="ruta/ejemplo.ejm" />
+                              <Label fx:id="createFilePathLabel" layoutX="10.0" layoutY="266.0" />
                               <JFXButton buttonType="RAISED" onAction="#createArticle" ripplerFill="#b6dbfb" style="-fx-background-color: #0483D0;" text="Crear artículo" textFill="WHITE" />
                            </children>
                         </VBox>

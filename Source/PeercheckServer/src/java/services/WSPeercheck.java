@@ -60,6 +60,11 @@ public class WSPeercheck {
     public List<Articles> findArticleBy(@WebParam(name = "criteria") ArticleCriteria criteria, @WebParam(name = "value") String value) {
         return ejbRef.findArticleBy(criteria, value);
     }
+    
+    @WebMethod(operationName = "getArticleFile")
+    public TrannyFile getArticleFile(@WebParam(name = "article") Articles article) {
+        return ejbRef.getArticleFile(article);
+    }
 
     @WebMethod(operationName = "addArticle")
     public boolean addArticle(@WebParam(name = "article") Articles article, @WebParam(name = "file") TrannyFile file) {

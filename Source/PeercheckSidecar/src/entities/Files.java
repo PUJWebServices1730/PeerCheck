@@ -7,6 +7,7 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Files.findById", query = "SELECT f FROM Files f WHERE f.id = :id")
     , @NamedQuery(name = "Files.findByDescription", query = "SELECT f FROM Files f WHERE f.description = :description")
     , @NamedQuery(name = "Files.findByTitle", query = "SELECT f FROM Files f WHERE f.title = :title")
-    , @NamedQuery(name = "Files.findByUrl", query = "SELECT f FROM Files f WHERE f.url = :url")})
+    , @NamedQuery(name = "Files.findByUrl", query = "SELECT f FROM Files f WHERE f.url = :url")
+    , @NamedQuery(name = "Files.findByArticleId", query = "SELECT f FROM Files f WHERE f.articleId = :articleId")})
 public class Files implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,7 +52,7 @@ public class Files implements Serializable {
     @Column(name = "URL")
     private String url;
     @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Articles articleId;
 
     public Files() {
@@ -106,7 +108,7 @@ public class Files implements Serializable {
     public void setArticleId(Articles articleId) {
         this.articleId = articleId;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;

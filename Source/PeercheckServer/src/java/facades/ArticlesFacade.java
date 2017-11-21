@@ -18,7 +18,7 @@ public class ArticlesFacade extends AbstractFacade<Articles> implements Articles
 
     @PersistenceContext(unitName = "PeercheckServerPU")
     private EntityManager em;
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
