@@ -4,11 +4,11 @@
 <xsd:import namespace="http://services/" schemaLocation="http://server.peercheck.com:8080/WSPeercheck/WSPeercheck?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="login">
-<part name="parameters" element="tns:login"/>
+<message name="getArticlesByAuthor">
+<part name="parameters" element="tns:getArticlesByAuthor"/>
 </message>
-<message name="loginResponse">
-<part name="parameters" element="tns:loginResponse"/>
+<message name="getArticlesByAuthorResponse">
+<part name="parameters" element="tns:getArticlesByAuthorResponse"/>
 </message>
 <message name="calculateFinalGradeToArticle">
 <part name="parameters" element="tns:calculateFinalGradeToArticle"/>
@@ -16,11 +16,23 @@
 <message name="calculateFinalGradeToArticleResponse">
 <part name="parameters" element="tns:calculateFinalGradeToArticleResponse"/>
 </message>
-<message name="assignReviewerToArticle">
-<part name="parameters" element="tns:assignReviewerToArticle"/>
+<message name="getReviewsByReviewer">
+<part name="parameters" element="tns:getReviewsByReviewer"/>
 </message>
-<message name="assignReviewerToArticleResponse">
-<part name="parameters" element="tns:assignReviewerToArticleResponse"/>
+<message name="getReviewsByReviewerResponse">
+<part name="parameters" element="tns:getReviewsByReviewerResponse"/>
+</message>
+<message name="getReviewsByArticle">
+<part name="parameters" element="tns:getReviewsByArticle"/>
+</message>
+<message name="getReviewsByArticleResponse">
+<part name="parameters" element="tns:getReviewsByArticleResponse"/>
+</message>
+<message name="login">
+<part name="parameters" element="tns:login"/>
+</message>
+<message name="loginResponse">
+<part name="parameters" element="tns:loginResponse"/>
 </message>
 <message name="getAllArticles">
 <part name="parameters" element="tns:getAllArticles"/>
@@ -28,17 +40,47 @@
 <message name="getAllArticlesResponse">
 <part name="parameters" element="tns:getAllArticlesResponse"/>
 </message>
-<message name="getAllUsers">
-<part name="parameters" element="tns:getAllUsers"/>
+<message name="addEvent">
+<part name="parameters" element="tns:addEvent"/>
 </message>
-<message name="getAllUsersResponse">
-<part name="parameters" element="tns:getAllUsersResponse"/>
+<message name="addEventResponse">
+<part name="parameters" element="tns:addEventResponse"/>
+</message>
+<message name="addReview">
+<part name="parameters" element="tns:addReview"/>
+</message>
+<message name="addReviewResponse">
+<part name="parameters" element="tns:addReviewResponse"/>
+</message>
+<message name="getArticleFile">
+<part name="parameters" element="tns:getArticleFile"/>
+</message>
+<message name="getArticleFileResponse">
+<part name="parameters" element="tns:getArticleFileResponse"/>
+</message>
+<message name="addArticle">
+<part name="parameters" element="tns:addArticle"/>
+</message>
+<message name="addArticleResponse">
+<part name="parameters" element="tns:addArticleResponse"/>
 </message>
 <message name="findUsersByEmail">
 <part name="parameters" element="tns:findUsersByEmail"/>
 </message>
 <message name="findUsersByEmailResponse">
 <part name="parameters" element="tns:findUsersByEmailResponse"/>
+</message>
+<message name="findArticleBy">
+<part name="parameters" element="tns:findArticleBy"/>
+</message>
+<message name="findArticleByResponse">
+<part name="parameters" element="tns:findArticleByResponse"/>
+</message>
+<message name="getAllUsers">
+<part name="parameters" element="tns:getAllUsers"/>
+</message>
+<message name="getAllUsersResponse">
+<part name="parameters" element="tns:getAllUsersResponse"/>
 </message>
 <message name="changeRol">
 <part name="parameters" element="tns:changeRol"/>
@@ -52,60 +94,70 @@
 <message name="signupResponse">
 <part name="parameters" element="tns:signupResponse"/>
 </message>
-<message name="addReview">
-<part name="parameters" element="tns:addReview"/>
-</message>
-<message name="addReviewResponse">
-<part name="parameters" element="tns:addReviewResponse"/>
-</message>
 <message name="findUsersByRole">
 <part name="parameters" element="tns:findUsersByRole"/>
 </message>
 <message name="findUsersByRoleResponse">
 <part name="parameters" element="tns:findUsersByRoleResponse"/>
 </message>
-<message name="addArticle">
-<part name="parameters" element="tns:addArticle"/>
+<message name="updateReview">
+<part name="parameters" element="tns:updateReview"/>
 </message>
-<message name="addArticleResponse">
-<part name="parameters" element="tns:addArticleResponse"/>
-</message>
-<message name="getArticleFile">
-<part name="parameters" element="tns:getArticleFile"/>
-</message>
-<message name="getArticleFileResponse">
-<part name="parameters" element="tns:getArticleFileResponse"/>
-</message>
-<message name="findArticleBy">
-<part name="parameters" element="tns:findArticleBy"/>
-</message>
-<message name="findArticleByResponse">
-<part name="parameters" element="tns:findArticleByResponse"/>
+<message name="updateReviewResponse">
+<part name="parameters" element="tns:updateReviewResponse"/>
 </message>
 <portType name="WSPeercheck">
-<operation name="login">
-<input wsam:Action="http://services/WSPeercheck/loginRequest" message="tns:login"/>
-<output wsam:Action="http://services/WSPeercheck/loginResponse" message="tns:loginResponse"/>
+<operation name="getArticlesByAuthor">
+<input wsam:Action="http://services/WSPeercheck/getArticlesByAuthorRequest" message="tns:getArticlesByAuthor"/>
+<output wsam:Action="http://services/WSPeercheck/getArticlesByAuthorResponse" message="tns:getArticlesByAuthorResponse"/>
 </operation>
 <operation name="calculateFinalGradeToArticle">
 <input wsam:Action="http://services/WSPeercheck/calculateFinalGradeToArticleRequest" message="tns:calculateFinalGradeToArticle"/>
 <output wsam:Action="http://services/WSPeercheck/calculateFinalGradeToArticleResponse" message="tns:calculateFinalGradeToArticleResponse"/>
 </operation>
-<operation name="assignReviewerToArticle">
-<input wsam:Action="http://services/WSPeercheck/assignReviewerToArticleRequest" message="tns:assignReviewerToArticle"/>
-<output wsam:Action="http://services/WSPeercheck/assignReviewerToArticleResponse" message="tns:assignReviewerToArticleResponse"/>
+<operation name="getReviewsByReviewer">
+<input wsam:Action="http://services/WSPeercheck/getReviewsByReviewerRequest" message="tns:getReviewsByReviewer"/>
+<output wsam:Action="http://services/WSPeercheck/getReviewsByReviewerResponse" message="tns:getReviewsByReviewerResponse"/>
+</operation>
+<operation name="getReviewsByArticle">
+<input wsam:Action="http://services/WSPeercheck/getReviewsByArticleRequest" message="tns:getReviewsByArticle"/>
+<output wsam:Action="http://services/WSPeercheck/getReviewsByArticleResponse" message="tns:getReviewsByArticleResponse"/>
+</operation>
+<operation name="login">
+<input wsam:Action="http://services/WSPeercheck/loginRequest" message="tns:login"/>
+<output wsam:Action="http://services/WSPeercheck/loginResponse" message="tns:loginResponse"/>
 </operation>
 <operation name="getAllArticles">
 <input wsam:Action="http://services/WSPeercheck/getAllArticlesRequest" message="tns:getAllArticles"/>
 <output wsam:Action="http://services/WSPeercheck/getAllArticlesResponse" message="tns:getAllArticlesResponse"/>
 </operation>
-<operation name="getAllUsers">
-<input wsam:Action="http://services/WSPeercheck/getAllUsersRequest" message="tns:getAllUsers"/>
-<output wsam:Action="http://services/WSPeercheck/getAllUsersResponse" message="tns:getAllUsersResponse"/>
+<operation name="addEvent">
+<input wsam:Action="http://services/WSPeercheck/addEventRequest" message="tns:addEvent"/>
+<output wsam:Action="http://services/WSPeercheck/addEventResponse" message="tns:addEventResponse"/>
+</operation>
+<operation name="addReview">
+<input wsam:Action="http://services/WSPeercheck/addReviewRequest" message="tns:addReview"/>
+<output wsam:Action="http://services/WSPeercheck/addReviewResponse" message="tns:addReviewResponse"/>
+</operation>
+<operation name="getArticleFile">
+<input wsam:Action="http://services/WSPeercheck/getArticleFileRequest" message="tns:getArticleFile"/>
+<output wsam:Action="http://services/WSPeercheck/getArticleFileResponse" message="tns:getArticleFileResponse"/>
+</operation>
+<operation name="addArticle">
+<input wsam:Action="http://services/WSPeercheck/addArticleRequest" message="tns:addArticle"/>
+<output wsam:Action="http://services/WSPeercheck/addArticleResponse" message="tns:addArticleResponse"/>
 </operation>
 <operation name="findUsersByEmail">
 <input wsam:Action="http://services/WSPeercheck/findUsersByEmailRequest" message="tns:findUsersByEmail"/>
 <output wsam:Action="http://services/WSPeercheck/findUsersByEmailResponse" message="tns:findUsersByEmailResponse"/>
+</operation>
+<operation name="findArticleBy">
+<input wsam:Action="http://services/WSPeercheck/findArticleByRequest" message="tns:findArticleBy"/>
+<output wsam:Action="http://services/WSPeercheck/findArticleByResponse" message="tns:findArticleByResponse"/>
+</operation>
+<operation name="getAllUsers">
+<input wsam:Action="http://services/WSPeercheck/getAllUsersRequest" message="tns:getAllUsers"/>
+<output wsam:Action="http://services/WSPeercheck/getAllUsersResponse" message="tns:getAllUsersResponse"/>
 </operation>
 <operation name="changeRol">
 <input wsam:Action="http://services/WSPeercheck/changeRolRequest" message="tns:changeRol"/>
@@ -115,30 +167,18 @@
 <input wsam:Action="http://services/WSPeercheck/signupRequest" message="tns:signup"/>
 <output wsam:Action="http://services/WSPeercheck/signupResponse" message="tns:signupResponse"/>
 </operation>
-<operation name="addReview">
-<input wsam:Action="http://services/WSPeercheck/addReviewRequest" message="tns:addReview"/>
-<output wsam:Action="http://services/WSPeercheck/addReviewResponse" message="tns:addReviewResponse"/>
-</operation>
 <operation name="findUsersByRole">
 <input wsam:Action="http://services/WSPeercheck/findUsersByRoleRequest" message="tns:findUsersByRole"/>
 <output wsam:Action="http://services/WSPeercheck/findUsersByRoleResponse" message="tns:findUsersByRoleResponse"/>
 </operation>
-<operation name="addArticle">
-<input wsam:Action="http://services/WSPeercheck/addArticleRequest" message="tns:addArticle"/>
-<output wsam:Action="http://services/WSPeercheck/addArticleResponse" message="tns:addArticleResponse"/>
-</operation>
-<operation name="getArticleFile">
-<input wsam:Action="http://services/WSPeercheck/getArticleFileRequest" message="tns:getArticleFile"/>
-<output wsam:Action="http://services/WSPeercheck/getArticleFileResponse" message="tns:getArticleFileResponse"/>
-</operation>
-<operation name="findArticleBy">
-<input wsam:Action="http://services/WSPeercheck/findArticleByRequest" message="tns:findArticleBy"/>
-<output wsam:Action="http://services/WSPeercheck/findArticleByResponse" message="tns:findArticleByResponse"/>
+<operation name="updateReview">
+<input wsam:Action="http://services/WSPeercheck/updateReviewRequest" message="tns:updateReview"/>
+<output wsam:Action="http://services/WSPeercheck/updateReviewResponse" message="tns:updateReviewResponse"/>
 </operation>
 </portType>
 <binding name="WSPeercheckPortBinding" type="tns:WSPeercheck">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="login">
+<operation name="getArticlesByAuthor">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -156,7 +196,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="assignReviewerToArticle">
+<operation name="getReviewsByReviewer">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getReviewsByArticle">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="login">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -174,7 +232,34 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getAllUsers">
+<operation name="addEvent">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addReview">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getArticleFile">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addArticle">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -184,6 +269,24 @@
 </output>
 </operation>
 <operation name="findUsersByEmail">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findArticleBy">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getAllUsers">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -210,15 +313,6 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="addReview">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="findUsersByRole">
 <soap:operation soapAction=""/>
 <input>
@@ -228,25 +322,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="addArticle">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getArticleFile">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="findArticleBy">
+<operation name="updateReview">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

@@ -29,5 +29,5 @@ public class EventsFacade extends AbstractFacade<Events> implements EventsFacade
     public EventsFacade() {
         super(Events.class);
     }
-    
+
 }

@@ -52,8 +52,14 @@ public class LoginController implements Initializable {
             return;
         }
         
-        if(email.equals("b") && password.equals("b")){
+        if(email.equals("e") && password.equals("e")){
             UserSession.user = PeercheckSOAPController.login("parra@mail.com", "qwertyuiop");
+            openHome(actionEvent);
+            return;
+        }
+        
+        if(email.equals("r") && password.equals("r")){
+            UserSession.user = PeercheckSOAPController.login("forero@mail.com", "qwertyuiop");
             openHome(actionEvent);
             return;
         }

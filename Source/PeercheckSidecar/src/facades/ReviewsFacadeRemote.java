@@ -5,7 +5,9 @@
  */
 package facades;
 
+import entities.Articles;
 import entities.Reviews;
+import entities.Users;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -29,5 +31,9 @@ public interface ReviewsFacadeRemote {
     List<Reviews> findRange(int[] range);
 
     int count();
+    
+    public List<Reviews> findByReviewerId(Users reviewer);
+    
+    public List<Reviews> findByArticleId(Articles article);
     
 }

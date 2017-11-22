@@ -5,11 +5,14 @@
  */
 package facades;
 
+import entities.Articles;
 import entities.Reviews;
+import entities.Users;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Path;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,5 +32,18 @@ public class ReviewsFacade extends AbstractFacade<Reviews> implements ReviewsFac
     public ReviewsFacade() {
         super(Reviews.class);
     }
-    
+
+    @Override
+    public List<Reviews> findByReviewerId(Users reviewer) {
+        Query query = em.createNamedQuery("Reviews.findByReviewer", Reviews.class);
+        List<Reviews> reviews = (List<Reviews>) query.setParameter("reviewerId", reviewer).setParameter("status", "ASIGNADA").getResultList();
+        return reviews;
+    }
+
+    @Override
+    public List<Reviews> findByArticleId(Articles article) {
+        Query query = em.createNamedQuery("Reviews.findByArticle", Articles.class);
+        List<Reviews> reviews = (List<Reviews>) query.setParameter("articleId", article).setParameter("status", "COMPLETADA").getResultList();
+        return reviews;
+    }
 }

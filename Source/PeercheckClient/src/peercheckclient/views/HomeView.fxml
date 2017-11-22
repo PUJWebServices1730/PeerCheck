@@ -36,7 +36,7 @@
                         <JFXTextField fx:id="searchArticleQueryTextField" labelFloat="true" layoutX="33.6" layoutY="33.6" prefHeight="25.0" prefWidth="547.0" promptText="Busca un articulo" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="14.0" />
                         <JFXComboBox fx:id="searchArticleFilterCombo" labelFloat="true" layoutX="581.0" layoutY="43.6" prefHeight="25.0" prefWidth="123.0" promptText="Filtro" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="14.0" />
                         <JFXButton layoutX="736.0" layoutY="24.0" onAction="#findArticle" prefHeight="25.0" prefWidth="138.0" ripplerFill="#43c650" style="-fx-background-color: #0C8A44;" text="Buscar" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
-                        <TableView fx:id="searchArticlesTable" layoutX="33.6" layoutY="111.6" prefHeight="148.0" prefWidth="500.0" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="102.0">
+                        <TableView fx:id="searchArticlesTable" layoutX="53.6" layoutY="83.6" prefHeight="250.0" prefWidth="500.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="74.0">
                            <columns>
                               <TableColumn fx:id="searchArticleTableTitleColumn" prefWidth="75.0" text="Título" />
                               <TableColumn fx:id="searchArticleTableCategoryColumn" prefWidth="75.0" text="Categoría" />
@@ -93,12 +93,20 @@
                               <JFXTextArea fx:id="createArticleAbstractTextArea" prefHeight="49.0" prefWidth="425.0" promptText="Abstract" />
                               <JFXTextField fx:id="createArticleKeywordsTextField" prefHeight="25.0" prefWidth="425.0" promptText="Palabras clave" />
                               <JFXTextField fx:id="createArticleCategoryTextField" prefHeight="25.0" prefWidth="425.0" promptText="Categorias" />
-                              <JFXButton buttonType="RAISED" onAction="#loadFile" style="-fx-background-color: #BBBBBB;" text="Cargar archivo" />
+                              <JFXButton buttonType="RAISED" onAction="#loadFile" style="-fx-background-color: #0C8A44;" text="Cargar archivo" textFill="WHITE" />
                               <Label fx:id="createFilePathLabel" layoutX="10.0" layoutY="266.0" />
-                              <JFXButton buttonType="RAISED" onAction="#createArticle" ripplerFill="#b6dbfb" style="-fx-background-color: #0483D0;" text="Crear artículo" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#createArticle" ripplerFill="#b6dbfb" style="-fx-background-color: #0C8A44;" text="Crear artículo" textFill="WHITE" />
                            </children>
                         </VBox>
                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" />
+                        <TableView prefHeight="333.0" prefWidth="427.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Nombre" />
+                            <TableColumn prefWidth="75.0" text="Descripción" />
+                              <TableColumn prefWidth="75.0" text="Ubicación" />
+                              <TableColumn prefWidth="75.0" text="Página Web" />
+                          </columns>
+                        </TableView>
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -127,19 +135,75 @@
                      </children></AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" text="Enviar evaluación de un articulo">
+            <TitledPane fx:id="paneSendReview" animated="false" text="Enviar evaluación de un articulo">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="sendReviewReviewsTable" layoutX="49.0" layoutY="77.0" prefHeight="200.0" prefWidth="400.0">
+                          <columns>
+                            <TableColumn fx:id="sendReviewTableTitleColumn" prefWidth="75.0" text="Título" />
+                            <TableColumn fx:id="sendReviewTableAuthorColumn" prefWidth="75.0" text="Autor" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="493.0" layoutY="77.0" text="Comentario">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextArea fx:id="sendReviewCommentTextArea" layoutX="493.0" layoutY="105.0" prefHeight="82.0" prefWidth="383.0" promptText="Ingresa tu comentario" />
+                        <Label layoutX="493.0" layoutY="228.0" text="Calificación">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="sendReviewGradeTexftField" layoutX="581.0" layoutY="226.0" />
+                        <JFXButton layoutX="783.0" layoutY="305.0" onAction="#sendReview" style="-fx-background-color: #0C8A44;" text="Enviar revisión" textFill="WHITE" />
+                     </children></AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" text="Calcular evaluación final de un articulo">
+            <TitledPane fx:id="paneViewGrade" animated="false" text="Calcular evaluación final de un articulo">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="276.0" prefWidth="898.0">
+                     <children>
+                        <TableView fx:id="viewGradeArticlesTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="400.0" AnchorPane.leftAnchor="14.0">
+                          <columns>
+                            <TableColumn fx:id="viewGradeTableTitleColumn" prefWidth="75.0" text="Título" />
+                            <TableColumn fx:id="viewGradeTableCategoryColumn" prefWidth="75.0" text="Categoría" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="viewGradeReviewsTable" layoutX="435.0" layoutY="14.0" prefHeight="200.0" prefWidth="423.0" AnchorPane.rightAnchor="14.0">
+                          <columns>
+                            <TableColumn fx:id="viewGradeTableCommentColumn" prefWidth="75.0" text="Comentario" />
+                            <TableColumn fx:id="viewGradeTableGradeColumn" prefWidth="75.0" text="Calificación" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="746.0" layoutY="265.0" text="Calificación">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="viewGradeLabel" layoutX="841.0" layoutY="265.0" AnchorPane.rightAnchor="14.0">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" text="Crear evento">
+            <TitledPane fx:id="paneCreateEvent" animated="false" text="Crear evento">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextField fx:id="createEventNameTextField" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="284.0" promptText="Nombre" />
+                        <JFXTextArea fx:id="createEventDescriptionTextArea" layoutX="14.0" layoutY="49.0" prefHeight="106.0" prefWidth="284.0" promptText="Descripción" />
+                        <JFXTextField fx:id="createEventLocationTextField" layoutX="14.0" layoutY="177.0" prefHeight="25.0" prefWidth="289.0" promptText="Ubicación" />
+                        <DatePicker fx:id="createEventDateDatepicker" layoutX="352.0" layoutY="58.0" />
+                        <DatePicker fx:id="createEventDeadlineDatepicker" layoutX="352.0" layoutY="155.0" />
+                        <JFXTextField fx:id="createEventWebsiteTextField" layoutX="14.0" layoutY="223.0" promptText="Página web" />
+                        <JFXButton layoutX="767.0" layoutY="302.0" onAction="#createEvent" style="-fx-background-color: #0C8A44;" text="Agregar evento" textFill="WHITE" />
+                        <Label layoutX="352.0" layoutY="18.0" text="Fecha del evento" />
+                        <Label layoutX="352.0" layoutY="111.0" text="Límite de envío" />
+                     </children></AnchorPane>
                </content>
             </TitledPane>
             <TitledPane animated="false" text="Buscar eventos">

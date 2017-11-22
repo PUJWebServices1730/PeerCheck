@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXTextField;
 import controllers.PeercheckSOAPController;
 import integration.peercheck.ArticleCriteria;
 import integration.peercheck.Articles;
+import integration.peercheck.Events;
+import integration.peercheck.Reviews;
 import integration.peercheck.TrannyFile;
 import integration.peercheck.UserRole;
 import integration.peercheck.Users;
@@ -22,10 +24,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,8 +46,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -48,6 +59,9 @@ import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import peercheckclient.PeercheckClient;
 import session.UserSession;
 
@@ -111,16 +125,61 @@ public class HomeController implements Initializable {
     // ------------- Assign reviewer components -------------
     @FXML
     private TitledPane paneAssignReviewer;
-    
+
     @FXML
     private TableView<Articles> assignReviewerArticlesTable;
 
     @FXML
     private TableView<Users> assignReviewerUsersTable;
-    
+
     @FXML
     private TableColumn assignReviewerArticlesTableTitleColumn, assignReviewerArticlesTableCategoryColumn, assignReviewerArticlesTableKeyWordsColumn, assignReviewerUsersTableIdColumn, assignReviewerUsersTableNameColumn;
-    
+
+    // ------------- Send review components -------------
+    @FXML
+    private TitledPane paneSendReview;
+
+    @FXML
+    private TableView<Reviews> sendReviewReviewsTable;
+
+    @FXML
+    private TableColumn sendReviewTableTitleColumn, sendReviewTableAuthorColumn;
+
+    @FXML
+    private JFXTextArea sendReviewCommentTextArea;
+
+    @FXML
+    private JFXTextField sendReviewGradeTexftField;
+
+    // ------------- View grade components -------------
+    @FXML
+    private TitledPane paneViewGrade;
+
+    @FXML
+    private TableView<Articles> viewGradeArticlesTable;
+
+    @FXML
+    private TableView<Reviews> viewGradeReviewsTable;
+
+    @FXML
+    private Label viewGradeLabel;
+
+    @FXML
+    private TableColumn viewGradeTableTitleColumn, viewGradeTableCategoryColumn, viewGradeTableCommentColumn, viewGradeTableGradeColumn;
+
+    // ------------- Create event components -------------
+    @FXML
+    private TitledPane paneCreateEvent;
+
+    @FXML
+    private JFXTextField createEventNameTextField, createEventLocationTextField, createEventWebsiteTextField;
+
+    @FXML
+    private JFXTextArea createEventDescriptionTextArea;
+
+    @FXML
+    private DatePicker createEventDateDatepicker, createEventDeadlineDatepicker;
+
     @Override
     public void initialize(URL url, ResourceBundle resources) {
 
@@ -145,39 +204,72 @@ public class HomeController implements Initializable {
     public void initTableColumns() {
         //Search articles table columns
         searchArticleTableTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        searchArticleTableTitleColumn.setPrefWidth(200);
-        
+        searchArticleTableTitleColumn.prefWidthProperty().bind(searchArticlesTable.widthProperty().multiply(0.5));
+
         searchArticleTableCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        searchArticleTableCategoryColumn.setPrefWidth(75);
-        
+        searchArticleTableCategoryColumn.prefWidthProperty().bind(searchArticlesTable.widthProperty().multiply(0.25));
+
         searchArticleTableKeyWordsColumn.setCellValueFactory(new PropertyValueFactory<>("keywords"));
-        searchArticleTableKeyWordsColumn.prefWidthProperty().bind(searchArticlesTable.widthProperty().subtract(277));
-        
+        searchArticleTableKeyWordsColumn.prefWidthProperty().bind(searchArticlesTable.widthProperty().multiply(0.25));
+
         //Change role table columns
         changeRoleTableIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        changeRoleTableIdColumn.setPrefWidth(50);
-        
+        changeRoleTableIdColumn.prefWidthProperty().bind(changeRoleUsersTable.widthProperty().multiply(0.2));
+
         changeRoleTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        changeRoleTableNameColumn.prefWidthProperty().bind(changeRoleUsersTable.widthProperty().subtract(125).subtract(2));
-        
+        changeRoleTableNameColumn.prefWidthProperty().bind(changeRoleUsersTable.widthProperty().multiply(0.5));
+
         changeRoleTableRoleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
-        changeRoleTableRoleColumn.setPrefWidth(75);
-        
+        changeRoleTableRoleColumn.prefWidthProperty().bind(changeRoleUsersTable.widthProperty().multiply(0.3));
+
         //Assign reviewer table columns
         assignReviewerArticlesTableTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        assignReviewerArticlesTableTitleColumn.setPrefWidth(200);
-        
+        assignReviewerArticlesTableTitleColumn.prefWidthProperty().bind(assignReviewerArticlesTable.widthProperty().multiply(0.5));
+
         assignReviewerArticlesTableCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        assignReviewerArticlesTableCategoryColumn.setPrefWidth(75);
-        
+        assignReviewerArticlesTableCategoryColumn.prefWidthProperty().bind(assignReviewerArticlesTable.widthProperty().multiply(0.25));
+
         assignReviewerArticlesTableKeyWordsColumn.setCellValueFactory(new PropertyValueFactory<>("keywords"));
-        assignReviewerArticlesTableKeyWordsColumn.prefWidthProperty().bind(assignReviewerArticlesTable.widthProperty().subtract(277));
-        
+        assignReviewerArticlesTableKeyWordsColumn.prefWidthProperty().bind(assignReviewerArticlesTable.widthProperty().multiply(0.25));
+
         assignReviewerUsersTableIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        assignReviewerUsersTableIdColumn.setPrefWidth(50);
-        
+        assignReviewerUsersTableIdColumn.prefWidthProperty().bind(assignReviewerUsersTable.widthProperty().multiply(0.3));
+
         assignReviewerUsersTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        assignReviewerUsersTableNameColumn.prefWidthProperty().bind(assignReviewerUsersTable.widthProperty().subtract(50).subtract(2));   
+        assignReviewerUsersTableNameColumn.prefWidthProperty().bind(assignReviewerUsersTable.widthProperty().multiply(0.7));
+
+        //Send review table columns
+        sendReviewTableTitleColumn.setCellValueFactory(new Callback<CellDataFeatures<Reviews, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<Reviews, String> data) {
+                return new SimpleObjectProperty<>(data.getValue().getArticleId().getTitle());
+            }
+        });
+        sendReviewTableTitleColumn.prefWidthProperty().bind(sendReviewReviewsTable.widthProperty().multiply(0.5));
+
+        sendReviewTableAuthorColumn.setCellValueFactory(new Callback<CellDataFeatures<Reviews, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<Reviews, String> data) {
+                return new SimpleObjectProperty<>(data.getValue().getArticleId().getMainAuthorId().getName());
+            }
+        });
+        sendReviewTableAuthorColumn.prefWidthProperty().bind(sendReviewReviewsTable.widthProperty().multiply(0.5));
+
+        //View grade table columns
+        viewGradeTableTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        viewGradeTableTitleColumn.prefWidthProperty().bind(viewGradeArticlesTable.widthProperty().multiply(0.7));
+
+        viewGradeTableCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        viewGradeTableCategoryColumn.prefWidthProperty().bind(viewGradeArticlesTable.widthProperty().multiply(0.3));
+
+        viewGradeTableCommentColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
+        viewGradeTableCommentColumn.prefWidthProperty().bind(viewGradeReviewsTable.widthProperty().multiply(0.8));
+
+        viewGradeTableGradeColumn.setCellValueFactory(new PropertyValueFactory<>("grade"));
+        viewGradeTableGradeColumn.prefWidthProperty().bind(viewGradeReviewsTable.widthProperty().multiply(0.2));
+        
+        //Create event table columns
+        
     }
 
     public void setUpListeners() {
@@ -211,6 +303,32 @@ public class HomeController implements Initializable {
             if (isNowExpanded) {
                 fillTable(assignReviewerArticlesTable, PeercheckSOAPController.getAllArticles());
                 fillTable(assignReviewerUsersTable, PeercheckSOAPController.findUsersByRole("REVISOR"));
+            }
+        });
+
+        //Actualizar tablas del panel send review al expandir
+        paneSendReview.expandedProperty().addListener((obs, wasExpanded, isNowExpanded) -> {
+            if (isNowExpanded) {
+                fillTable(sendReviewReviewsTable, PeercheckSOAPController.getReviewsByReviewer(UserSession.user));
+            }
+        });
+
+        //Actualizar tablas del panel view grade al expandir
+        paneViewGrade.expandedProperty().addListener((obs, wasExpanded, isNowExpanded) -> {
+            if (isNowExpanded) {
+                fillTable(viewGradeArticlesTable, PeercheckSOAPController.getArticlesByAuthor(UserSession.user));
+            }
+        });
+
+        //Actualizar tables con el artículo seleccionado de la tabla
+        viewGradeArticlesTable.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                if (viewGradeArticlesTable.getSelectionModel().getSelectedItem() != null) {
+                    //Actualizar tabla de revisiones asociadas al artículo
+                    fillTable(viewGradeReviewsTable, PeercheckSOAPController.getReviewsByArticle(viewGradeArticlesTable.getSelectionModel().getSelectedItem()));
+                    //Actualizar promedio de calificación
+                    viewGradeLabel.setText(String.format("%1.2f", PeercheckSOAPController.calculateFinalGradeToArticle(viewGradeArticlesTable.getSelectionModel().getSelectedItem())));
+                }
             }
         });
     }
@@ -277,10 +395,15 @@ public class HomeController implements Initializable {
             FileOutputStream outstream = null;
             try {
                 TrannyFile trannyFile = PeercheckSOAPController.getArticleFile(searchArticlesTable.getSelectionModel().getSelectedItem());
-                outstream = new FileOutputStream(trannyFile.getName());
-                outstream.write(trannyFile.getContent());
-                outstream.close();
-                Desktop.getDesktop().open(new File(trannyFile.getName()));
+                if (trannyFile != null) {
+                    outstream = new FileOutputStream(trannyFile.getName());
+                    outstream.write(trannyFile.getContent());
+                    outstream.close();
+                    Desktop.getDesktop().open(new File(trannyFile.getName()));
+                } else {
+                    displayAlertDialog("Error descargando archivo");
+                }
+
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -332,17 +455,91 @@ public class HomeController implements Initializable {
 
         createFilePathLabel.setText(fileToUpload.getName());
     }
-    
+
     @FXML
     void assignReviewer() {
         Articles selectedArticle = assignReviewerArticlesTable.getSelectionModel().getSelectedItem();
         Users selectedUser = assignReviewerUsersTable.getSelectionModel().getSelectedItem();
-        if(selectedArticle == null || selectedUser == null) {
+        if (selectedArticle == null || selectedUser == null) {
             displayAlertDialog("Por favor selecciona un articulo y un revisor");
             return;
         }
-        PeercheckSOAPController.assignReviewerToArticle(selectedUser, selectedArticle);
-        displayAlertDialog("El artículo ha sido asociado");
+        try {
+            Reviews newReview = new Reviews();
+            newReview.setArticleId(selectedArticle);
+            newReview.setReviewerId(selectedUser);
+            newReview.setDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+            newReview.setStatus("ASIGNADA");
+            newReview.setMessage("");
+            newReview.setGrade(-1);
+
+            PeercheckSOAPController.addReview(newReview);
+            displayAlertDialog("La revisión fue asignada");
+
+        } catch (DatatypeConfigurationException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    void sendReview() {
+        if (!UserSession.user.getRole().equals("REVISOR")) {
+            displayAlertDialog("No tienes permisos para acceder a esta acción");
+            return;
+        }
+        try {
+            Reviews review = sendReviewReviewsTable.getSelectionModel().getSelectedItem();
+
+            if (review != null) {
+                review.setMessage(sendReviewCommentTextArea.getText());
+                review.setGrade(Integer.parseInt(sendReviewGradeTexftField.getText()));
+                review.setStatus("COMPLETADA");
+                review.setDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+
+                PeercheckSOAPController.updateReview(review);
+                displayAlertDialog("El artículo ha sido calificado");
+            } else {
+                displayAlertDialog("Selecciona un artículo");
+            }
+
+        } catch (DatatypeConfigurationException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void createEvent() {
+        Events event = new Events();
+        if (!UserSession.user.getRole().equals("EDITOR")) {
+            displayAlertDialog("No tienes permisos para acceder a esta acción");
+            return;
+        }
+        try {
+            event.setName(createEventNameTextField.getText());
+            event.setDescription(createEventDescriptionTextArea.getText());
+            event.setLocation(createEventLocationTextField.getText());
+            event.setWebsite(createEventWebsiteTextField.getText());
+            LocalDate localDate = createEventDateDatepicker.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            Date date = Date.from(instant);
+            GregorianCalendar c = new GregorianCalendar();
+            c.setTime(date);
+            event.setDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+            localDate = createEventDeadlineDatepicker.getValue();
+            instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            date = Date.from(instant);
+            c.setTime(date);
+            event.setDeadline(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+            event.setEditorId(UserSession.user);
+            c.setTime(date);
+            event.setSubmissionstart(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+            
+            PeercheckSOAPController.addEvent(event);
+            displayAlertDialog("El evento ha sido creado");
+        } catch (DatatypeConfigurationException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

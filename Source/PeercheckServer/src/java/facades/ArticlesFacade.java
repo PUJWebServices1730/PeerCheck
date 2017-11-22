@@ -6,6 +6,7 @@
 package facades;
 
 import entities.Articles;
+import entities.Users;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,6 +43,16 @@ public class ArticlesFacade extends AbstractFacade<Articles> implements Articles
         Query query = em.createNamedQuery("Articles.findInCategory", Articles.class);
         try {
             return (List<Articles>)query.setParameter("param", category).getResultList();
+        } catch(Exception e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Articles> findByAuthor(Users author) {
+        Query query = em.createNamedQuery("Articles.findByAuthor", Articles.class);
+        try {
+            return (List<Articles>)query.setParameter("mainAuthorId", author).getResultList();
         } catch(Exception e) {
             return null;
         }

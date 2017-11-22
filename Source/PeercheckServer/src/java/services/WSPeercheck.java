@@ -6,6 +6,7 @@
 package services;
 
 import entities.Articles;
+import entities.Events;
 import entities.Reviews;
 import entities.TrannyFile;
 import entities.Users;
@@ -81,18 +82,38 @@ public class WSPeercheck {
         return ejbRef.addArticle(article, file);
     }
 
-    @WebMethod(operationName = "assignReviewerToArticle")
-    public boolean assignReviewerToArticle(@WebParam(name = "user") Users user, @WebParam(name = "article") Articles article) {
-        return ejbRef.assignReviewerToArticle(user, article);
-    }
-
     @WebMethod(operationName = "addReview")
     public boolean addReview(@WebParam(name = "review") Reviews review) {
         return ejbRef.addReview(review);
+    }
+    
+    @WebMethod(operationName = "getReviewsByReviewer")
+    public List<Reviews> getReviewsByReviewer(@WebParam(name = "reviewer") Users reviewer) {
+        return ejbRef.getReviewsByReviewer(reviewer);
+    }
+    
+    @WebMethod(operationName = "getArticlesByAuthor")
+    public List<Articles> getArticlesByAuthor(@WebParam(name = "author") Users author) {
+        return ejbRef.getArticlesByAuthor(author);
+    }
+    
+    @WebMethod(operationName = "updateReview")
+    public boolean updateReview(@WebParam(name = "review") Reviews review) {
+        return ejbRef.updateReview(review);
+    }
+    
+    @WebMethod(operationName = "getReviewsByArticle")
+    public List<Reviews> getReviewsByArticle(@WebParam(name = "article") Articles article) {
+        return ejbRef.getReviewsByArticle(article);
     }
 
     @WebMethod(operationName = "calculateFinalGradeToArticle")
     public double calculateFinalGradeToArticle(@WebParam(name = "article") Articles article) {
         return ejbRef.calculateFinalGradeToArticle(article);
+    }
+    
+    @WebMethod(operationName = "addEvent")
+    public boolean addEvent(@WebParam(name = "event") Events event) {
+        return ejbRef.addEvent(event);
     }
 }

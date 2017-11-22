@@ -6,15 +6,20 @@
 package logic;
 
 import entities.Articles;
+import entities.Events;
 import entities.Files;
 import entities.Reviews;
 import entities.TrannyFile;
 import entities.Users;
 import enums.ArticleCriteria;
 import enums.UserRole;
+import facades.ArticlesFacade;
 import facades.ArticlesFacadeRemote;
+import facades.EventsFacade;
+import facades.EventsFacadeRemote;
 import facades.FilesFacade;
 import facades.FilesFacadeRemote;
+import facades.ReviewsFacade;
 import facades.ReviewsFacadeRemote;
 import facades.UsersFacade;
 import facades.UsersFacadeRemote;
@@ -47,32 +52,38 @@ public class SessionManager implements SessionManagerRemote {
 
     @PersistenceContext(unitName = "PeercheckServerPU")
     private EntityManager em;
-    
+
     @EJB
     private ReviewsFacadeRemote reviewsFacade;
 
     @EJB
     private ArticlesFacadeRemote articlesFacade;
-
+    
     @EJB
     private UsersFacadeRemote usersFacade;
-    
+
+    @EJB
+    private EventsFacadeRemote eventsFacade;
+
     @EJB
     private FilesFacadeRemote filesFacade;
-    
+
     public SessionManager() {
+        reviewsFacade = new ReviewsFacade();
+        articlesFacade = new ArticlesFacade();
         usersFacade = new UsersFacade();
+        eventsFacade = new EventsFacade();
         filesFacade = new FilesFacade();
     }
-    
+
     @GET
     @Override
     @Path("login/{email}/{password}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Users login(@PathParam("email") String email, @PathParam("password") String password) {
         Users user = usersFacade.findByEmail(email);
-        if(user != null) {
-            if(user.getPassword().equals(password)) {
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
                 return user;
             }
         }
@@ -86,18 +97,18 @@ public class SessionManager implements SessionManagerRemote {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Users signup(Users user) {
         Users other = usersFacade.findByEmail(user.getEmail());
-        if(other == null) {
+        if (other == null) {
             usersFacade.create(user);
             return usersFacade.findByEmail(user.getEmail());
         }
         return null;
     }
-    
+
     @Override
-    public List<Users> getAllUsers(){
+    public List<Users> getAllUsers() {
         return usersFacade.getAllUsers();
     }
-    
+
     @Override
     public boolean changeRol(Users user, UserRole role) {
         user.setRole(role.toString());
@@ -108,9 +119,9 @@ public class SessionManager implements SessionManagerRemote {
     @Override
     public List<Articles> findArticleBy(ArticleCriteria criteria, String value) {
         List<Articles> articles = null;
-        if(criteria.equals(ArticleCriteria.NOMBRE)) {
+        if (criteria.equals(ArticleCriteria.NOMBRE)) {
             articles = articlesFacade.findByName(value);
-        } else if(criteria.equals(ArticleCriteria.CATEGORIA)) {
+        } else if (criteria.equals(ArticleCriteria.CATEGORIA)) {
             articles = articlesFacade.findByCategory(value);
         }
         return articles;
@@ -120,7 +131,7 @@ public class SessionManager implements SessionManagerRemote {
     public List<Articles> getAllArticles() {
         return articlesFacade.getAllArticles();
     }
-    
+
     @Override
     public boolean addArticle(Articles article, TrannyFile file) {
         article.getMainAuthorId().getArticlesList1().add(article);
@@ -143,33 +154,44 @@ public class SessionManager implements SessionManagerRemote {
     }
 
     @Override
-    public boolean assignReviewerToArticle(Users user, Articles article) {
-        //TODO Relate user to article
+    public boolean addReview(Reviews review) {
+        reviewsFacade.create(review);
+
+        Articles article = review.getArticleId();
+        article.getReviewsList().add(review);
+
+        Users reviewer = review.getReviewerId();
+        reviewer.getReviewsList().add(review);
+
         return false;
     }
 
     @Override
-    public boolean addReview(Reviews review) {
-        reviewsFacade.create(review);
-        return false;
+    public List<Reviews> getReviewsByReviewer(Users reviewer) {
+        return reviewsFacade.findByReviewerId(reviewer);
     }
 
     @Override
     public double calculateFinalGradeToArticle(Articles article) {
-        article = articlesFacade.find(article);
+        article = articlesFacade.find(article.getId());
         List<Reviews> reviewsList = article.getReviewsList();
-        double grade = 0.0;
-        for (Reviews reviews : reviewsList) {
-            grade += reviews.getGrade();
+        if (reviewsList.isEmpty()) {
+            return 0.0;
         }
-        grade /= (double)reviewsList.size();
+        double grade = 0.0;
+        for (Reviews review : reviewsList) {
+            if(review.getStatus().equals("COMPLETADA")) {
+                grade += review.getGrade();
+            }
+        }
+        grade /= (double) reviewsList.size();
         return grade;
     }
 
     @Override
     public List<Users> findUsersByEmail(List<String> emails) {
         List<Users> users = new ArrayList<>();
-        for(String email : emails){
+        for (String email : emails) {
             users.add(usersFacade.findByEmail(email));
         }
         return users;
@@ -179,9 +201,31 @@ public class SessionManager implements SessionManagerRemote {
     public List<Users> findUsersByRole(String role) {
         return usersFacade.findByRole(role);
     }
-    
+
     @Override
     public TrannyFile getArticleFile(Articles article) {
         return filesFacade.findByArticleId(article);
+    }
+
+    @Override
+    public boolean updateReview(Reviews review) {
+        reviewsFacade.edit(review);
+        return false;
+    }
+
+    @Override
+    public List<Articles> getArticlesByAuthor(Users author) {
+        return articlesFacade.findByAuthor(author);
+    }
+
+    @Override
+    public List<Reviews> getReviewsByArticle(Articles article) {
+        return reviewsFacade.findByArticleId(article);
+    }
+
+    @Override
+    public boolean addEvent(Events event) {
+        eventsFacade.create(event);
+        return false;
     }
 }

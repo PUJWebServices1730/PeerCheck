@@ -6,6 +6,7 @@
 package logic;
 
 import entities.Articles;
+import entities.Events;
 import entities.Reviews;
 import entities.TrannyFile;
 import entities.Users;
@@ -33,8 +34,6 @@ public interface SessionManagerRemote {
 
     boolean addArticle(Articles article, TrannyFile file);
 
-    boolean assignReviewerToArticle(Users user, Articles article);
-
     boolean addReview(Reviews review);
 
     double calculateFinalGradeToArticle(Articles article);
@@ -46,4 +45,14 @@ public interface SessionManagerRemote {
     public List<Users> findUsersByRole(String role);
     
     public TrannyFile getArticleFile(Articles article);
+    
+    public List<Reviews> getReviewsByReviewer(Users reviewer);
+
+    public boolean updateReview(Reviews review);
+
+    public List<Articles> getArticlesByAuthor(Users author);
+
+    public List<Reviews> getReviewsByArticle(Articles article);
+    
+    boolean addEvent(Events event);
 }

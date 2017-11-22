@@ -42,10 +42,6 @@ public class PeercheckSOAPController {
         return port.calculateFinalGradeToArticle(article);
     }
 
-    public static boolean assignReviewerToArticle(integration.peercheck.Users user, integration.peercheck.Articles article) {
-        return port.assignReviewerToArticle(user, article);
-    }
-
     public static boolean addReview(integration.peercheck.Reviews review) {
         return port.addReview(review);
     }
@@ -72,5 +68,25 @@ public class PeercheckSOAPController {
 
     public static java.util.List<integration.peercheck.Users> findUsersByRole(java.lang.String role) {
         return port.findUsersByRole(role);
+    }
+
+    public static java.util.List<integration.peercheck.Reviews> getReviewsByReviewer(integration.peercheck.Users reviewer) {
+        return port.getReviewsByReviewer(reviewer);
+    }
+
+    public static boolean updateReview(integration.peercheck.Reviews review) {
+        return port.updateReview(review);
+    }
+
+    public static java.util.List<integration.peercheck.Articles> getArticlesByAuthor(integration.peercheck.Users author) {
+        return port.getArticlesByAuthor(author);
+    }
+
+    public static java.util.List<integration.peercheck.Reviews> getReviewsByArticle(integration.peercheck.Articles article) {
+        return port.getReviewsByArticle(article);
+    }
+
+    public static boolean addEvent(integration.peercheck.Events event) {
+        return port.addEvent(event);
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Articles.findByKeywords", query = "SELECT a FROM Articles a WHERE a.keywords = :keywords")
     , @NamedQuery(name = "Articles.findByTitle", query = "SELECT a FROM Articles a WHERE a.title = :title")
     , @NamedQuery(name = "Articles.findInTitle", query = "SELECT a FROM Articles a WHERE LOWER(a.title) LIKE CONCAT('%',LOWER(:param),'%')")
-    , @NamedQuery(name = "Articles.findInCategory", query = "SELECT a FROM Articles a WHERE LOWER(a.category) LIKE CONCAT('%',LOWER(:param),'%')")})
+    , @NamedQuery(name = "Articles.findInCategory", query = "SELECT a FROM Articles a WHERE LOWER(a.category) LIKE CONCAT('%',LOWER(:param),'%')")
+    , @NamedQuery(name = "Articles.findByAuthor", query = "SELECT a FROM Articles a WHERE a.mainAuthorId = :mainAuthorId")})
 public class Articles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,9 +65,9 @@ public class Articles implements Serializable {
     private String title;
     @ManyToMany(mappedBy = "articlesList")
     private List<Users> usersList;
-    @ManyToMany(mappedBy = "articlesList")
-    private List<Events> eventsList;
-    @OneToMany(mappedBy = "articleId")
+    @ManyToOne
+    private Events eventId;
+    @OneToMany(mappedBy = "articleId", fetch = FetchType.EAGER)
     private List<Reviews> reviewsList;
     @JoinColumn(name = "MAIN_AUTHOR_ID", referencedColumnName = "ID")
     @ManyToOne
@@ -75,7 +77,6 @@ public class Articles implements Serializable {
 
     public Articles() {
         usersList = new ArrayList<>();
-        eventsList = new ArrayList<>();
         reviewsList = new ArrayList<>();
         filesList = new ArrayList<>();
     }
@@ -83,7 +84,6 @@ public class Articles implements Serializable {
     public Articles(Integer id) {
         this.id = id;
         usersList = new ArrayList<>();
-        eventsList = new ArrayList<>();
         reviewsList = new ArrayList<>();
         filesList = new ArrayList<>();
     }
@@ -95,7 +95,6 @@ public class Articles implements Serializable {
         this.keywords = keywords;
         this.title = title;
         usersList = new ArrayList<>();
-        eventsList = new ArrayList<>();
         reviewsList = new ArrayList<>();
         filesList = new ArrayList<>();
     }
@@ -148,14 +147,13 @@ public class Articles implements Serializable {
     public void setUsersList(List<Users> usersList) {
         this.usersList = usersList;
     }
-
-    @XmlTransient
-    public List<Events> getEventsList() {
-        return eventsList;
+    
+    public Events getEvent() {
+        return eventId;
     }
 
-    public void setEventsList(List<Events> eventsList) {
-        this.eventsList = eventsList;
+    public void setEvent(Events event) {
+        this.eventId = event;
     }
 
     @XmlTransient
@@ -208,5 +206,5 @@ public class Articles implements Serializable {
     public String toString() {
         return "entities.Articles[ id=" + id + " ]";
     }
-    
+
 }

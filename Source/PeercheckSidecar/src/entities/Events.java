@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -75,10 +76,7 @@ public class Events implements Serializable {
     @Basic(optional = false)
     @Column(name = "WEBSITE")
     private String website;
-    @JoinTable(name = "EVENTS_ARTICLES", joinColumns = {
-        @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")})
-    @ManyToMany
+    @OneToMany(mappedBy = "eventId")
     private List<Articles> articlesList;
     @JoinColumn(name = "EDITOR_ID", referencedColumnName = "ID")
     @ManyToOne

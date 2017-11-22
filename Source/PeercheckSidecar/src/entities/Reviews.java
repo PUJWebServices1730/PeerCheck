@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Reviews.findByDate", query = "SELECT r FROM Reviews r WHERE r.date = :date")
     , @NamedQuery(name = "Reviews.findByGrade", query = "SELECT r FROM Reviews r WHERE r.grade = :grade")
     , @NamedQuery(name = "Reviews.findByMessage", query = "SELECT r FROM Reviews r WHERE r.message = :message")
-    , @NamedQuery(name = "Reviews.findByStatus", query = "SELECT r FROM Reviews r WHERE r.status = :status")})
+    , @NamedQuery(name = "Reviews.findByStatus", query = "SELECT r FROM Reviews r WHERE r.status = :status")
+    , @NamedQuery(name = "Reviews.findByReviewer", query = "SELECT r FROM Reviews r WHERE r.reviewerId = :reviewerId AND r.status = :status")
+    , @NamedQuery(name = "Reviews.findByArticle", query = "SELECT r FROM Reviews r WHERE r.articleId = :articleId AND r.status = :status")})
 public class Reviews implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,7 +61,7 @@ public class Reviews implements Serializable {
     @Column(name = "STATUS")
     private String status;
     @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Articles articleId;
     @JoinColumn(name = "REVIEWER_ID", referencedColumnName = "ID")
     @ManyToOne
@@ -159,5 +162,5 @@ public class Reviews implements Serializable {
     public String toString() {
         return "entities.Reviews[ id=" + id + " ]";
     }
-    
+
 }
