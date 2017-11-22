@@ -55,4 +55,6 @@ public interface SessionManagerRemote {
     public List<Reviews> getReviewsByArticle(Articles article);
     
     boolean addEvent(Events event);
+
+    public List<Events> getAllEvents();
 }

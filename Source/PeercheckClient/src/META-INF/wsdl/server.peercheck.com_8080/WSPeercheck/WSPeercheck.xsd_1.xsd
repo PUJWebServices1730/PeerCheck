@@ -40,6 +40,10 @@
 
 <xs:element name="getAllArticlesResponse" type="tns:getAllArticlesResponse"/>
 
+<xs:element name="getAllEvents" type="tns:getAllEvents"/>
+
+<xs:element name="getAllEventsResponse" type="tns:getAllEventsResponse"/>
+
 <xs:element name="getAllUsers" type="tns:getAllUsers"/>
 
 <xs:element name="getAllUsersResponse" type="tns:getAllUsersResponse"/>
@@ -151,18 +155,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="calculateFinalGradeToArticle">
-<xs:sequence>
-<xs:element name="article" type="tns:articles" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="calculateFinalGradeToArticleResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="addEvent">
 <xs:sequence>
 <xs:element name="event" type="tns:events" minOccurs="0"/>
@@ -172,6 +164,18 @@
 <xs:complexType name="addEventResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculateFinalGradeToArticle">
+<xs:sequence>
+<xs:element name="article" type="tns:articles" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculateFinalGradeToArticleResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -277,18 +281,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getArticleFile">
-<xs:sequence>
-<xs:element name="article" type="tns:articles" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getArticleFileResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:trannyFile" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="findUsersByEmail">
 <xs:sequence>
 <xs:element name="emails" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -298,6 +290,18 @@
 <xs:complexType name="findUsersByEmailResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:users" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getArticleFile">
+<xs:sequence>
+<xs:element name="article" type="tns:articles" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getArticleFileResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:trannyFile" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -323,6 +327,16 @@
 <xs:complexType name="loginResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:users" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllEvents">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAllEventsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:events" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

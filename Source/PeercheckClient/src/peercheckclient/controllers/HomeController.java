@@ -78,7 +78,7 @@ public class HomeController implements Initializable {
     // ------------- Search article components -------------
     @FXML
     private TitledPane paneSearchArticle;
-
+    
     @FXML
     private JFXTextField searchArticleQueryTextField;
 
@@ -110,7 +110,10 @@ public class HomeController implements Initializable {
     @FXML
     private JFXComboBox changeRoleCombo;
 
-    // ------------- Add article components -------------
+    // ------------- Create article components -------------
+    @FXML
+    private TitledPane paneCreateArticle;
+    
     @FXML
     private JFXTextField createArticleTitleTextFiled, createArticleKeywordsTextField, createArticleCategoryTextField, createArticleAuthorsTextField;
 
@@ -121,6 +124,12 @@ public class HomeController implements Initializable {
     private Label createFilePathLabel;
 
     private TrannyFile fileToUpload;
+    
+    @FXML
+    private TableView<Events> createArticleEventsTable;
+    
+    @FXML
+    private TableColumn createArticleNameColumn, createArticleDescriptionColumn, createArticleLocationColumn, createArticleWebsiteColumn;
 
     // ------------- Assign reviewer components -------------
     @FXML
@@ -180,6 +189,16 @@ public class HomeController implements Initializable {
     @FXML
     private DatePicker createEventDateDatepicker, createEventDeadlineDatepicker;
 
+    // ------------- Search event components -------------
+    @FXML
+    private TitledPane paneSearchEvent;
+    
+    @FXML
+    private TableView<Events> searchEventEventsTable;
+    
+    @FXML
+    private TableColumn searchEventTableNameColumn, searchEventTableDescriptionColumn, searchEventTableDateColumn, searchEventTableDeadlineColumn, searchEventTableLocationColumn, searchEventTableWebsiteColumn;
+    
     @Override
     public void initialize(URL url, ResourceBundle resources) {
 
@@ -269,7 +288,46 @@ public class HomeController implements Initializable {
         viewGradeTableGradeColumn.prefWidthProperty().bind(viewGradeReviewsTable.widthProperty().multiply(0.2));
         
         //Create event table columns
+        createArticleNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        createArticleNameColumn.prefWidthProperty().bind(createArticleEventsTable.widthProperty().multiply(0.3));
         
+        createArticleDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        createArticleDescriptionColumn.prefWidthProperty().bind(createArticleEventsTable.widthProperty().multiply(0.3));
+        
+        createArticleLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        createArticleLocationColumn.prefWidthProperty().bind(createArticleEventsTable.widthProperty().multiply(0.2));
+        
+        createArticleWebsiteColumn.setCellValueFactory(new PropertyValueFactory<>("website"));
+        createArticleWebsiteColumn.prefWidthProperty().bind(createArticleEventsTable.widthProperty().multiply(0.2));
+        
+        //Search event table columns
+        searchEventTableNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        searchEventTableNameColumn.prefWidthProperty().bind(searchEventEventsTable.widthProperty().multiply(0.2));
+    
+        searchEventTableDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        searchEventTableDescriptionColumn.prefWidthProperty().bind(searchEventEventsTable.widthProperty().multiply(0.2));
+
+        searchEventTableDateColumn.setCellValueFactory(new Callback<CellDataFeatures<Events, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<Events, String> data) {
+                return new SimpleObjectProperty<>(data.getValue().getDate().toString().substring(0, 10));
+            }
+        });
+        searchEventTableDateColumn.prefWidthProperty().bind(searchEventEventsTable.widthProperty().multiply(0.15));
+
+        searchEventTableDeadlineColumn.setCellValueFactory(new Callback<CellDataFeatures<Events, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<Events, String> data) {
+                return new SimpleObjectProperty<>(data.getValue().getDeadline().toString().substring(0, 10));
+            }
+        });
+        searchEventTableDeadlineColumn.prefWidthProperty().bind(searchEventEventsTable.widthProperty().multiply(0.15));
+
+        searchEventTableLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        searchEventTableLocationColumn.prefWidthProperty().bind(searchEventEventsTable.widthProperty().multiply(0.15));
+                                 
+        searchEventTableWebsiteColumn.setCellValueFactory(new PropertyValueFactory<>("website"));
+        searchEventTableWebsiteColumn.prefWidthProperty().bind(searchEventEventsTable.widthProperty().multiply(0.15));
     }
 
     public void setUpListeners() {
@@ -329,6 +387,20 @@ public class HomeController implements Initializable {
                     //Actualizar promedio de calificación
                     viewGradeLabel.setText(String.format("%1.2f", PeercheckSOAPController.calculateFinalGradeToArticle(viewGradeArticlesTable.getSelectionModel().getSelectedItem())));
                 }
+            }
+        });
+            
+        //Actualizar tablas del panel view grade al expandir
+        paneCreateArticle.expandedProperty().addListener((obs, wasExpanded, isNowExpanded) -> {
+            if (isNowExpanded) {
+                fillTable(createArticleEventsTable, PeercheckSOAPController.getAllEvents());
+            }
+        });
+        
+        //Actualizar tablas del panel view grade al expandir
+        paneSearchEvent.expandedProperty().addListener((obs, wasExpanded, isNowExpanded) -> {
+            if (isNowExpanded) {
+                fillTable(searchEventEventsTable, PeercheckSOAPController.getAllEvents());
             }
         });
     }
@@ -428,18 +500,25 @@ public class HomeController implements Initializable {
 
     @FXML
     void createArticle() {
+        if(createArticleEventsTable.getSelectionModel().getSelectedItem() == null) {
+            displayAlertDialog("Por favor selecciona un evento");
+            return;
+        }
+        
         Articles article = new Articles();
         article.setTitle(createArticleTitleTextFiled.getText());
         article.setAbstract1(createArticleAbstractTextArea.getText());
         article.setCategory(createArticleCategoryTextField.getText());
         article.setKeywords(createArticleKeywordsTextField.getText());
         article.setMainAuthorId(UserSession.user);
-
+        article.setEvent(createArticleEventsTable.getSelectionModel().getSelectedItem());
+        
         if (fileToUpload == null) {
             displayAlertDialog("Por favor selecciona un archivo");
             return;
         }
-        //List<String> authorsEMails = Arrays.asList(createArticleAuthorsTextField.getText().split(","));
+        
+        
         PeercheckSOAPController.addArticle(article, fileToUpload);
         displayAlertDialog("El artículo ha sido creado");
     }

@@ -65,6 +65,7 @@ public class Articles implements Serializable {
     private String title;
     @ManyToMany(mappedBy = "articlesList")
     private List<Users> usersList;
+    @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID")
     @ManyToOne
     private Events eventId;
     @OneToMany(mappedBy = "articleId", fetch = FetchType.EAGER)

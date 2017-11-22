@@ -228,4 +228,9 @@ public class SessionManager implements SessionManagerRemote {
         eventsFacade.create(event);
         return false;
     }
+
+    @Override
+    public List<Events> getAllEvents() {
+        return eventsFacade.findAll();
+    }
 }

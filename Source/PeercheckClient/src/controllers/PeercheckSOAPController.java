@@ -89,4 +89,8 @@ public class PeercheckSOAPController {
     public static boolean addEvent(integration.peercheck.Events event) {
         return port.addEvent(event);
     }
+
+    public static java.util.List<integration.peercheck.Events> getAllEvents() {
+        return port.getAllEvents();
+    }
 }

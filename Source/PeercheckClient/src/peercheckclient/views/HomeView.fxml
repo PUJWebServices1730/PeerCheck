@@ -83,7 +83,7 @@
                      </children></AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane animated="false" text="Subir articulo">
+          <TitledPane fx:id="paneCreateArticle" animated="false" text="Subir articulo">
                <content>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
                      <children>
@@ -99,12 +99,12 @@
                            </children>
                         </VBox>
                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" />
-                        <TableView prefHeight="333.0" prefWidth="427.0">
+                        <TableView fx:id="createArticleEventsTable" prefHeight="333.0" prefWidth="427.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Nombre" />
-                            <TableColumn prefWidth="75.0" text="Descripción" />
-                              <TableColumn prefWidth="75.0" text="Ubicación" />
-                              <TableColumn prefWidth="75.0" text="Página Web" />
+                            <TableColumn fx:id="createArticleNameColumn" prefWidth="75.0" text="Nombre" />
+                            <TableColumn fx:id="createArticleDescriptionColumn" prefWidth="75.0" text="Descripción" />
+                              <TableColumn fx:id="createArticleLocationColumn" prefWidth="75.0" text="Ubicación" />
+                              <TableColumn fx:id="createArticleWebsiteColumn" prefWidth="75.0" text="Página Web" />
                           </columns>
                         </TableView>
                      </children>
@@ -206,9 +206,21 @@
                      </children></AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false" text="Buscar eventos">
+            <TitledPane fx:id="paneSearchEvent" animated="false" text="Buscar eventos">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="searchEventEventsTable" layoutX="59.0" layoutY="39.0" prefHeight="200.0" prefWidth="764.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+                          <columns>
+                            <TableColumn fx:id="searchEventTableNameColumn" prefWidth="75.0" text="Nombre" />
+                            <TableColumn fx:id="searchEventTableDescriptionColumn" prefWidth="75.0" text="Descripción" />
+                              <TableColumn fx:id="searchEventTableDateColumn" prefWidth="75.0" text="Fecha" />
+                              <TableColumn fx:id="searchEventTableDeadlineColumn" prefWidth="75.0" text="Deadline" />
+                              <TableColumn fx:id="searchEventTableLocationColumn" prefWidth="75.0" text="Ubicación" />
+                              <TableColumn fx:id="searchEventTableWebsiteColumn" prefWidth="75.0" text="Página web" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
                </content>
             </TitledPane>
         </panes>

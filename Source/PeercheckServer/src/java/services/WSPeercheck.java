@@ -116,4 +116,9 @@ public class WSPeercheck {
     public boolean addEvent(@WebParam(name = "event") Events event) {
         return ejbRef.addEvent(event);
     }
+    
+    @WebMethod(operationName = "getAllEvents")
+    public List<Events> getAllEvents() {
+        return ejbRef.getAllEvents();
+    }
 }
