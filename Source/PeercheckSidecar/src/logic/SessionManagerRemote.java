@@ -61,4 +61,6 @@ public interface SessionManagerRemote {
 	public void addReviewerToArticle(long id_reviewer, long id_article);
 
 	public void updateReviewAtArticle(long articleId, int reviewId, Reviews review);
+
+	public List<Articles> getAllArticlesInEvent(int eventId);
 }

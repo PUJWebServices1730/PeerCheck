@@ -5,6 +5,7 @@
  */
 package services;
 
+import entities.Articles;
 import entities.Events;
 import entities.Reviews;
 import java.util.List;
@@ -61,5 +62,11 @@ public class RSPeercheck {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public void updateReview(@PathParam("article_id") long articleId, @PathParam("review_id") int reviewId, Reviews review) {
 		ejbRef.updateReviewAtArticle(articleId, reviewId, review);
+	}
+	
+	@GET
+	@Path("events/{event_id}")
+	public List<Articles> getAllArticlesInEvent(@PathParam("event_id") int eventId) {
+		return ejbRef.getAllArticlesInEvent(eventId);
 	}
 }

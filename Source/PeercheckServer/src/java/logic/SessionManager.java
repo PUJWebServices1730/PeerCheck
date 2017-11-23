@@ -273,5 +273,17 @@ public class SessionManager implements SessionManagerRemote {
 		
 		updateReview(review);
 	}
+
+	@Override
+	public List<Articles> getAllArticlesInEvent(int eventId) {
+		Events event = eventsFacade.find(eventId);
+		if (event == null) {
+			return null;
+		}
+		if (event.getArticlesList() == null) {
+			return new ArrayList<>();
+		}
+		return event.getArticlesList();
+	}
 	
 }
