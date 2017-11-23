@@ -27,6 +27,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +43,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 
 /**
  *
@@ -233,4 +237,41 @@ public class SessionManager implements SessionManagerRemote {
     public List<Events> getAllEvents() {
         return eventsFacade.findAll();
     }
+	
+	@Override
+	public void addReviewerToArticle(long reviewerId, long articleId) {
+        Articles article = articlesFacade.find(articleId);
+		if (article == null) {
+			return;
+		}
+        
+		Users user = usersFacade.find(reviewerId);
+		if (user == null || !(user.getRole().equals("REVISOR") || user.getRole().equals("EDITOR"))) {
+			return;
+		}
+		
+		Reviews review = new Reviews();
+		review.setArticleId(article);
+		review.setReviewerId(user);
+		review.setDate(new Date());
+		review.setStatus("ASIGNADA");
+		review.setMessage("");
+		review.setGrade(-1);
+		
+		reviewsFacade.create(review);
+	}
+
+	@Override
+	public void updateReviewAtArticle(long articleId, int reviewId, Reviews review) {
+		Articles article = articlesFacade.find(articleId);
+		if (article == null) {
+			return;
+		}
+		
+		review.setId(reviewId);
+		review.setArticleId(article);
+		
+		updateReview(review);
+	}
+	
 }

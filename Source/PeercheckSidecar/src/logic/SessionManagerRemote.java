@@ -57,4 +57,8 @@ public interface SessionManagerRemote {
     boolean addEvent(Events event);
 
     public List<Events> getAllEvents();
+
+	public void addReviewerToArticle(long id_reviewer, long id_article);
+
+	public void updateReviewAtArticle(long articleId, int reviewId, Reviews review);
 }
