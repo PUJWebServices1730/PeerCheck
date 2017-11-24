@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
     @FXML
     public void openRegistrarse(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(PeercheckClient.class.getResource("views/SignupView.fxml"));
+            Parent root = FXMLLoader.load(PeercheckClient.class.getResource("SignupView.fxml"));
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -105,7 +105,7 @@ public class LoginController implements Initializable {
     
     private void openHome(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(PeercheckClient.class.getResource("views/HomeView.fxml"));
+            Parent root = FXMLLoader.load(PeercheckClient.class.getResource("HomeView.fxml"));
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);

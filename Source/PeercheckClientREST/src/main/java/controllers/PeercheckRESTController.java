@@ -28,7 +28,7 @@ import model.ArticleWithFile;
 
 public class PeercheckRESTController {
     
-	public static String SERVER_URL = "http://server.peercheck.com:8080/peercheck";
+	public static String SERVER_URL = "http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck";
 	public static WebTarget baseWebTarget;
 	public static Client client;
 	
@@ -40,7 +40,7 @@ public class PeercheckRESTController {
 	}
     
     public static Users login(String email, String password) {
-		// http://server.peercheck.com:8080/peercheck/login
+		// http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/login
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("login");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -51,8 +51,7 @@ public class PeercheckRESTController {
 		user.setEmail(email);
 		user.setPassword(password);
 		
-		Response response = invocationBuilder.post(Entity.xml(user));
-		user = response.readEntity(Users.class);
+		Response response = invocationBuilder.post(Entity.json(user));
 		System.out.println("Response from server code: " + response.getStatus() + " - " + response.getStatusInfo());
 		user = null;
 		if (response.getLength() > 0) {
@@ -64,15 +63,14 @@ public class PeercheckRESTController {
     }
 
     public static Users signup(Users user) {
-        // http://server.peercheck.com:8080/peercheck/signup
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/signup
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("signup");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
 		// Concatena servidor y el path al recurso
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_XML);
 		
-		Response response = invocationBuilder.post(Entity.xml(user));
-		user = response.readEntity(Users.class);
+		Response response = invocationBuilder.put(Entity.xml(user));
 		System.out.println("Response from server code: " + response.getStatus() + " - " + response.getStatusInfo());
 		user = null;
 		if (response.getLength() > 0) {
@@ -84,10 +82,10 @@ public class PeercheckRESTController {
     }
 
     public static List<Articles> findArticleBy(ArticleCriteria criteria, String value) {
-        // http://server.peercheck.com:8080/peercheck/articles?criteria=CATEGORIA&query=Arquitectura
-		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles");
-		webTarget.queryParam("criteria", criteria.toString());
-		webTarget.queryParam("query", value);
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/articles?criteria=CATEGORIA&query=Arquitectura
+		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles")
+			.queryParam("criteria", criteria.toString())
+			.queryParam("query", value);
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
 		// Concatena servidor y el path al recurso
@@ -106,9 +104,10 @@ public class PeercheckRESTController {
     }
 
     public static void changeRol(Users user, UserRole role) {
-        // http://server.peercheck.com:8080/peercheck/users/2?role=REVISOR
-		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles/" + user.getId());
-		webTarget.queryParam("role", role.toString());
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/users/2?role=REVISOR
+		WebTarget webTarget = PeercheckRESTController.baseWebTarget
+				.path("users/" + user.getId())
+				.queryParam("role", role.toString());
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
 		// Concatena servidor y el path al recurso
@@ -119,12 +118,12 @@ public class PeercheckRESTController {
     }
 
     public static double calculateFinalGradeToArticle(Articles article) {
-        // http://server.peercheck.com:8080/peercheck/articles/2/grade
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/articles/2/grade
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles/" + article.getId() + "/grade");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
 		// Concatena servidor y el path al recurso
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_XML);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.TEXT_PLAIN);
 		
 		Response response = invocationBuilder.get();
 		System.out.println("Response from server code: " + response.getStatus() + " - " + response.getStatusInfo());
@@ -140,7 +139,7 @@ public class PeercheckRESTController {
     }
 
     public static void addReview(Reviews review) {
-        // http://server.peercheck.com:8080/peercheck/reviews
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/reviews
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("reviews");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -152,7 +151,7 @@ public class PeercheckRESTController {
     }
     
     public static List<Users> getAllUsers() {
-        // http://server.peercheck.com:8080/peercheck/users
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/users
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("users");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -172,9 +171,9 @@ public class PeercheckRESTController {
     }
 
     public static List<Users> findUsersByEmail(List<String> emails) {
-        // http://server.peercheck.com:8080/peercheck/users?emails={email1@mail.com,email2@mail.com,..}
-		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("users");
-		webTarget.queryParam("emails", emails.toArray());
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/users?emails={email1@mail.com,email2@mail.com,..}
+		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("users")
+			.queryParam("emails", emails.toArray());
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
 		// Concatena servidor y el path al recurso
@@ -193,7 +192,7 @@ public class PeercheckRESTController {
     }
 
     public static void addArticle(Articles article, TrannyFile file) {
-        // http://server.peercheck.com:8080/peercheck/articles
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/articles
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -207,7 +206,7 @@ public class PeercheckRESTController {
     }
 
     public static TrannyFile getArticleFile(Articles article) {
-        // http://server.peercheck.com:8080/peercheck/articles/2/file
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/articles/2/file
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles/" + article.getId() + "/file");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -228,7 +227,7 @@ public class PeercheckRESTController {
     }
 
     public static List<Articles> getAllArticles() {
-        // http://server.peercheck.com:8080/peercheck/articles
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/articles
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -248,7 +247,7 @@ public class PeercheckRESTController {
     }
 
     public static List<Users> findUsersByRole(String role) {
-        // http://server.peercheck.com:8080/peercheck/users/REVISOR
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/users/REVISOR
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("users/" + role);
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -268,7 +267,7 @@ public class PeercheckRESTController {
     }
 
     public static List<Reviews> getReviewsByReviewer(Users reviewer) {
-        // http://server.peercheck.com:8080/peercheck/users/reviewers/2/reviews
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/users/reviewers/2/reviews
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("users/reviewers/" + reviewer.getId() + "/reviews");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -288,7 +287,7 @@ public class PeercheckRESTController {
     }
 
     public static void updateReview(Reviews review) {
-        // http://server.peercheck.com:8080/peercheck/reviews/{review_id}
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/reviews/{review_id}
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("reviews/" + review.getId());
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -300,7 +299,7 @@ public class PeercheckRESTController {
     }
 
     public static List<Articles> getArticlesByAuthor(Users author) {
-        // http://server.peercheck.com:8080/peercheck/users/authors/2/articles
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/users/authors/2/articles
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("users/authors/" + author.getId() + "/articles");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -320,7 +319,7 @@ public class PeercheckRESTController {
     }
 
     public static List<Reviews> getReviewsByArticle(Articles article) {
-        // http://server.peercheck.com:8080/peercheck/articles/2/reviews
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/articles/2/reviews
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("articles/" + article.getId() + "/reviews");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -340,7 +339,7 @@ public class PeercheckRESTController {
     }
 
     public static void addEvent(Events event) {
-        // http://server.peercheck.com:8080/peercheck/events
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/events
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("events");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		
@@ -352,7 +351,7 @@ public class PeercheckRESTController {
     }
 
     public static List<Events> getAllEvents() {
-        // http://server.peercheck.com:8080/peercheck/events
+        // http://server.peercheck.com:8080/PeercheckServer/restservices/peercheck/events
 		WebTarget webTarget = PeercheckRESTController.baseWebTarget.path("events");
 		System.out.println("Requesting from server URI: " + webTarget.getUri());
 		

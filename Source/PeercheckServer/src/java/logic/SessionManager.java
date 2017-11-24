@@ -175,12 +175,14 @@ public class SessionManager implements SessionManagerRemote {
             return 0.0;
         }
         double grade = 0.0;
+		int numCompleted = 0;
         for (Reviews review : reviewsList) {
             if(review.getStatus().equals("COMPLETADA")) {
                 grade += review.getGrade();
+				numCompleted++;
             }
         }
-        grade /= (double) reviewsList.size();
+        grade /= (double) numCompleted;
         return grade;
     }
 

@@ -5,6 +5,7 @@
  */
 package peercheckclient;
 
+import controllers.PeercheckRESTController;
 import java.util.HashSet;
 import java.util.Set;
 import javafx.application.Application;
@@ -23,7 +24,7 @@ public class PeercheckClient extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("views/LoginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -36,6 +37,7 @@ public class PeercheckClient extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+		PeercheckRESTController.init();
         launch(args);
     }
     

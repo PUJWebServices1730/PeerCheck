@@ -7,11 +7,13 @@ package model;
 
 import entities.Articles;
 import entities.TrannyFile;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author davlad
  */
+@XmlRootElement
 public class ArticleWithFile {
 	protected Articles article;
 	protected TrannyFile file;

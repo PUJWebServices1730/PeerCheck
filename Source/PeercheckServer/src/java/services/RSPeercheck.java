@@ -127,13 +127,15 @@ public class RSPeercheck {
 	
 	@GET
 	@Path("articles/{id}/grade")
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public double calculateFinalGradeToArticle(@PathParam("id") int id) {
+	@Produces({MediaType.TEXT_PLAIN})
+	public Double calculateFinalGradeToArticle(@PathParam("id") int id) {
 		Articles article = ejbRef.getArticle(id);
+		Double res = -1d;
 		if (article == null) {
-			return -1;
+			return res;
 		}
-		return ejbRef.calculateFinalGradeToArticle(article);
+		res = ejbRef.calculateFinalGradeToArticle(article);
+		return res;
 	}
 	
 	@GET
@@ -185,6 +187,13 @@ public class RSPeercheck {
 	}
 	
 	@PUT
+	@Path("reviews")
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public void addReview(Reviews review) {
+		ejbRef.updateReview(review);
+	}
+	
+	@PUT
 	@Path("events")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public void addEvent(Events event) {
@@ -196,13 +205,6 @@ public class RSPeercheck {
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public List<Events> getAllEvents() {
 		return ejbRef.getAllEvents();
-	}
-	
-	@GET
-	@Path("events/{event_id}/articles")
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<Articles> getAllArticlesInEvent(@PathParam("event_id") int eventId) {
-		return ejbRef.getAllArticlesInEvent(eventId);
 	}
 	
 	@GET
