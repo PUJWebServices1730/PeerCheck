@@ -60,7 +60,15 @@ public interface SessionManagerRemote {
 
 	public void addReviewerToArticle(long id_reviewer, long id_article);
 
-	public void updateReviewAtArticle(long articleId, int reviewId, Reviews review);
-
 	public List<Articles> getAllArticlesInEvent(int eventId);
+
+	public List<Articles> findArticlesInEventByTitle(int eventId, String title);
+
+	public void changeRol(int userId, String role);
+
+	public Articles getArticle(int id);
+
+	public List<Reviews> findReviewsByReviewer(int id);
+
+	public Users getUser(int id);
 }

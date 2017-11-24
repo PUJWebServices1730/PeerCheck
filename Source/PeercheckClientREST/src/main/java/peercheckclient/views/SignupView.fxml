@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.validation.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="491.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="peercheckclient.controllers.SignupController">
+   <children>
+      <AnchorPane layoutX="50.0" layoutY="77.0" prefHeight="359.0" prefWidth="200.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="77.0">
+         <children>
+            <JFXTextField fx:id="inputNames" labelFloat="true" layoutY="14.0" promptText="Nombres" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXTextField fx:id="inputSurnames" labelFloat="true" layoutY="66.0" promptText="Apellidos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXTextField fx:id="inputEmail" labelFloat="true" layoutY="118.0" promptText="Correo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="118.0" />
+            <JFXPasswordField fx:id="inputPassword" labelFloat="true" layoutY="167.0" prefHeight="25.0" prefWidth="123.0" promptText="Contraseña" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXComboBox fx:id="comboRol" labelFloat="true" layoutY="217.0" promptText="Rol" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Label fx:id="labelResult" alignment="CENTER" layoutY="259.0" prefHeight="17.0" prefWidth="95.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutY="293.0" onAction="#signup" prefHeight="32.0" prefWidth="200.0" ripplerFill="#84b0d7" style="-fx-background-color: #0483D0;" text="Registrarme" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <JFXButton layoutY="334.0" onAction="#openLogin" text="Iniciar sesión" textFill="#356acd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

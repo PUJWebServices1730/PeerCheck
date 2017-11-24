@@ -51,7 +51,6 @@ import javax.xml.datatype.DatatypeFactory;
  * @author juanm
  */
 @Singleton
-@Path("peercheck")
 public class SessionManager implements SessionManagerRemote {
 
     @PersistenceContext(unitName = "PeercheckServerPU")
@@ -80,11 +79,8 @@ public class SessionManager implements SessionManagerRemote {
         filesFacade = new FilesFacade();
     }
 
-    @GET
     @Override
-    @Path("login/{email}/{password}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Users login(@PathParam("email") String email, @PathParam("password") String password) {
+    public Users login(String email, String password) {
         Users user = usersFacade.findByEmail(email);
         if (user != null) {
             if (user.getPassword().equals(password)) {
@@ -94,11 +90,7 @@ public class SessionManager implements SessionManagerRemote {
         return null;
     }
 
-    @PUT
     @Override
-    @Path("signup")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Users signup(Users user) {
         Users other = usersFacade.findByEmail(user.getEmail());
         if (other == null) {
@@ -262,28 +254,72 @@ public class SessionManager implements SessionManagerRemote {
 	}
 
 	@Override
-	public void updateReviewAtArticle(long articleId, int reviewId, Reviews review) {
-		Articles article = articlesFacade.find(articleId);
-		if (article == null) {
-			return;
-		}
-		
-		review.setId(reviewId);
-		review.setArticleId(article);
-		
-		updateReview(review);
-	}
-
-	@Override
 	public List<Articles> getAllArticlesInEvent(int eventId) {
 		Events event = eventsFacade.find(eventId);
 		if (event == null) {
 			return null;
 		}
+		
 		if (event.getArticlesList() == null) {
 			return new ArrayList<>();
 		}
+		
 		return event.getArticlesList();
 	}
 	
+	@Override
+	public List<Articles> findArticlesInEventByTitle(int eventId, String title) {
+		Events event = eventsFacade.find(eventId);
+		if (event == null) {
+			return null;
+		}
+		
+		if (event.getArticlesList() == null) {
+			return new ArrayList<>();
+		}
+		
+		List<Articles> articles = new ArrayList<>();
+		for (Articles a : event.getArticlesList()) {
+			String t = a.getTitle();
+			if (t != null && t.equals(title)) {
+				articles.add(a);
+			}
+		}
+		
+		return articles;
+	}
+
+	@Override
+	public void changeRol(int userId, String role) {
+		Users user = usersFacade.find(userId);
+		if (user == null) {
+			return;
+		}
+		UserRole userRole = null;
+		try {
+			userRole = UserRole.valueOf(role);
+		} catch (IllegalArgumentException | NullPointerException ex) {
+			return;
+		}
+		changeRol(user, userRole);
+	}
+
+	@Override
+	public Articles getArticle(int id) {
+		return articlesFacade.find(id);
+	}
+
+	@Override
+	public List<Reviews> findReviewsByReviewer(int id) {
+		Users user = usersFacade.find(id);
+		if (user == null || user.getRole() == null || user.getRole().equals(UserRole.AUTOR.toString())) {
+			return null;
+		}
+		return getReviewsByReviewer(user);
+	}
+
+	@Override
+	public Users getUser(int id) {
+		return usersFacade.find(id);
+	}
 }
