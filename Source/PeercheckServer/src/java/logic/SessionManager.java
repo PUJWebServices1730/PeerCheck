@@ -23,6 +23,7 @@ import facades.ReviewsFacade;
 import facades.ReviewsFacadeRemote;
 import facades.UsersFacade;
 import facades.UsersFacadeRemote;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -132,12 +133,18 @@ public class SessionManager implements SessionManagerRemote {
     public boolean addArticle(Articles article, TrannyFile file) {
         article.getMainAuthorId().getArticlesList1().add(article);
         try {
-            FileOutputStream outstream = new FileOutputStream(file.getName());
+			String home = System.getProperty("user.home");
+			File dir = new File(home + "/UploadsPeercheck/");
+			if (!dir.exists()){
+				dir.mkdir();
+			}
+			File f = new File(dir.getAbsolutePath() + "/" + file.getName());
+            FileOutputStream outstream = new FileOutputStream(f);
             outstream.write(file.getContent());
             outstream.close();
             Files newFile = new Files();
             newFile.setArticleId(article);
-            newFile.setUrl(file.getName());
+            newFile.setUrl(f.getAbsolutePath());
             newFile.setDescription("");
             newFile.setTitle(file.getName());
             filesFacade.create(newFile);

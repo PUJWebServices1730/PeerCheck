@@ -217,12 +217,10 @@ public class PeercheckRESTController {
 		System.out.println("Response from server code: " + response.getStatus() + " - " + response.getStatusInfo());
 		
 		TrannyFile file = null;
-		
-		if (response.getLength() > 0) {
-			System.out.println("Media type: " + response.getMediaType().toString());
-			file = response.readEntity(TrannyFile.class);
-			System.out.println("Content: " + file.getName());
-		}
+		int len = response.getLength();
+		System.out.println("Media type: " + response.getMediaType().toString());
+		file = response.readEntity(TrannyFile.class);
+		System.out.println("Content: " + file.getName());
 		return file;
     }
 
